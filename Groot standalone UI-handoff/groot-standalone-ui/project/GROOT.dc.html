@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>GROOT: Organizational Intelligence Through Natural Language</title>
+<meta name="description" content="GROOT turns natural human language into executable intelligence missions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Condiment&amp;family=Inter:wght@400;500;600;700;800&amp;family=Pixelify+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/groot-styles.css">
+<script src="assets/icons.js"></script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#010A04"></rect><text x="50" y="64" text-anchor="middle" font-family="Inter, sans-serif" font-size="40" font-weight="800" fill="#4ADE80">G</text></svg></template>
+<style>
+html, body { margin: 0; background: #010A04; }
+a { color: inherit; }
+a:hover { color: #4ADE80; }
+span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0; padding: 0; border: 0; background: none; box-shadow: none; font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; }
+.groot-tag { display: block; margin-top: 0.38rem; color: rgba(138, 146, 140, 0.92); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; font-style: normal; text-transform: none; }
+@keyframes gBootFade { 0%, 82% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes gBootBox { 0% { transform: scale(0.42) translateY(40px); opacity: 0; } 12% { transform: scale(0.5); opacity: 1; } 62% { transform: scale(0.52); padding: 14px; border-radius: 26px; } 88% { transform: scale(1); padding: 0; border-radius: 0; } 100% { transform: scale(1); padding: 0; border-radius: 0; } }
+@keyframes gBootCrt { 0%, 14% { transform: scale(0, 0.004); filter: brightness(3); } 20% { transform: scale(1, 0.004); filter: brightness(3); } 27% { transform: scale(1, 1); filter: brightness(1.4); } 34%, 100% { transform: scale(1, 1); filter: brightness(1); } }
+@keyframes gBootLine { 0%, 30% { opacity: 0; transform: translateX(-6px); } 38%, 100% { opacity: 1; transform: none; } }
+@keyframes gBootText { 0%, 64% { opacity: 1; } 76%, 100% { opacity: 0; } }
+@keyframes gBootBar { 0%, 36% { transform: scaleX(0); } 62%, 100% { transform: scaleX(1); } }
+@keyframes gBootBlink { 50% { opacity: 0.25; } }
+</style>
+</helmet>
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div class="landing-shell" data-screen-label="Landing">
+  <div class="landing-vignette" aria-hidden="true"></div>
+  <div class="landing-grid" aria-hidden="true"></div>
+  <div class="mouse-spotlight" ref="{{ setSpotEl }}" aria-hidden="true"></div>
+  <div class="landing-glow landing-glow-left" aria-hidden="true"></div>
+  <div class="landing-glow landing-glow-right" aria-hidden="true"></div>
+
+  <header class="landing-header">
+    <button type="button" class="landing-logo" onClick="{{ goLanding }}" aria-label="GROOT home">
+      <span>GROOT</span>
+      <i aria-hidden="true"></i>
+    </button>
+    <nav class="landing-nav" aria-label="Landing navigation">
+      <sc-for list="{{ landingNav }}" as="item" hint-placeholder-count="4">
+        <a href="{{ item.href }}" onClick="{{ item.onClick }}">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+    <button type="button" onClick="{{ openDashboard }}" class="landing-header-cta liquid-glass" style="white-space: nowrap">Launch GROOT</button>
+  </header>
+
+  <main class="landing-main">
+    <div class="orbit-background" aria-hidden="true" ref="{{ setOrbitEl }}">
+      <div class="orbit-core-glow"></div>
+      <div class="orbit-horizon-glow"></div>
+      {{ ringsSvg }}
+      <div class="orbit-sparks">
+        <span style="--spark-left: 7%; --spark-top: 19%; --spark-delay: 1.1s"></span>
+        <span style="--spark-left: 14%; --spark-top: 77%; --spark-delay: 3.8s"></span>
+        <span style="--spark-left: 21%; --spark-top: 33%; --spark-delay: 2.2s"></span>
+        <span style="--spark-left: 31%; --spark-top: 84%; --spark-delay: 0.4s"></span>
+        <span style="--spark-left: 39%; --spark-top: 27%; --spark-delay: 4.4s"></span>
+        <span style="--spark-left: 47%; --spark-top: 89%; --spark-delay: 2.7s"></span>
+        <span style="--spark-left: 54%; --spark-top: 20%; --spark-delay: 1.7s"></span>
+        <span style="--spark-left: 61%; --spark-top: 75%; --spark-delay: 4.9s"></span>
+        <span style="--spark-left: 70%; --spark-top: 31%; --spark-delay: 0.8s"></span>
+        <span style="--spark-left: 78%; --spark-top: 68%; --spark-delay: 3.2s"></span>
+        <span style="--spark-left: 86%; --spark-top: 24%; --spark-delay: 5.1s"></span>
+        <span style="--spark-left: 94%; --spark-top: 82%; --spark-delay: 2.9s"></span>
+        <span style="--spark-left: 18%; --spark-top: 58%; --spark-delay: 5.5s"></span>
+        <span style="--spark-left: 36%; --spark-top: 48%; --spark-delay: 1.2s"></span>
+        <span style="--spark-left: 67%; --spark-top: 51%; --spark-delay: 3.6s"></span>
+        <span style="--spark-left: 90%; --spark-top: 44%; --spark-delay: 0.1s"></span>
+      </div>
+      <div class="orbit-agent-live orbit-agent-email" ref="{{ agentRef0 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon0 }}</span><span class="orbit-agent-label">Understands</span></div></div>
+      <div class="orbit-agent-live orbit-agent-calendar" ref="{{ agentRef1 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon1 }}</span><span class="orbit-agent-label">Finds context</span></div></div>
+      <div class="orbit-agent-live orbit-agent-task" ref="{{ agentRef2 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon2 }}</span><span class="orbit-agent-label">Maps decisions</span></div></div>
+      <div class="orbit-agent-live orbit-agent-notes" ref="{{ agentRef3 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon3 }}</span><span class="orbit-agent-label">Fetches data</span></div></div>
+      <div class="orbit-agent-live orbit-agent-analytics" ref="{{ agentRef4 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon4 }}</span><span class="orbit-agent-label">Tracks progress</span></div></div>
+      <div class="orbit-agent-live orbit-agent-research" ref="{{ agentRef5 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon5 }}</span><span class="orbit-agent-label">Learns</span></div></div>
+    </div>
+
+    <section class="landing-hero" aria-labelledby="landing-title">
+      <div class="hero-kicker">
+        <span></span>
+        <p>Growth | Reasoning | Observation | Orchestration | Thinking</p>
+      </div>
+      <h1 id="landing-title" class="hero-title">
+        <span>Natural Language, One</span>
+        <strong>
+          <span class="typing-hero-word">
+            <span class="typing-hero-word-text" aria-hidden="true">{{ typedWord }}<span class="typing-hero-dot">.</span></span>
+            <span class="typing-hero-cursor" aria-hidden="true"></span>
+          </span>
+        </strong>
+      </h1>
+      <p class="hero-subtitle">Ask a question, or just talk it through in a meeting. GROOT finds what you need and helps your team decide.</p>
+      <button type="button" onClick="{{ openDashboard }}" class="hero-cta liquid-glass">Open the Console</button>
+    </section>
+  </main>
+  <div data-scroll-cue="" style="position: absolute; left: 50%; bottom: 22px; z-index: 12; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(239, 244, 255, 0.55); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; pointer-events: none">
+    <span>Scroll</span>
+    <div style="width: 1px; height: 44px; background: linear-gradient(180deg, rgba(74, 222, 128, 0.9), rgba(74, 222, 128, 0))"></div>
+  </div>
+  <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; height: 200px; background: linear-gradient(180deg, rgba(1, 5, 3, 0) 0%, rgba(1, 5, 3, 0.7) 55%, #010503 100%); pointer-events: none"></div>
+</div>
+
+<div ref="{{ setScrollRoot }}" data-screen-label="Landing sections" style="position: relative; background: linear-gradient(180deg, #010503 0%, #020906 45%, #010503 100%); color: #ffffff; font-family: Inter, ui-sans-serif, system-ui, sans-serif">
+
+  <nav data-rail="" aria-label="Section navigation" style="position: fixed; right: 28px; top: 50%; z-index: 40; display: flex; flex-direction: column; gap: 18px; transform: translateY(-50%); opacity: 0; pointer-events: none; transition: opacity 300ms ease">
+    <sc-for list="{{ landingNav }}" as="item" hint-placeholder-count="4">
+      <a href="{{ item.href }}" onClick="{{ item.onClick }}" data-rail-item="" style="display: flex; align-items: center; justify-content: flex-end; gap: 12px; color: rgba(239, 244, 255, 0.4); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none">
+        <span>{{ item.label }}</span>
+        <i data-rail-dot="" style="display: block; width: 8px; height: 8px; border-radius: 999px; background: rgba(239, 244, 255, 0.25); transition: all 250ms ease"></i>
+      </a>
+    </sc-for>
+  </nav>
+
+  <section id="product" data-section="0" style="max-width: 1200px; margin: 0 auto; padding: 160px clamp(20px, 6vw, 96px) 140px">
+    <p data-reveal="0" style="margin: 0 0 22px; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">01 · Product</p>
+    <h2 data-words="" style="margin: 0; max-width: 980px; font-size: clamp(2.4rem, 5.4vw, 4.6rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02; text-wrap: balance">
+      <span data-w="" style="display: inline-block">Ask</span> <span data-w="" style="display: inline-block">in</span> <span data-w="" style="display: inline-block">plain</span> <span data-w="" style="display: inline-block">words.</span> <span data-w="" style="display: inline-block; color: #4ADE80">GROOT</span> <span data-w="" style="display: inline-block; color: #4ADE80">works</span> <span data-w="" style="display: inline-block; color: #4ADE80">out</span> <span data-w="" style="display: inline-block; color: #4ADE80">the</span> <span data-w="" style="display: inline-block; color: #4ADE80">rest.</span>
+    </h2>
+    <p data-reveal="1" style="margin: 28px 0 64px; max-width: 640px; color: rgba(239, 244, 255, 0.66); font-size: 1.2rem; line-height: 1.6; text-wrap: pretty">You don't need to know which files, spreadsheets or systems hold the answer. Say what you want to know or decide, and GROOT plans the work.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px">
+      <div data-reveal="0" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Quick answer</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“What were Q2 sales in Maharashtra?”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">A straight answer from your own data.</p>
+      </div>
+      <div data-reveal="1" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Find the cause</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“Why did sales decline?”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">Likely reasons, with the evidence behind each one.</p>
+      </div>
+      <div data-reveal="2" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Make a decision</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“Should we switch suppliers?”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">What you know, what's missing, and what to check next.</p>
+      </div>
+      <div data-reveal="3" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Build a list</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“Find 30 manufacturers matching these constraints.”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">A clean list, ready to use.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture" data-section="1" data-arch="" style="position: relative; height: 380vh">
+    <div style="position: sticky; top: 0; display: flex; height: 100vh; flex-direction: column; justify-content: center; gap: clamp(18px, 5vh, 48px); overflow: hidden">
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 96px)">
+        <div>
+          <p style="margin: 0 0 22px; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">02 · Architecture</p>
+          <h2 style="margin: 0; font-size: clamp(1.8rem, min(4.6vw, 6.5vh), 3.9rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02">How a question becomes a decision</h2>
+        </div>
+        <div style="width: min(280px, 100%); height: 2px; border-radius: 999px; background: rgba(239, 244, 255, 0.1); overflow: hidden">
+          <div data-arch-fill="" style="width: 100%; height: 100%; background: #4ADE80; box-shadow: 0 0 14px rgba(74, 222, 128, 0.7); transform-origin: left center; transform: scaleX(0)"></div>
+        </div>
+      </div>
+      <div style="width: 100%; perspective: 1400px">
+        <div data-track="" style="display: flex; gap: 24px; width: max-content; padding: 0 clamp(20px, 6vw, 96px) 0 max(clamp(20px, 6vw, 96px), calc((100vw - 1200px) / 2 + 96px)); will-change: transform">
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">01</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Listen</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Understands a typed question, or what people say in a meeting.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">02</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Plan</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Turns the request into a clear task: what to find, by when, and how sure it needs to be.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">03</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Look around</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Checks the files, systems and outside sources your team has allowed.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">04</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Map the decision</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Lays out the options, what's known, what's missing and what's being assumed.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">05</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Fetch what's missing</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Collects only the information the task needs. Nothing extra.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">06</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Keep track</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Holds the decision open until the missing pieces are filled in.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">07</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Learn</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Compares each decision with what happened next, so the next one goes better.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decision-room" data-section="2" data-room="" style="position: relative; height: 320vh">
+    <div data-room-sticky="" style="position: sticky; top: 0; display: flex; height: 100vh; align-items: center; overflow: hidden">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 96px)">
+        <div style="display: grid; gap: clamp(10px, 2.4vh, 22px)">
+          <p style="margin: 0; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">03 · Decision Room</p>
+          <h2 style="margin: 0; font-size: clamp(1.8rem, min(4.2vw, 6vh), 3.6rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02; text-wrap: balance">Your meeting already asked the question.</h2>
+          <p style="margin: 0; max-width: 520px; color: rgba(239, 244, 255, 0.66); font-size: clamp(0.95rem, 2.1vh, 1.1rem); line-height: 1.5">With everyone's consent, GROOT listens to the discussion and spots the facts the decision depends on.</p>
+          <div style="display: grid; gap: clamp(6px, 1.2vh, 10px)">
+            <div data-q="0" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“Supplier B is cheaper.”</div>
+            <div data-q="1" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“I'm worried about Q4 capacity.”</div>
+            <div data-q="2" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“We don't have recent capacity evidence.”</div>
+            <div data-q="3" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“Let's not decide until we know.”</div>
+          </div>
+        </div>
+        <div style="display: grid; gap: clamp(6px, 1.4vh, 14px); padding: clamp(16px, 3vh, 28px); border: 1px solid rgba(74, 222, 128, 0.16); border-radius: 22px; background: radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.08), transparent 18rem), rgba(3, 18, 8, 0.86); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45)">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+            <span style="color: rgba(239, 244, 255, 0.8); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase">What GROOT understood</span>
+            <div style="display: grid">
+              <span data-status-a="" style="grid-area: 1 / 1; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 999px; color: #86f7a3; font-size: 12px; font-weight: 700">Listening</span>
+              <span data-status-b="" style="grid-area: 1 / 1; padding: 6px 12px; border: 1px solid rgba(251, 191, 36, 0.45); border-radius: 999px; color: #fcd34d; font-size: 12px; font-weight: 700; opacity: 0">On hold</span>
+            </div>
+          </div>
+          <div data-need="1" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Decision</span><strong style="font-weight: 600; text-align: right">Supplier allocation</strong></div>
+          <div data-need="1" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Known</span><strong style="font-weight: 600; text-align: right">Supplier B is cheaper</strong></div>
+          <div data-need="2" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Concern</span><strong style="font-weight: 600; text-align: right">Can B handle Q4 volume?</strong></div>
+          <div data-need="3" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Missing</span><strong style="font-weight: 600; text-align: right; color: #fcd34d">Supplier B's Q4 capacity</strong></div>
+          <div data-need="4" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Next step</span><strong style="font-weight: 600; text-align: right">Check Supplier B's capacity</strong></div>
+          <div data-need="5" style="margin-top: 2px; padding: clamp(9px, 1.8vh, 16px) 18px; border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 18px 18px 4px 18px; background: rgba(74, 222, 128, 0.08); color: #eaffef; font-size: clamp(0.9rem, 2vh, 1.02rem); line-height: 1.45">I found one missing fact: Supplier B's Q4 capacity. I can look into it before you decide.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap" data-section="3" style="max-width: 1200px; margin: 0 auto; padding: 160px clamp(20px, 6vw, 96px) 120px">
+    <p data-reveal="0" style="margin: 0 0 22px; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">04 · Roadmap</p>
+    <h2 data-words="" style="margin: 0 0 24px; font-size: clamp(2.4rem, 5.4vw, 4.6rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02">
+      <span data-w="" style="display: inline-block">Built</span> <span data-w="" style="display: inline-block">in</span> <span data-w="" style="display: inline-block; color: #4ADE80">six</span> <span data-w="" style="display: inline-block; color: #4ADE80">steps.</span>
+    </h2>
+    <p data-reveal="1" style="margin: 0 0 72px; max-width: 560px; color: rgba(239, 244, 255, 0.66); font-size: 1.2rem; line-height: 1.6">Each step proves one piece works before the next one starts.</p>
+    <div data-road="" style="position: relative; display: grid; gap: 44px; padding-left: 56px">
+      <div style="position: absolute; left: 11px; top: 6px; bottom: 6px; width: 2px; border-radius: 999px; background: rgba(239, 244, 255, 0.1)">
+        <div data-road-fill="" style="width: 100%; height: 100%; background: linear-gradient(180deg, #86f7a3, #2db954); box-shadow: 0 0 14px rgba(74, 222, 128, 0.7); transform-origin: top center; transform: scaleY(0)"></div>
+      </div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 1</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Question to task</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Turn a typed question into a clear task GROOT can run every time.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 2</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Connect data</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Hook up files, one internal system and one approved outside source.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 3</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Map decisions</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Show what's known, missing and assumed, not just a single answer.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 4</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Meeting mode</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Let a spoken discussion start or update the same decision.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 5</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Decision memory</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Save each decision and what happened afterwards.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 6</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Learning loop</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Use past results to handle similar decisions better next time.</p></div>
+    </div>
+  </section>
+
+  <section style="display: flex; min-height: 90vh; flex-direction: column; align-items: center; justify-content: center; gap: 44px; padding: 120px clamp(20px, 6vw, 96px) 80px; text-align: center; background: radial-gradient(ellipse at 50% 60%, rgba(24, 117, 57, 0.28) 0%, transparent 60%)">
+    <h2 data-words="" style="margin: 0; max-width: 1000px; font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.05; text-wrap: balance">
+      <span data-w="" style="display: inline-block">Most</span> <span data-w="" style="display: inline-block">assistants</span> <span data-w="" style="display: inline-block">wait</span> <span data-w="" style="display: inline-block">for</span> <span data-w="" style="display: inline-block">a</span> <span data-w="" style="display: inline-block">question.</span> <span data-w="" style="display: inline-block; color: #4ADE80">GROOT</span> <span data-w="" style="display: inline-block; color: #4ADE80">also</span> <span data-w="" style="display: inline-block; color: #4ADE80">hears</span> <span data-w="" style="display: inline-block; color: #4ADE80">the</span> <span data-w="" style="display: inline-block; color: #4ADE80">one</span> <span data-w="" style="display: inline-block; color: #4ADE80">your</span> <span data-w="" style="display: inline-block; color: #4ADE80">team</span> <span data-w="" style="display: inline-block; color: #4ADE80">hasn't</span> <span data-w="" style="display: inline-block; color: #4ADE80">asked</span> <span data-w="" style="display: inline-block; color: #4ADE80">yet.</span>
+    </h2>
+    <div data-reveal="0"><button type="button" onClick="{{ openDashboard }}" class="hero-cta liquid-glass">Open the Console</button></div>
+    <p style="margin: 40px 0 0; color: rgba(239, 244, 255, 0.35); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase">GROOT · Growth | Reasoning | Observation | Orchestration | Thinking</p>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isConsole }}" hint-placeholder-val="{{ false }}">
+{{ bootFx }}
+<div data-screen-label="Console" ref="{{ setConsoleEl }}" style="display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100vh; min-height: 520px; background: var(--g-bg, #15140c); color: var(--g-text, #f4e8c6); font-family: Inter, ui-sans-serif, system-ui, sans-serif; overflow: hidden">
+
+  <header style="display: flex; align-items: center; gap: 14px; padding: 10px 22px; border-bottom: 1px solid var(--g-line, #4b4026)">
+    <button type="button" onClick="{{ goLanding }}" aria-label="Back to landing" style="display: flex; align-items: flex-start; gap: 5px; padding: 0; border: 0; background: none; color: var(--g-text, #f4e8c6); font-family: Inter, sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.055em; cursor: pointer">GROOT<i style="display: block; width: 7px; height: 7px; margin-top: 4px; border-radius: 999px; background: #f2b544"></i></button>
+    <div style="display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">
+      <span style="color: var(--g-muted, #b8a87c)">Console</span><sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span>/</span><span>{{ sessionId }}</span></sc-if>
+    </div>
+    <div style="display: flex; gap: 2px; margin-left: auto; padding: 3px; border: 1px solid var(--g-line, #4b4026); border-radius: 8px">
+      <sc-for list="{{ channels }}" as="ch" hint-placeholder-count="2">
+        <button type="button" onClick="{{ ch.onClick }}" style="{{ ch.style }}">{{ ch.label }}</button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ showRailBtn }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ toggleRail }}" style="padding: 8px 12px; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer" style-hover="color: var(--g-text, #f4e8c6); border-color: var(--g-line3, #6e5d33)">Missions · Memory</button></sc-if>
+    <button type="button" onClick="{{ openPaper }}" style="padding: 8px 12px; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer" style-hover="color: var(--g-text, #f4e8c6); border-color: var(--g-line3, #6e5d33)">Read the paper</button>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--g-muted, #b8a87c); white-space: nowrap">{{ clockText }}</span></sc-if>
+  </header>
+
+  <div style="{{ mainGridStyle }}">
+
+    <sc-if value="{{ railOverlay }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeRail }}" style="position: fixed; inset: 0; z-index: 60; background: rgba(8, 7, 5, 0.55)"></div></sc-if>
+    <aside style="{{ railStyle }}">
+      <div style="display: grid; gap: 8px">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Missions</div>
+        <sc-if value="{{ noMissions }}" hint-placeholder-val="{{ true }}">
+          <p style="margin: 0; color: var(--g-dim, #8a7c55); font-size: 13px; line-height: 1.5">No missions yet. Compile a request or open the Decision Room.</p>
+        </sc-if>
+        <sc-for list="{{ missionRows }}" as="mr" hint-placeholder-count="0">
+          <button type="button" onClick="{{ mr.onClick }}" style="{{ mr.style }}">
+            <i style="{{ mr.glyph }}"></i>
+            <span style="display: grid; gap: 3px; min-width: 0; text-align: left">
+              <span style="overflow: hidden; color: var(--g-text, #f4e8c6); font-size: 13px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap">{{ mr.title }}</span>
+              <span style="color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase">{{ mr.meta }}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; gap: 8px">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Try a request</div>
+        <sc-for list="{{ examples }}" as="ex" hint-placeholder-count="5">
+          <button type="button" onClick="{{ ex.onClick }}" disabled="{{ compiling }}" style="display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-text, #f4e8c6); text-align: left; cursor: pointer" style-hover="border-color: #f2b544; background: rgba(242, 181, 68, 0.05)">
+            <span style="color: #f2b544; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase">{{ ex.label }}</span>
+            <span style="font-size: 13px; line-height: 1.4">{{ ex.prompt }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; gap: 8px">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Decision memory</div>
+        <sc-if value="{{ noMemory }}" hint-placeholder-val="{{ true }}">
+          <p style="margin: 0; color: var(--g-dim, #8a7c55); font-size: 13px; line-height: 1.5">Nothing saved yet. Saved decisions and their outcomes collect here.</p>
+        </sc-if>
+        <sc-for list="{{ memoryRows }}" as="mem" hint-placeholder-count="0">
+          <div style="display: grid; gap: 6px; padding: 10px 12px; border: 1px solid rgba(182, 156, 255, 0.28); border-radius: 8px; background: rgba(182, 156, 255, 0.05)">
+            <span style="font-size: 13px; font-weight: 600">{{ mem.title }}</span>
+            <span style="color: #b69cff; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase">{{ mem.meta }}</span>
+            <sc-for list="{{ mem.deltas }}" as="d" hint-placeholder-count="0">
+              <span style="color: var(--g-soft, #dccfa7); font-size: 12px; line-height: 1.4">↺ {{ d }}</span>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+
+    </aside>
+
+    <section style="display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0">
+      <div style="padding: 20px 26px 16px; border-bottom: 1px solid var(--g-line, #4b4026); background: var(--g-panel, #1e1c11)">
+        <sc-if value="{{ isTyped }}" hint-placeholder-val="{{ true }}">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">{{ compilerLabel }}</div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 10px">
+            <span style="color: #f2b544; font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; line-height: 1">›</span>
+            <input value="{{ input }}" onChange="{{ onInput }}" onKeyDown="{{ onKey }}" placeholder="Should we move 30% of production from Supplier A to B?" style="flex: 1; min-width: 0; padding: 6px 0; border: 0; outline: none; background: transparent; color: var(--g-text, #f4e8c6); caret-color: #f2b544; font-family: Inter, sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em">
+            <button type="button" onClick="{{ onCompile }}" disabled="{{ compiling }}" style="{{ compileBtnStyle }}">{{ compileLabel }}</button>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 8px; min-height: 42px; margin-top: 14px">
+            <sc-if value="{{ noTokens }}" hint-placeholder-val="{{ true }}">
+              <span style="color: var(--g-dim, #8a7c55); font-family: 'JetBrains Mono', monospace; font-size: 11.5px">{{ parserIdle }}</span>
+            </sc-if>
+            <sc-for list="{{ tokens }}" as="tk" hint-placeholder-count="0">
+              <span style="display: grid; gap: 3px; justify-items: start">
+                <span style="{{ tk.wordStyle }}">{{ tk.w }}</span>
+                <span style="{{ tk.roleStyle }}">{{ tk.role }}</span>
+              </span>
+            </sc-for>
+            <span style="margin-left: auto; color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase">Intent <b style="color: #f2b544">{{ intentText }}</b></span>
+          </div>
+          <sc-if value="{{ showChips }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px">
+              <sc-for list="{{ examples }}" as="ex" hint-placeholder-count="5">
+                <button type="button" onClick="{{ ex.onClick }}" disabled="{{ compiling }}" title="{{ ex.prompt }}" style="padding: 6px 10px; border: 1px solid var(--g-line, #4b4026); border-radius: 999px; background: none; color: var(--g-soft, #dccfa7); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer" style-hover="border-color: #f2b544; color: #f2b544">{{ ex.label }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </sc-if>
+        <sc-if value="{{ isRoom }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px">
+            <div style="display: grid; gap: 8px; max-width: 560px">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #b69cff">Decision Room · ambient mode</div>
+              <p style="margin: 0; color: var(--g-soft, #dccfa7); font-size: 15px; line-height: 1.55">{{ roomText }}</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px">
+              <div style="display: flex; align-items: center; gap: 3px; height: 30px">
+                <sc-for list="{{ bars }}" as="b" hint-placeholder-count="14">
+                  <i data-bar="" style="display: block; width: 3px; height: 4px; border-radius: 2px; background: #b69cff"></i>
+                </sc-for>
+              </div>
+              <button type="button" onClick="{{ roomAction }}" style="{{ roomBtnStyle }}">{{ roomBtnLabel }}</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 11px 26px; border-bottom: 1px solid var(--g-line, #4b4026)">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Console log</span>
+          <span style="color: var(--g-line3, #6e5d33); font-family: 'JetBrains Mono', monospace; font-size: 11px">{{ logCount }}</span>
+          <div style="{{ legendStyle }}">
+            <span style="white-space: nowrap"><b style="color: #f2b544">◆</b> compile</span>
+            <span style="white-space: nowrap"><b style="color: #b69cff">“</b> heard</span>
+            <span style="white-space: nowrap"><b style="color: #ff8a6b">▲</b> signal</span>
+            <span style="white-space: nowrap"><b style="color: #4ADE80">⇣</b> data</span>
+            <span style="white-space: nowrap"><b style="color: var(--g-text, #f4e8c6)">■</b> state</span>
+            <span style="white-space: nowrap"><b style="color: #b69cff">↺</b> memory</span>
+          </div>
+        </div>
+        <div ref="{{ setLogEl }}" style="min-height: 0; padding: 8px 26px 28px; overflow-y: auto">
+          <sc-if value="{{ emptyLog }}" hint-placeholder-val="{{ true }}">
+            <div style="display: grid; gap: 14px; max-width: 620px; padding: 48px 0 20px">
+              <span style="color: #f2b544; font-family: Anton, sans-serif; font-size: 56px; line-height: 0.95; letter-spacing: 0.01em; text-transform: uppercase">Language in.<br>Missions out.</span>
+              <p style="margin: 0; color: var(--g-muted, #b8a87c); font-size: 15px; line-height: 1.6">Every request becomes a mission. Each step of the mission compiler prints here, together with what GROOT hears in the Decision Room, the data it fetches, and what it learns after the decision.</p>
+            </div>
+          </sc-if>
+          <sc-for list="{{ logRows }}" as="row" hint-placeholder-count="0">
+            <div style="{{ row.rowStyle }}">
+              <span style="color: var(--g-line3, #6e5d33); font-family: 'JetBrains Mono', monospace; font-size: 11px">{{ row.t }}</span>
+              <span style="{{ row.glyphStyle }}">{{ row.glyph }}</span>
+              <span style="{{ row.tagStyle }}">{{ row.tag }}</span>
+              <span style="{{ row.textStyle }}">{{ row.text }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="{{ rightStyle }}">
+      <div style="display: flex; align-items: flex-start; gap: 12px; padding: 18px 22px 12px">
+        <div style="display: grid; gap: 5px; min-width: 0; flex: 1">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">{{ graphLabel }}</span>
+          <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em">{{ graphTitle }}</strong>
+        </div>
+        <div style="display: flex; gap: 6px; flex-shrink: 0">
+          <button type="button" onClick="{{ toggleGraphMin }}" title="{{ graphMinLabel }}" aria-label="{{ graphMinLabel }}" style="display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="{{ graphMinChev }}"><path d="M2.5 7.5 6 4l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <button type="button" onClick="{{ toggleGraphMax }}" title="{{ graphMaxLabel }}" aria-label="{{ graphMaxLabel }}" style="display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
+            <sc-if value="{{ graphNotMax }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 1.5h3.5V5M5 10.5H1.5V7M10.5 1.5 7 5M1.5 10.5 5 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if>
+            <sc-if value="{{ graphMax }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.5 5H7V1.5M1.5 7H5v3.5M7 5l3.5-3.5M5 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if>
+          </button>
+        </div>
+      </div>
+      <sc-if value="{{ graphShown }}" hint-placeholder-val="{{ true }}">
+      <div style="position: relative; min-height: 270px; margin: 0 14px; overflow: hidden; border: 1px solid var(--g-line, #4b4026); border-radius: 12px; background: radial-gradient(circle at 50% 50%, rgba(242, 181, 68, 0.07), transparent 60%), repeating-linear-gradient(0deg, transparent 0 23px, rgba(241, 236, 226, 0.035) 23px 24px), repeating-linear-gradient(90deg, transparent 0 23px, rgba(241, 236, 226, 0.035) 23px 24px)">
+        <sc-if value="{{ graphEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="position: absolute; inset: 0; display: grid; place-items: center; padding: 30px; text-align: center">
+            <p style="max-width: 260px; margin: 0; color: var(--g-dim, #8a7c55); font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6">{{ graphEmptyText }}</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ graphReady }}" hint-placeholder-val="{{ false }}">
+          {{ edgesSvg }}
+          <div style="position: absolute; left: 50%; top: 50%; display: grid; width: 128px; height: 128px; place-content: center; gap: 6px; padding: 14px; border: 1.5px solid #f2b544; border-radius: 999px; background: var(--g-panel, #1e1c11); box-shadow: 0 0 40px rgba(242, 181, 68, 0.14); text-align: center; transform: translate(-50%, -50%)">
+            <span style="color: #f2b544; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.16em">{{ centerTag }}</span>
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.25">{{ centerLabel }}</span>
+          </div>
+          <sc-for list="{{ graphNodes }}" as="nd" hint-placeholder-count="0">
+            <button type="button" onClick="{{ nd.onClick }}" style="{{ nd.style }}">
+              <span data-pulse="" style="{{ nd.ringStyle }}"></span>
+              <span style="font-size: 12.5px; font-weight: 600; white-space: nowrap">{{ nd.label }}</span>
+              <span style="{{ nd.subStyle }}">{{ nd.sub }}</span>
+            </button>
+          </sc-for>
+        </sc-if>
+      </div>
+      </sc-if>
+      <div style="display: grid; align-content: start; gap: 10px; min-height: 176px; padding: 16px 22px 20px">
+        <sc-if value="{{ notWide }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--g-line, #4b4026)">
+      <button type="button" onClick="{{ onAcquireAll }}" disabled="{{ acquireAllOff }}" style="{{ acquireAllStyle }}">Fetch unknowns</button>
+      <button type="button" onClick="{{ onSave }}" disabled="{{ saveOff }}" style="{{ saveStyle }}">Save decision</button>
+      <button type="button" onClick="{{ onOutcome }}" disabled="{{ outcomeOff }}" style="{{ outcomeStyle }}">Simulate outcome</button>
+        </div></sc-if>
+        <sc-if value="{{ hasInspect }}" hint-placeholder-val="{{ false }}">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">{{ insp.kind }}</span>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+            <strong style="font-size: 17px; font-weight: 600">{{ insp.label }}</strong>
+            <span style="{{ insp.chipStyle }}">{{ insp.state }}</span>
+          </div>
+          <p style="margin: 0; color: var(--g-soft, #dccfa7); font-size: 13.5px; line-height: 1.55">{{ insp.note }}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-if value="{{ insp.canAcquire }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ insp.onAcquire }}" style="padding: 9px 12px; border: 0; border-radius: 6px; background: #4ADE80; color: #0d1a10; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer">{{ insp.acquireLabel }}</button>
+            </sc-if>
+            <sc-if value="{{ insp.canAssume }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ insp.onAssume }}" style="padding: 9px 12px; border: 1px solid #b69cff; border-radius: 6px; background: none; color: #d9ceff; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer">Mark as assumed</button>
+            </sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noInspect }}" hint-placeholder-val="{{ true }}">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Node inspector</span>
+          <p style="margin: 0; color: var(--g-muted, #b8a87c); font-size: 13.5px; line-height: 1.55">Select a node to see what GROOT knows about it and fetch what's missing.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em">
+            <span style="display: flex; align-items: center; gap: 6px"><i style="display: block; width: 10px; height: 10px; border-radius: 3px; background: #4ADE80"></i>Known</span>
+            <span style="display: flex; align-items: center; gap: 6px"><i style="display: block; width: 10px; height: 10px; border: 1px dashed var(--g-muted, #b8a87c); border-radius: 3px"></i>Unknown</span>
+            <span style="display: flex; align-items: center; gap: 6px"><i style="display: block; width: 10px; height: 10px; border-radius: 3px; background: #b69cff"></i>Assumed</span>
+            <span style="display: flex; align-items: center; gap: 6px"><i style="display: block; width: 10px; height: 10px; border-radius: 3px; background: #ff8a6b"></i>Conflicting</span>
+            <span style="display: flex; align-items: center; gap: 6px"><i style="display: block; width: 10px; height: 10px; border: 1.5px solid #f2b544; border-radius: 3px"></i>Critical</span>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+  </div>
+
+  <footer style="position: relative; border-top: 1px solid var(--g-line, #4b4026); background: var(--g-panel, #1e1c11)">
+  <button type="button" onClick="{{ toggleFoot }}" aria-label="{{ footToggleLabel }}" aria-expanded="{{ footOpen }}" style="position: absolute; top: -13px; left: 50%; z-index: 3; display: grid; place-items: center; width: 34px; height: 24px; margin-left: -17px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: var(--g-panel, #1e1c11); color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="{{ footChevStyle }}"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </button>
+  <sc-if value="{{ footClosed }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 9px 22px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Decision state</span>
+      <span style="{{ statusMiniStyle }}">{{ status }}</span>
+    </div>
+  </sc-if>
+  <sc-if value="{{ footOpen }}" hint-placeholder-val="{{ true }}">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; padding: 12px 22px">
+    <div style="display: grid; gap: 2px; width: 230px; min-width: 0">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Decision state</span>
+      <strong style="{{ statusStyle }}">{{ status }}</strong>
+      <span style="color: var(--g-muted, #b8a87c); font-size: 12px; line-height: 1.4">{{ statusNote }}</span>
+    </div>
+    <div style="display: flex; gap: 22px">
+      <sc-for list="{{ countRows }}" as="cr" hint-placeholder-count="4">
+        <div style="display: grid; gap: 4px">
+          <span style="{{ cr.numStyle }}">{{ cr.n }}</span>
+          <span style="display: flex; align-items: center; gap: 6px; color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase"><i style="{{ cr.swStyle }}"></i>{{ cr.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="{{ pipeWrapStyle }}">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Mission compiler</span>
+      <div style="display: flex; gap: 6px">
+        <sc-for list="{{ pipe }}" as="p" hint-placeholder-count="8">
+          <div style="display: grid; gap: 4px; justify-items: center" title="{{ p.k }}">
+            <i style="{{ p.style }}"></i>
+            <span style="color: var(--g-dim, #8a7c55); font-family: 'JetBrains Mono', monospace; font-size: 9px">{{ p.n }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-left: auto">
+      <button type="button" onClick="{{ onAcquireAll }}" disabled="{{ acquireAllOff }}" style="{{ acquireAllStyle }}">Fetch unknowns</button>
+      <button type="button" onClick="{{ onSave }}" disabled="{{ saveOff }}" style="{{ saveStyle }}">Save decision</button>
+      <button type="button" onClick="{{ onOutcome }}" disabled="{{ outcomeOff }}" style="{{ outcomeStyle }}">Simulate outcome</button>
+    </div></sc-if>
+  </div>
+  </sc-if>
+  </footer>
+
+  <sc-if value="{{ docOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeDoc }}" style="position: fixed; inset: 0; z-index: 90; display: flex; justify-content: flex-end; background: rgba(8, 7, 5, 0.62); backdrop-filter: blur(6px)">
+      <div onClick="{{ stop }}" style="width: min(780px, 100%); height: 100%; padding: 30px clamp(22px, 4vw, 48px) 64px; overflow-y: auto; border-left: 1px solid var(--g-line, #4b4026); background: var(--g-drawer, #1b1a10); color: var(--g-text, #f4e8c6)">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+          <span style="color: #f2b544; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase">The paper · {{ doc.num }} / 08</span>
+          <button type="button" onClick="{{ closeDoc }}" style="padding: 8px 12px; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer" style-hover="color: var(--g-text, #f4e8c6)">Close</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 34px">
+          <sc-for list="{{ docTabs }}" as="dt" hint-placeholder-count="8">
+            <button type="button" onClick="{{ dt.onClick }}" style="{{ dt.style }}">{{ dt.label }}</button>
+          </sc-for>
+        </div>
+        <h2 style="margin: 0; font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 500; letter-spacing: -0.045em; line-height: 1.05">{{ doc.title }}</h2>
+        <p style="margin: 14px 0 0; max-width: 620px; color: var(--g-muted, #b8a87c); font-size: 16px; line-height: 1.6">{{ doc.subtitle }}</p>
+        <sc-for list="{{ doc.blocks }}" as="bk" hint-placeholder-count="3">
+          <section style="display: grid; gap: 14px; margin-top: 42px">
+            <h3 style="margin: 0; color: #f2b544; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">{{ bk.heading }}</h3>
+            <sc-if value="{{ bk.isSummary }}" hint-placeholder-val="{{ false }}">
+              <p style="margin: 0; color: var(--g-text, #f4e8c6); font-size: 19px; line-height: 1.55; letter-spacing: -0.01em; text-wrap: pretty">{{ bk.text }}</p>
+            </sc-if>
+            <sc-if value="{{ bk.isRows }}" hint-placeholder-val="{{ true }}">
+              <div style="display: grid">
+                <sc-for list="{{ bk.rows }}" as="r" hint-placeholder-count="3">
+                  <div style="{{ r.gridStyle }}">
+                    <sc-if value="{{ r.hasTitle }}" hint-placeholder-val="{{ true }}"><strong style="font-size: 15px; font-weight: 600; line-height: 1.4">{{ r.title }}</strong></sc-if>
+                    <div style="display: grid; gap: 6px">
+                      <sc-if value="{{ r.hasText }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; color: var(--g-soft, #dccfa7); font-size: 14.5px; line-height: 1.55">{{ r.text }}</p></sc-if>
+                      <sc-if value="{{ r.hasTag }}" hint-placeholder-val="{{ false }}"><span style="color: var(--g-muted, #b8a87c); font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.5">{{ r.tag }}</span></sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ bk.isAction }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ bk.onClick }}" style="justify-self: start; padding: 11px 16px; border: 0; border-radius: 8px; background: #f2b544; color: var(--g-bg, #15140c); font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer">{{ bk.label }}</button>
+            </sc-if>
+          </section>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const ORBIT = [
+  { duration: 34, start: 222, reverse: false, rx: 0.28, ry: 0.25, icon: 'Cpu' },
+  { duration: 39, start: 305, reverse: true, rx: 0.28, ry: 0.24, icon: 'Database' },
+  { duration: 31, start: 180, reverse: false, rx: 0.42, ry: 0.28, icon: 'Network' },
+  { duration: 36, start: 8, reverse: true, rx: 0.42, ry: 0.27, icon: 'Radar' },
+  { duration: 42, start: 128, reverse: false, rx: 0.36, ry: 0.32, icon: 'Flag' },
+  { duration: 28, start: 52, reverse: true, rx: 0.36, ry: 0.31, icon: 'Brain' }
+];
+const WORDS = ['GROOT', 'Mission'];
+
+const VIEWS = {
+  'Overview': {
+    subtitle: 'GROOT in one page. Growth | Reasoning | Observation | Orchestration | Thinking. Organizational intelligence through natural language. Final Concept Paper, Track 01.',
+    blocks: [
+      { h: 'One-sentence thesis', summary: 'GROOT turns natural human language - typed explicitly or spoken naturally in a decision-making environment - into executable intelligence missions that can answer questions, assemble decision-ready information, and learn from organizational outcomes over time.' },
+      { h: 'Executive Summary', icon: 'FileText', rows: [
+        ['Natural language is the primary interface', 'GROOT is not a scraping platform, a dashboard, or a chatbot wrapper. Its primary interface is natural language. A user can type or speak a requirement such as “Should we switch suppliers?”, “Why did sales fall in the North?”, or “Find 30 manufacturers matching these constraints.” GROOT interprets the intent, determines what information and workflow are required, and executes the appropriate intelligence mission.'],
+        ['The ambient input path', 'The second input path is ambient: with explicit consent, GROOT can sit inside a decision room and listen to natural conversation. It does not treat the meeting as a transcription problem. It detects decision-relevant statements, assumptions, objections, unresolved information gaps and emerging questions, and turns them into the same internal mission structure generated from an explicit prompt.'],
+        ['A persistent decision-learning layer', 'The long-term system is a persistent decision-learning layer. It records what was known, what was assumed, what was missing, what decision was made, and what happened afterward. Over repeated decisions, GROOT can update the organization-specific decision model - not by continuously retraining a base LLM, but by maintaining a growing decision memory and updating the variables, evidence paths and reasoning patterns that it uses.']
+      ] },
+      { h: 'Core layers', icon: 'Layers', rows: [
+        ['Natural-language interface', 'Accepts a plain-English prompt or naturally occurring spoken language.'],
+        ['Mission compiler', 'Converts language into the required task, data requirements, constraints and workflow.'],
+        ['Context engine', 'Combines permitted internal data, files, meeting context and external sources.'],
+        ['Decision graph', 'Represents evidence, unknowns, assumptions, alternatives and dependencies.'],
+        ['Data acquisition', 'Obtains only the information needed to complete the mission.'],
+        ['Decision state', 'Maintains the current state of an open or completed organizational decision.'],
+        ['Learning engine', 'Compares decisions with outcomes and updates organization-specific decision memory.']
+      ] },
+      { h: 'The central idea', summary: 'The user does not need to know what data, columns, APIs or workflow steps are required. The user states what they need to know, understand, investigate or decide. GROOT determines the information architecture behind the request.' },
+      { h: 'The Problem', icon: 'CircleHelp', rows: [
+        ['The gap is not access to AI. It is the gap between language and executable intelligence.', 'Modern AI assistants can already research multi-step questions and work across connected information. OpenAI documents Deep Research as a system that can plan, research and synthesize complex questions using web, files and connected apps. Anthropic similarly offers enterprise context, connectors and tool access. Microsoft has gone further with Work IQ, a workplace intelligence layer that continuously builds semantic understanding across email, meetings, files, people and business systems. [1][2][3]'],
+        ['', 'That means GROOT cannot claim novelty simply because it can understand natural language, listen to meetings, or connect to company information. Those capabilities are increasingly becoming platform primitives. GROOT must differentiate at the level of the system it builds around those capabilities.']
+      ] },
+      { h: 'The actual unmet need', icon: 'AlertTriangle', rows: [
+        ['', 'Organizations express requirements in human language, while the data needed to fulfill those requirements is fragmented across systems, documents, conversations and external information.'],
+        ['', 'The user often knows the outcome they want, but does not know the complete data specification needed to produce it.'],
+        ['', 'In a live meeting, the information requirement may be implicit: people discuss an issue, reveal an uncertainty, or raise an objection without formally creating a data request.'],
+        ['', 'A useful answer is not always the same thing as a useful decision state. Decisions need assumptions, alternatives, unresolved variables, evidence and later outcome tracking.']
+      ] },
+      { h: 'The design question', summary: 'Can one system convert ordinary human language - including language spoken inside a meeting - into a machine-executable intelligence mission, then preserve the resulting decision state and learn from what actually happened?' },
+      { h: 'Why “just build a better chatbot” is insufficient', icon: 'Scale', rows: [
+        ['Language -> mission -> answer / dataset / decision state', '', 'Generic assistant: Prompt -> answer'],
+        ['Builds persistent organizational decision context', '', 'Generic assistant: Uses context for the current task'],
+        ['Meeting -> detected decision state and information gaps', '', 'Generic assistant: Meeting -> transcript / summary'],
+        ['Acquire information according to mission need and decision sensitivity', '', 'Generic assistant: More data is generally helpful'],
+        ['Decision can remain open, monitored and learnable', '', 'Generic assistant: Conversation ends when response is delivered'],
+        ['Memory is structured decision history tied to outcomes', '', 'Generic assistant: Memory is conversational context']
+      ] }
+    ]
+  },
+  'Architecture': {
+    subtitle: 'One intelligence engine, two natural-language entry paths. Both inputs enter the same mission compiler and intelligence engine.',
+    blocks: [
+      { h: 'Two entry paths', icon: 'GitBranch', rows: [
+        ['Explicit mode', 'User types or speaks: “Should we switch supplier B?”', 'Natural language understanding -> intent detection'],
+        ['Ambient mode', 'Meeting participants speak naturally: “Supplier B is cheaper, but can they handle Q4 volume?”', 'Natural language understanding -> event detection'],
+        ['The key innovation is not voice', 'Voice is only the transport mechanism. The differentiated capability is that GROOT can recognize an implicit information requirement from ordinary human language. If a meeting reveals that a decision depends on a missing variable, GROOT can convert that observation into a mission even when nobody formally created a prompt.']
+      ] },
+      { h: 'GROOT architecture', icon: 'Layers', rows: [
+        ['Human organization', 'Meetings / Voice · Data Systems · External Sources', 'Input'],
+        ['Context engine', 'Combines permitted internal data, files, meeting context and external sources.', 'Layer 01'],
+        ['Natural language / intent + event engine', 'Accepts a plain-English prompt or naturally occurring spoken language.', 'Layer 02'],
+        ['Mission compiler', 'Converts language into the required task, data requirements, constraints and workflow.', 'Layer 03'],
+        ['Decision graph', 'Evidence · Unknowns · Assumptions', 'Layer 04'],
+        ['Data acquisition orchestrator', 'Obtains only the information needed to complete the mission.', 'Layer 05'],
+        ['Decision dataset', 'Mission-specific decision datasets normalize the information required for the current task.', 'Layer 06'],
+        ['Decision state', 'Maintains the current state of an open or completed organizational decision.', 'Layer 07'],
+        ['Outcome', 'What actually happened.', 'Feedback'],
+        ['Learning engine', 'Compares decisions with outcomes and updates organization-specific decision memory.', 'Layer 08'],
+        ['Company decision memory', 'Structured decision history tied to outcomes.', 'Output']
+      ] },
+      { h: 'Architecture principle', summary: 'The components are modular: language understanding decides what mission is required; the mission compiler creates the structured task; the acquisition layer obtains the required information; decision state persists what matters; and the learning layer closes the outcome loop.' },
+      { h: 'What the user can ask', icon: 'MessageSquare', rows: [
+        ['“What were Q2 sales in Maharashtra?”', 'Answer grounded in permitted data.', 'Direct question'],
+        ['“Why did sales decline?”', 'Hypothesis / evidence analysis.', 'Investigation'],
+        ['“Should we switch suppliers?”', 'Decision graph + required information + state.', 'Decision'],
+        ['“Find manufacturers matching these constraints.”', 'Structured data mission + result dataset.', 'Data requirement']
+      ] },
+      { h: 'Important product rule', summary: 'GROOT should not activate the full decision pipeline for every request. The mission compiler first determines what the user is actually asking, then invokes only the necessary downstream reasoning and acquisition components.' },
+      { h: 'Reference implementation stack', icon: 'Boxes', rows: [
+        ['Interface', 'Web app + microphone / meeting capture'],
+        ['Speech', 'Streaming speech-to-text'],
+        ['Reasoning', 'LLM with tool calling / structured output'],
+        ['Mission model', 'JSON schema + decision graph representation'],
+        ['Orchestration', 'Python service + task queue / workflow runner'],
+        ['Data', 'PostgreSQL + object storage'],
+        ['Retrieval', 'Metadata index + embeddings where useful'],
+        ['Connectors', 'API / MCP / file adapters'],
+        ['Learning memory', 'Decision + outcome tables / graph layer'],
+        ['Security', 'Tenant isolation + permission-aware connectors'],
+        ['Evaluation', 'Golden missions + decision replay tests']
+      ] }
+    ]
+  },
+  'Decision Graph': {
+    subtitle: 'The mission compiler is the heart of the product. It translates a human request into a formal internal representation, so GROOT can support multiple kinds of requests without asking the user to know the underlying data model.',
+    blocks: [
+      { h: 'From natural language to an executable intelligence mission', icon: 'Workflow', rows: [
+        ['1. Parse the user language.', 'Identify the object, desired outcome, constraints, time horizon and level of certainty required.'],
+        ['2. Classify the request:', 'direct answer, analysis, decision support, or structured data acquisition.'],
+        ['3. Build a task representation.', 'Translate the request into variables, entities, relationships, evidence requirements and output schema.'],
+        ['4. Map variables to available context.', 'Identify which requirements can be satisfied from internal systems, documents, permitted external sources or conversation context.'],
+        ['5. Find information gaps.', 'Distinguish between unavailable data, unknown variables, unresolved assumptions and conflicting evidence.'],
+        ['6. Plan acquisition.', 'Retrieve only the information needed to complete the mission, using the organization\'s permitted tools and sources.'],
+        ['7. Construct the decision-ready result.', 'This may be a direct answer, analysis, dataset, or living decision state.'],
+        ['8. Persist the useful structure.', 'Save the decision state and relevant reasoning context when the task is consequential or ongoing.']
+      ] },
+      { h: 'Decision Graph example', icon: 'Network', rows: [
+        ['USER: “Should we move 30% of production from Supplier A to B?”', '', 'Decision'],
+        ['Option A: Maintain allocation', '', 'Alternative'],
+        ['Option B: Shift 30%', '', 'Alternative'],
+        ['Critical variables', 'Unit cost · Lead-time distribution · Defect rate · MOQ · Transition cost · Peak capacity'],
+        ['Input states', 'Known · Unknown · Assumed · Conflicting'],
+        ['Required data mission(s)', 'Current decision state']
+      ] },
+      { h: 'Run this mission', action: 'Run the supplier decision in Mission Control', prompt: 'Should we move 30% of production from Supplier A to B?' },
+      { h: 'Design principle', summary: 'The system should optimize for completion of the user mission, not for the number of sources queried or the amount of data collected.' }
+    ]
+  },
+  'Decision Room': {
+    room: true,
+    subtitle: 'Ambient Decision Mode: when the prompt is spoken, not typed.',
+    blocks: [
+      { h: 'What GROOT extracts from conversation', icon: 'Ear', rows: [
+        ['Decision statement', 'A choice is being proposed, evaluated or finalized.'],
+        ['Assumption', 'A belief is being used as a premise.'],
+        ['Objection / disagreement', 'A variable or interpretation may be contested.'],
+        ['Unknown', 'A missing fact may block or change the decision.'],
+        ['Commitment', 'An agreed follow-up or information request emerges.'],
+        ['Decision change', 'New evidence changes the previously known state.']
+      ] },
+      { h: 'Why this is not just “meeting notes”', summary: 'A conventional meeting tool primarily compresses speech into a summary. GROOT converts speech into an evolving computational state: what the organization believes, what it needs to know, what decision is open, and what information would move the state forward. This distinction is central to the product.' },
+      { h: 'Feasibility note', summary: 'Modern speech-to-text and meeting-recording systems make the input channel technically practical. OpenAI documents meeting transcription and multi-speaker recording, but also emphasizes consent and accuracy limitations. GROOT therefore treats consent, retention and permission boundaries as core implementation requirements, not optional polish. [4]' }
+    ]
+  },
+  'Decision Memory': {
+    subtitle: 'GROOT learns the organization through decisions and outcomes.',
+    blocks: [
+      { h: 'Self-learning, defined', summary: '“Self-learning” should not mean that the base language model is silently retrained after every interaction. The practical design is a persistent organizational memory that stores decision structures and outcomes, then uses those observations to update future decision workflows, relevant variables and information priorities.' },
+      { h: 'The learning loop', icon: 'RotateCcw', rows: [
+        ['Past decision', 'Inputs known at the time · Assumptions · Information missing · Decision made · Predicted result'],
+        ['Real world outcome', 'What actually happened'],
+        ['Learning engine', 'Which variables were predictive? · Which assumptions failed? · Which evidence paths were useful? · Which unknowns should become standard inputs?'],
+        ['Future decision', 'Updated decision model for this organization']
+      ] },
+      { h: 'Decision Memory', icon: 'Database', rows: [
+        ['Decision context', 'What was being decided and under what constraints.'],
+        ['Variables', 'Which measurable factors were used or considered.'],
+        ['Evidence', 'Where each important input came from.'],
+        ['Assumptions', 'What the organization believed when the decision was made.'],
+        ['Decision outcome', 'What choice was made.'],
+        ['Observed outcome', 'What happened later.'],
+        ['Learning delta', 'What GROOT should change in a similar future mission.']
+      ] },
+      { h: 'What the system can learn', icon: 'Lightbulb', rows: [
+        ['', 'Repeated decision variables that consistently influence outcomes.'],
+        ['', 'Information that decision-makers repeatedly request before committing.'],
+        ['', 'Assumptions that repeatedly fail or require revision.'],
+        ['', 'Sources or internal systems that are repeatedly useful for particular decision variables.'],
+        ['', 'Patterns between the organization’s stated reasoning and its actual decisions and outcomes.']
+      ] },
+      { h: 'Technical position', summary: 'The moat is not a proprietary foundation model. The moat is the accumulated structured record of how a specific organization frames decisions, which information it needs, what it decides, and what actually happens afterward.' }
+    ]
+  },
+  'Track 01 Fit': {
+    subtitle: 'How GROOT directly satisfies the problem statement: natural-language understanding of data requirements and dynamic workflow execution.',
+    blocks: [
+      { h: 'Product center', summary: 'The central Track 01 requirement is natural-language understanding of data requirements and dynamic workflow execution. GROOT treats that requirement as the product center: the user does not need to provide a pre-defined schema or collection recipe. The system derives the structure from ordinary language.' },
+      { h: 'Track 01 requirement -> GROOT implementation', icon: 'Target', rows: [
+        ['Understand requirements from natural-language prompts', 'Mission compiler converts plain language into objectives, entities, variables, constraints and outputs.'],
+        ['Dynamically design data-collection workflows', 'Workflow is derived after the system determines what information is actually needed.'],
+        ['Execute across multiple permitted sources', 'Context engine + acquisition orchestrator work across connected internal and external sources subject to permission.'],
+        ['Clean / structure / validate information', 'Mission-specific decision datasets normalize the information required for the current task.'],
+        ['Traceable / explainable outputs', 'Decision state retains source lineage and the reasoning structure behind important inputs.'],
+        ['Monitor / manage collection tasks', 'Open missions and unresolved variables remain part of the decision state until resolved or closed.'],
+        ['Maintain workflow / dataset history', 'GROOT maintains persistent decision and outcome memory rather than discarding context after the response.']
+      ] },
+      { h: 'Why the interpretation is differentiated', summary: 'A common interpretation of Track 01 is “natural language -> schema -> scrape / query -> table.” GROOT interprets it as “natural language -> determine the information mission -> determine what must be known -> acquire only what is needed -> produce the answer or decision state -> learn from the outcome.” This moves the center of gravity from collection to intelligence orchestration.' },
+      { h: 'Scraping is not the product', summary: 'External web collection can be one acquisition mechanism when permitted and useful. It is deliberately not the defining product abstraction. GROOT is valuable even when the required information already exists inside an ERP, CRM, document store, meeting transcript or connected business system.' },
+      { h: 'Research basis', summary: 'The design uses established ideas rather than claiming to invent decision theory itself. Value-of-information research provides a formal basis for prioritizing which additional information is worth collecting because it can reduce decision uncertainty or expected loss. GROOT operationalizes that principle as part of an AI mission compiler. [5]' }
+    ]
+  },
+  'Build Plan': {
+    subtitle: 'From hackathon prototype to startup-grade system. Each phase proves a distinct architectural claim.',
+    blocks: [
+      { h: 'Is GROOT actually buildable? Yes - as a staged system.', summary: 'The complete vision is ambitious, but the underlying building blocks are individually available: speech-to-text, LLM reasoning, retrieval, structured extraction, tool calling, event-driven workflows, databases, permissions, and APIs. The build challenge is systems integration and the definition of the decision/mission representation, not the invention of a new foundation model.' },
+      { h: 'Roadmap', icon: 'Route', rows: [
+        ['Prompt to mission', 'Build natural-language compiler and structured mission object.', 'Phase 1 · Proof: User prompt reliably becomes an executable task specification.'],
+        ['Context and acquisition', 'Connect files, one internal source and one approved external source.', 'Phase 2 · Proof: Mission can gather and normalize required information.'],
+        ['Decision graph', 'Represent assumptions, unknowns and evidence.', 'Phase 3 · Proof: Decision request produces a transparent state rather than a single answer.'],
+        ['Decision Room', 'Add live speech ingestion and event detection.', 'Phase 4 · Proof: Spoken discussion can create or update the same mission/decision state.'],
+        ['Memory', 'Persist decisions and outcomes.', 'Phase 5 · Proof: Past decisions can be replayed and compared with actual outcomes.'],
+        ['Learning loop', 'Update organization-specific variable and workflow priorities from outcomes.', 'Phase 6 · Proof: Similar future missions use learned organizational context.']
+      ] },
+      { h: 'Recommended MVP boundary', icon: 'CheckSquare', rows: [
+        ['Natural-language prompt', 'Primary interaction and Track 01 compliance.'],
+        ['Mission compiler', 'Turns prompts into structured missions.'],
+        ['Connected data sources', 'Start with a small set: uploaded files + one business data source + approved external source.'],
+        ['Decision graph', 'Represent variables, evidence, unknowns and assumptions for decision requests.'],
+        ['Decision Room voice input', 'Live transcription and event extraction for one meeting flow.'],
+        ['Decision state', 'Persist open / resolved / blocked states.'],
+        ['Basic outcome memory', 'Store decision + outcome pairs for later replay.']
+      ] },
+      { h: 'Not required for a convincing prototype', icon: 'X', rows: [
+        ['', 'A proprietary foundation model.'],
+        ['', 'Dozens of enterprise connectors.'],
+        ['', 'Continuous model retraining.'],
+        ['', 'Large-scale web scraping infrastructure.'],
+        ['', 'A complex analytics dashboard.']
+      ] },
+      { h: 'Competition demo flow', icon: 'Play', rows: [
+        ['1.', 'User types: “Should we move 30% of production from Supplier A to B?”'],
+        ['2.', 'GROOT identifies a decision and builds the critical-variable graph.'],
+        ['3.', 'GROOT shows known vs unknown information.'],
+        ['4.', 'User enters a Decision Room and says: “The concern is whether B can handle Q4 volume.”'],
+        ['5.', 'GROOT detects the new decision-critical unknown.'],
+        ['6.', 'GROOT asks permission to investigate / calls permitted sources.'],
+        ['7.', 'GROOT returns the decision-ready result and updates the decision state.'],
+        ['8.', 'The decision is saved.'],
+        ['9.', 'A simulated later outcome is introduced.'],
+        ['10.', 'GROOT replays the decision and shows the learning delta.']
+      ] },
+      { h: 'Try the demo flow', action: 'Start step 1 in Mission Control', prompt: 'Should we move 30% of production from Supplier A to B?' },
+      { h: 'Evaluation metrics', icon: 'TrendingUp', rows: [
+        ['Mission compilation accuracy', 'Does GROOT infer the intended task and constraints?'],
+        ['Required-variable recall', 'Does it identify the decision-critical variables?'],
+        ['Acquisition efficiency', 'Does it obtain the needed information without unnecessary work?'],
+        ['Decision-state fidelity', 'Can the system reconstruct what was known, unknown and assumed?'],
+        ['Outcome learning', 'Does a prior outcome change the next similar mission in a measurable way?']
+      ] },
+      { h: 'Buildability verdict', summary: 'A strong competition MVP is technically realistic. The difficult part is not making an LLM answer a question; it is making the mission representation, decision state and outcome loop reliable enough that the system behaves consistently across different prompts and meetings.' },
+      { h: 'Startup path', summary: 'Begin with organizations where decisions are repeated, cross-functional and data-fragmented. The product can expand horizontally once the mission compiler, decision state and learning loop are reliable enough to become reusable infrastructure.' }
+    ]
+  },
+  'Differentiation': {
+    subtitle: 'Why GROOT is more than a normal chatbot agent.',
+    blocks: [
+      { h: 'Capability comparison', icon: 'Scale', rows: [
+        ['Natural-language questions', 'ChatGPT / Claude style assistant: Yes', 'GROOT: Yes - core interface'],
+        ['Research / connected data', 'ChatGPT / Claude style assistant: Yes', 'GROOT: Yes - as mission execution'],
+        ['Meeting transcription', 'ChatGPT / Claude style assistant: Increasingly available', 'GROOT: Yes - as ambient mission input'],
+        ['Persistent decision object', 'ChatGPT / Claude style assistant: Not the core abstraction', 'GROOT: Core abstraction'],
+        ['Implicit information requirement from meeting language', 'ChatGPT / Claude style assistant: Possible with tooling', 'GROOT: Core workflow'],
+        ['Decision graph: assumptions / unknowns / evidence', 'ChatGPT / Claude style assistant: Can be constructed ad hoc', 'GROOT: Persisted system state'],
+        ['Outcome-linked decision memory', 'ChatGPT / Claude style assistant: Not the core abstraction', 'GROOT: Core learning loop'],
+        ['Organization-specific decision model', 'ChatGPT / Claude style assistant: Requires custom setup and usage', 'GROOT: Designed as product state']
+      ] },
+      { h: 'Framing the claim', summary: 'The comparison must be framed carefully. OpenAI and Anthropic are rapidly adding research, connectors, enterprise context and meeting capabilities, while Microsoft is building an enterprise intelligence layer that reasons over organizational work context. [1][2][3][4] Therefore the defensible claim is not “existing assistants cannot do these things.” The claim is that GROOT makes a different system-level abstraction the product: the persistent intelligence mission and decision state that sit between natural language and organizational action.' },
+      { h: 'The final product thesis', icon: 'Star', rows: [
+        ['Core', 'Natural language is the primary interface. The user states what they want to know, investigate, compare, collect or decide.'],
+        ['Inputs', 'GROOT can receive either an explicit prompt or, with consent, natural spoken language from a Decision Room.'],
+        ['Engine', 'GROOT compiles that language into a mission, identifies what information is required, orchestrates acquisition and builds a structured result or decision state.'],
+        ['Memory', 'The system stores decisions and outcomes, creating an organization-specific decision memory that improves future missions.']
+      ] },
+      { h: 'Final pitch', summary: '“Every AI assistant waits for you to ask a question. GROOT can understand the question you explicitly ask - or recognize the question your organization is implicitly trying to answer. It converts natural language into intelligence missions, carries those missions through the organization’s information, and learns from the decisions that follow.”' },
+      { h: 'Research references', icon: 'BookOpen', rows: [
+        ['[1] OpenAI Deep Research', '', 'help.openai.com/en/articles/10500283-deep-research-in-chatgpt'],
+        ['[2] Anthropic Enterprise / Connectors', '', 'support.anthropic.com/en/articles/9797531-what-is-the-enterprise-plan'],
+        ['[3] Microsoft Work IQ APIs', '', 'learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/work-iq-api-overview'],
+        ['[4] OpenAI ChatGPT Record', '', 'help.openai.com/en/articles/11487532-chatgpt-record'],
+        ['[5] Value of Information review', '', 'annualreviews.org/content/journals/10.1146/annurev-statistics-040120-010730']
+      ] }
+    ]
+  }
+};
+
+
+const C = { bg: 'var(--g-bg, #15140c)', panel: 'var(--g-panel, #1e1c11)', line: 'var(--g-line, #4b4026)', line2: 'var(--g-line2, #5f5030)', text: 'var(--g-text, #f4e8c6)', soft: 'var(--g-soft, #dccfa7)', muted: 'var(--g-muted, #b8a87c)', dim: 'var(--g-dim, #8a7c55)', amber: '#f2b544', green: '#4ADE80', violet: '#b69cff', coral: '#ff8a6b' };
+const PALETTE = {"bg":["#15140c","#13120f"],"panel":["#1e1c11","#1a1814"],"side":["#1a190f","#161512"],"drawer":["#1b1a10","#171512"],"chip":["#28251a","#211e19"],"line":["#4b4026","#2e2a23"],"line2":["#5f5030","#3d372d"],"line3":["#6e5d33","#4a4336"],"text":["#f4e8c6","#f1ece2"],"soft":["#dccfa7","#cfc7b8"],"muted":["#b8a87c","#a39b8c"],"dim":["#8a7c55","#6f685c"]};
+const MONO = "'JetBrains Mono', ui-monospace, monospace";
+const STEPS = [['01', 'Parse'], ['02', 'Classify'], ['03', 'Represent'], ['04', 'Map context'], ['05', 'Find gaps'], ['06', 'Plan acquisition'], ['07', 'Construct'], ['08', 'Persist']];
+const TYPE_LABEL = { direct: 'Direct answer', investigation: 'Analysis', decision: 'Decision support', data: 'Data acquisition', ambient: 'Decision support' };
+const OUTPUT = { direct: 'answer grounded in permitted data', investigation: 'hypothesis / evidence analysis', decision: 'decision graph + required information + state', data: 'structured data mission + result dataset', ambient: 'decision graph + required information + state' };
+const SKIP = { direct: ['08'], investigation: ['08'], data: ['08'], decision: [], ambient: [] };
+const EXAMPLES = [
+  { label: 'Direct question', prompt: 'What were Q2 sales in Maharashtra?' },
+  { label: 'Investigation', prompt: 'Why did sales decline?' },
+  { label: 'Decision', prompt: 'Should we move 30% of production from Supplier A to B?' },
+  { label: 'Data requirement', prompt: 'Find 30 manufacturers matching these constraints.' },
+  { label: 'Said in a meeting', prompt: 'The concern is whether B can handle Q4 volume.' }
+];
+const ROOM = [
+  { text: 'Supplier B is cheaper.', sig: 'Known', detail: 'unit-cost advantage' },
+  { text: "I'm worried about Q4 capacity.", sig: 'Objection / disagreement', detail: 'capacity risk' },
+  { text: "We don't have recent capacity evidence.", sig: 'Unknown', detail: 'peak capacity is decision-critical', critical: 'cap' },
+  { text: "Let's not decide until we know.", sig: 'Decision statement', detail: 'hold until capacity is known' }
+];
+const GROOT_AMBIENT = "I detected one decision-critical unknown: Supplier B's Q4 capacity. I can investigate it before the decision is finalized.";
+const DOCS = ['Overview', 'Architecture', 'Decision Graph', 'Decision Room', 'Decision Memory', 'Track 01 Fit', 'Build Plan', 'Differentiation'];
+const STATUS_COLOR = { IDLE: C.dim, SKIPPED: C.muted, OPEN: C.text, BLOCKED: C.amber, READY: C.green, SAVED: C.green, LEARNED: C.violet };
+const SIG_COLOR = { 'Known': C.green, 'Unknown': C.amber, 'Objection / disagreement': C.coral, 'Assumption': C.violet, 'Decision statement': C.text };
+const ROLE_COLOR = { intent: C.amber, horizon: C.violet, constraint: C.coral, entity: C.green, object: C.text };
+
+function classify(p) {
+  const s = p.toLowerCase();
+  if (/concern|worried|can they handle|handle q4|capacity evidence/.test(s)) return 'ambient';
+  if (/\bshould\b|switch|\bmove\b|decide|choose/.test(s)) return 'decision';
+  if (/\bwhy\b/.test(s)) return 'investigation';
+  if (/\bfind\b|\blist\b|collect|manufacturer/.test(s)) return 'data';
+  return 'direct';
+}
+function parseTokens(p) {
+  return p.split(/\s+/).filter(Boolean).map((w, i) => {
+    const b = w.toLowerCase().replace(/[^a-z0-9%]/g, '');
+    let role = '';
+    if (/^(should|why|find|what|which|how|list|collect|can|who|when|compare|is|are|do|does)$/.test(b)) role = i < 2 ? 'intent' : '';
+    if (/^(q[1-4]|today|tomorrow|week|month|quarter|year|daily|weekly|monthly|annual|20\d\d)$/.test(b)) role = 'horizon';
+    else if (/\d/.test(b)) role = 'constraint';
+    else if (!role && i > 0 && /^[A-Z]/.test(w)) role = 'entity';
+    else if (!role && /^(supplier|suppliers|sales|production|manufacturers|manufacturer|volume|capacity|cost|costs|price|pricing|revenue|margin|churn|hiring|budget)$/.test(b)) role = 'object';
+    return { w, role };
+  });
+}
+function short(p, n) { n = n || 42; return p.length > n ? p.slice(0, n - 1) + '…' : p; }
+function nd(id, label, kind, state, note) { return { id, label, kind, state, note: note || '' }; }
+function buildMission(id, type, prompt, learned) {
+  const s = prompt.toLowerCase();
+  const tok = parseTokens(prompt);
+  const pick = (r) => (tok.find((t) => t.role === r) || {}).w;
+  const gen = { object: (pick('object') || pick('entity') || 'to be mapped').toLowerCase(), outcome: 'answer', constraints: pick('constraint') || 'none stated', horizon: pick('horizon') || 'not stated' };
+  const base = { id, type, prompt, nodes: [], critical: null, saved: false, outcome: false, revealed: false, step: 0, fromMemory: false, topic: 'generic' };
+  if (type === 'ambient' || (type === 'decision' && /supplier/.test(s))) {
+    return Object.assign(base, {
+      kind: 'decision', topic: 'supplier', title: 'Supplier allocation', center: 'Supplier allocation', centerTag: 'DECISION',
+      spec: { object: 'production allocation', outcome: 'decide between options', constraints: type === 'ambient' ? 'Supplier B, Q4 volume' : '30% shift, Supplier A to B', horizon: type === 'ambient' ? 'Q4' : 'not stated' },
+      nodes: [nd('optA', 'A · Maintain allocation', 'option', 'option'), nd('cost', 'Unit cost', 'variable', 'known', 'Unit-cost advantage for Supplier B.'), nd('cap', 'Peak capacity', 'variable', 'unknown'), nd('lead', 'Lead-time distribution', 'variable', 'unknown'), nd('optB', 'B · Shift 30%', 'option', 'option'), nd('defect', 'Defect rate', 'variable', 'unknown'), nd('moq', 'MOQ', 'variable', 'assumed', 'Assumed unchanged from current terms.'), nd('trans', 'Transition cost', 'variable', 'unknown')],
+      critical: type === 'ambient' || learned ? 'cap' : null, fromMemory: !!learned && type !== 'ambient'
+    });
+  }
+  if (type === 'decision') return Object.assign(base, { kind: 'decision', title: short(prompt), center: short(prompt, 30), centerTag: 'DECISION', spec: Object.assign({}, gen, { outcome: 'decide' }),
+    nodes: [nd('optA', 'Option A', 'option', 'option'), nd('ev', 'Evidence', 'variable', 'unknown'), nd('unk', 'Critical variables', 'variable', 'unknown'), nd('optB', 'Option B', 'option', 'option'), nd('asm', 'Assumptions', 'variable', 'assumed', 'Premises stated in the request.')] });
+  if (type === 'direct') {
+    if (/q2|maharashtra/.test(s)) return Object.assign(base, { kind: 'context', title: 'Q2 sales · Maharashtra', center: 'Q2 sales in Maharashtra', centerTag: 'QUESTION', spec: { object: 'sales', outcome: 'answer', constraints: 'Maharashtra', horizon: 'Q2' },
+      nodes: [nd('obj', 'Sales', 'spec', 'spec', 'The object of the question.'), nd('geo', 'Maharashtra', 'spec', 'spec', 'Constraint parsed from the request.'), nd('time', 'Q2', 'spec', 'spec', 'Time horizon parsed from the request.'), nd('src', 'Business data source', 'source', 'unknown', 'Required to answer. Not connected in this demo.')] });
+    return Object.assign(base, { kind: 'context', title: short(prompt), center: short(prompt, 30), centerTag: 'QUESTION', spec: gen,
+      nodes: [nd('obj', gen.object, 'spec', 'spec', 'The object of the question.'), nd('src', 'Permitted data', 'source', 'unknown', 'Where the answer should come from.')] });
+  }
+  if (type === 'investigation') return Object.assign(base, { kind: 'context', title: /sales/.test(s) ? 'Sales decline' : short(prompt), center: /sales/.test(s) ? 'Sales decline' : short(prompt, 30), centerTag: 'INVESTIGATION', spec: Object.assign({}, gen, { outcome: 'explain' }),
+    nodes: [nd('hyp', 'Hypotheses', 'variable', 'unknown', 'Candidate explanations to test against evidence.'), nd('int', 'Internal systems', 'source', 'unknown'), nd('doc', 'Documents', 'source', 'unknown'), nd('ext', 'Permitted external sources', 'source', 'unknown'), nd('conf', 'Conflicting evidence', 'variable', 'conflicting', 'Where sources disagree. GROOT keeps both sides visible.')] });
+  return Object.assign(base, { kind: 'context', title: /manufacturer/.test(s) ? '30 manufacturers' : short(prompt), center: /manufacturer/.test(s) ? '30 manufacturers' : short(prompt, 30), centerTag: 'DATASET', spec: Object.assign({}, gen, { outcome: 'result dataset' }),
+    nodes: [nd('con', 'Constraints', 'spec', 'spec', 'Criteria each row has to meet.'), nd('files', 'Uploaded files', 'source', 'unknown'), nd('biz', 'Business data source', 'source', 'unknown'), nd('ext', 'Approved external source', 'source', 'unknown'), nd('ds', 'Result dataset', 'variable', 'unknown', 'Normalized rows for the current task.')] });
+}
+function statusOf(m) {
+  if (!m) return 'IDLE';
+  if (m.kind !== 'decision') return 'SKIPPED';
+  if (m.outcome) return 'LEARNED';
+  if (m.saved) return 'SAVED';
+  const crit = m.critical && m.nodes.find((n) => n.id === m.critical);
+  if (crit && crit.state !== 'known') return 'BLOCKED';
+  if (m.nodes.some((n) => n.kind === 'variable' && (n.state === 'unknown' || n.state === 'acquiring'))) return 'OPEN';
+  return 'READY';
+}
+function counts(m) {
+  const c = { known: 0, unknown: 0, assumed: 0, conflicting: 0 };
+  if (m) m.nodes.forEach((n) => { if (n.kind === 'option' || n.kind === 'spec') return; const st = n.state === 'acquiring' ? 'unknown' : n.state; if (c[st] != null) c[st]++; });
+  return c;
+}
+function compileLines(m) {
+  const c = counts(m);
+  const L = {
+    '01': 'object = ' + m.spec.object + ' · outcome = ' + m.spec.outcome + ' · constraints = ' + m.spec.constraints + ' · horizon = ' + m.spec.horizon,
+    '02': TYPE_LABEL[m.type].toLowerCase(),
+    '03': m.nodes.filter((n) => n.kind !== 'option').length + ' variables · ' + m.nodes.filter((n) => n.kind === 'option').length + ' options · output = ' + OUTPUT[m.type],
+    '04': 'internal systems · documents · permitted external sources' + (m.type === 'ambient' ? ' · conversation' : ''),
+    '05': 'known ' + c.known + ' · unknown ' + c.unknown + ' · assumed ' + c.assumed + ' · conflicting ' + c.conflicting,
+    '06': c.unknown + ' data mission' + (c.unknown === 1 ? '' : 's') + ' planned · only what the mission needs',
+    '07': { decision: 'decision graph ready', ambient: 'decision graph updated', direct: 'answer plan ready', investigation: 'hypothesis / evidence map ready', data: 'dataset schema ready' }[m.type],
+    '08': m.kind === 'decision' ? 'decision state persisted' : 'not consequential or ongoing'
+  };
+  return STEPS.map(([n, k]) => ({ n, k, text: L[n], skipped: SKIP[m.type].includes(n) }));
+}
+function grootLine(m) {
+  if (m.type === 'ambient') return GROOT_AMBIENT;
+  if (m.topic === 'supplier') return m.fromMemory ? 'Decision detected. Memory says peak capacity decided the last supplier call, so it is flagged critical from the start.' : 'Decision detected. Known and unknown information is on the graph. Nothing is decided yet.';
+  return {
+    decision: 'Decision detected. Fill the unknowns on the graph before deciding.',
+    direct: 'Direct question. I answer from permitted data only, so the decision graph and decision state stay off.',
+    investigation: 'Investigation. I will separate unavailable data, unknowns, assumptions and conflicting evidence before proposing causes.',
+    data: 'Data requirement. I will collect only the fields this dataset needs, from permitted sources.'
+  }[m.type];
+}
+const GLYPH = { input: '›', compile: '◆', skip: '◇', signal: '▲', heard: '“', groot: '◎', state: '■', memory: '↺', data: '⇣', room: '◉' };
+function btnStyle(kind, on) {
+  const base = { padding: '10px 14px', borderRadius: 6, fontFamily: MONO, fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: on ? 'pointer' : 'not-allowed', opacity: on ? 1 : 0.35, whiteSpace: 'nowrap' };
+  if (kind === 'primary') return Object.assign(base, { border: 0, background: on ? C.amber : C.line, color: on ? C.bg : C.muted });
+  if (kind === 'violet') return Object.assign(base, { border: '1px solid ' + C.violet, background: on ? 'rgba(182,156,255,0.12)' : 'none', color: '#e2d8ff' });
+  return Object.assign(base, { border: '1px solid ' + C.line2, background: 'none', color: C.text });
+}
+
+class Component extends DCLogic {
+  state = {
+    screen: 'landing', now: new Date(), wordIndex: 0, letterCount: WORDS[0].length, deleting: false, iconsReady: !!window.GROOT_ICONS,
+    channel: 'typed', input: '', log: [], vw: window.innerWidth, railOpen: false, footOpen: true, booting: false, graphMin: false, graphMax: false, missions: [], activeId: null, selected: null, compiling: false, roomIdx: -1, memory: [], docView: null
+  };
+  sessionId = 'S-' + Math.random().toString(16).slice(2, 6).toUpperCase();
+  mid = 0;
+  lid = 0;
+  agentEls = [];
+  agentRefs = [0, 1, 2, 3, 4, 5].map((i) => (el) => { this.agentEls[i] = el; });
+  spot = { cx: 50, cy: 44, tx: 50, ty: 44 };
+  setOrbitEl = (el) => { this.orbitEl = el; };
+  setSpotEl = (el) => { this.spotEl = el; };
+  setScrollRoot = (el) => { this.scrollRoot = el; };
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+
+  scrollFx() {
+    const root = this.scrollRoot;
+    if (!root) return;
+    const vh = window.innerHeight, vw = window.innerWidth;
+    const cl = (v) => Math.max(0, Math.min(1, v));
+    const rm = this.reduce;
+    const sy = window.scrollY;
+    const hero = document.querySelector('.landing-hero');
+    if (hero) { const k = rm ? 0 : cl(sy / (vh * 0.9)); hero.style.transform = 'scale(' + (1 - k * 0.06).toFixed(3) + ')'; hero.style.opacity = (1 - k * 1.2).toFixed(3); }
+    const cue = document.querySelector('[data-scroll-cue]');
+    if (cue) { const cta = document.querySelector('.landing-hero .hero-cta'); const cr = cta ? cta.getBoundingClientRect() : null; cue.style.display = cr && cr.bottom + sy + 90 > vh ? 'none' : 'flex'; cue.style.opacity = (1 - cl(sy / 160)).toFixed(3); }
+    root.querySelectorAll('[data-reveal]').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      const p = rm ? 1 : cl((vh * 0.95 - r.top) / (vh * 0.3) - (+el.dataset.reveal || 0) * 0.22);
+      el.style.opacity = p.toFixed(3);
+      el.style.transform = 'translateY(' + ((1 - p) * 56).toFixed(1) + 'px) scale(' + (0.95 + 0.05 * p).toFixed(3) + ')';
+      el.style.filter = p < 1 ? 'blur(' + ((1 - p) * 10).toFixed(1) + 'px)' : 'none';
+    });
+    root.querySelectorAll('[data-words]').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      const p = rm ? 1 : cl((vh * 0.9 - r.top) / (vh * 0.5));
+      const ws = el.querySelectorAll('[data-w]');
+      const n = ws.length;
+      ws.forEach((w, i) => {
+        const q = cl(p * (n + 2) - i);
+        w.style.opacity = (0.1 + 0.9 * q).toFixed(3);
+        w.style.filter = q < 1 ? 'blur(' + ((1 - q) * 8).toFixed(1) + 'px)' : 'none';
+        w.style.transform = 'translateY(' + ((1 - q) * 0.35).toFixed(3) + 'em) rotateX(' + ((1 - q) * 60).toFixed(1) + 'deg)';
+      });
+    });
+    const pin = (el) => { const r = el.getBoundingClientRect(); return cl(-r.top / Math.max(1, r.height - vh)); };
+    const arch = root.querySelector('[data-arch]');
+    if (arch) {
+      const p = rm ? 0 : pin(arch);
+      const track = arch.querySelector('[data-track]');
+      const max = Math.max(0, track.scrollWidth - vw);
+      track.style.transform = 'translate3d(' + (-p * max).toFixed(1) + 'px, 0, 0)';
+      const fill = arch.querySelector('[data-arch-fill]');
+      if (fill) fill.style.transform = 'scaleX(' + (rm ? 1 : p).toFixed(3) + ')';
+      arch.querySelectorAll('[data-step]').forEach((c) => {
+        const r = c.getBoundingClientRect();
+        const d = (r.left + r.width / 2 - vw / 2) / vw;
+        const lit = cl(1 - Math.abs(d) * 1.6);
+        c.style.transform = rm ? 'none' : 'rotateY(' + (d * -28).toFixed(1) + 'deg) translateZ(' + (lit * 40).toFixed(1) + 'px)';
+        c.style.opacity = (0.35 + 0.65 * lit).toFixed(3);
+        c.style.borderColor = 'rgba(74, 222, 128, ' + (0.1 + lit * 0.45).toFixed(3) + ')';
+        c.style.boxShadow = '0 0 ' + (lit * 60).toFixed(0) + 'px rgba(74, 222, 128, ' + (lit * 0.18).toFixed(3) + ')';
+      });
+    }
+    const room = root.querySelector('[data-room]');
+    if (room) {
+      const narrow = vw < 720;
+      const st = room.querySelector('[data-room-sticky]');
+      room.style.height = narrow ? 'auto' : '320vh';
+      if (st) { st.style.position = narrow ? 'relative' : 'sticky'; st.style.height = narrow ? 'auto' : '100vh'; st.style.padding = narrow ? '120px 0' : '0'; const g = st.firstElementChild; if (g) g.style.gridTemplateColumns = narrow ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(0, 1.05fr)'; }
+      const rr = room.getBoundingClientRect();
+      const c = rm ? 9 : narrow ? cl((vh * 0.9 - rr.top) / (rr.height * 0.8)) * 6.4 : pin(room) * 6.4;
+      room.querySelectorAll('[data-q]').forEach((el) => {
+        const v = cl(c - +el.dataset.q);
+        el.style.opacity = v.toFixed(3);
+        el.style.transform = 'translateX(' + ((1 - v) * -40).toFixed(1) + 'px) scale(' + (0.9 + 0.1 * v).toFixed(3) + ')';
+      });
+      room.querySelectorAll('[data-need]').forEach((el) => {
+        const v = cl(c - +el.dataset.need);
+        el.style.opacity = (0.12 + 0.88 * v).toFixed(3);
+        el.style.transform = 'translateY(' + ((1 - v) * 14).toFixed(1) + 'px)';
+        el.style.filter = v < 1 ? 'blur(' + ((1 - v) * 4).toFixed(1) + 'px)' : 'none';
+      });
+      const a = room.querySelector('[data-status-a]'), b = room.querySelector('[data-status-b]');
+      if (a && b) { a.style.opacity = c >= 4 ? '0' : '1'; b.style.opacity = c >= 4 ? '1' : '0'; }
+    }
+    const road = root.querySelector('[data-road]');
+    if (road) {
+      const r = road.getBoundingClientRect();
+      const line = vh * 0.6;
+      const p = rm ? 1 : cl((line - r.top) / r.height);
+      const fill = road.querySelector('[data-road-fill]');
+      if (fill) fill.style.transform = 'scaleY(' + p.toFixed(3) + ')';
+      road.querySelectorAll('[data-ph]').forEach((el) => {
+        const er = el.getBoundingClientRect();
+        const v = rm ? 1 : cl((line - er.top) / 120);
+        el.style.opacity = (0.28 + 0.72 * v).toFixed(3);
+        el.style.transform = 'translateX(' + ((1 - v) * 24).toFixed(1) + 'px)';
+        const dot = el.querySelector('[data-ph-dot]');
+        if (dot) { dot.style.background = v >= 1 ? '#4ADE80' : '#010503'; dot.style.borderColor = v >= 1 ? '#86f7a3' : 'rgba(239, 244, 255, 0.3)'; dot.style.boxShadow = v >= 1 ? '0 0 18px rgba(74, 222, 128, 0.8)' : 'none'; }
+      });
+    }
+    const rail = root.querySelector('[data-rail]');
+    if (rail) {
+      const show = sy > vh * 0.6 && vw > 900;
+      rail.style.opacity = show ? '1' : '0';
+      rail.style.pointerEvents = show ? 'auto' : 'none';
+      let active = -1;
+      root.querySelectorAll('[data-section]').forEach((s) => { if (s.getBoundingClientRect().top < vh * 0.5) active = +s.dataset.section; });
+      rail.querySelectorAll('[data-rail-item]').forEach((it, i) => {
+        const on = i === active;
+        it.style.color = on ? '#86f7a3' : 'rgba(239, 244, 255, 0.4)';
+        const dot = it.querySelector('[data-rail-dot]');
+        if (dot) { dot.style.background = on ? '#4ADE80' : 'rgba(239, 244, 255, 0.25)'; dot.style.transform = on ? 'scale(1.6)' : 'scale(1)'; dot.style.boxShadow = on ? '0 0 12px rgba(74, 222, 128, 0.9)' : 'none'; }
+      });
+    }
+  }
+
+  componentDidMount() {
+    if (!window.GROOT_ICONS) {
+      this.iconPoll = setInterval(() => { if (window.GROOT_ICONS) { clearInterval(this.iconPoll); this.setState({ iconsReady: true }); } }, 60);
+    }
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.coarse = window.matchMedia('(pointer: coarse)').matches;
+    this.t0 = performance.now();
+    this.onMove = (e) => { this.spot.tx = (e.clientX / window.innerWidth) * 100; this.spot.ty = (e.clientY / window.innerHeight) * 100; };
+    if (!this.reduce && !this.coarse) window.addEventListener('pointermove', this.onMove, { passive: true });
+    const tick = (now) => {
+      const el = this.orbitEl;
+      if (el) {
+        const r = el.getBoundingClientRect();
+        const w = r.width || 1536, h = r.height || 790;
+        const t = this.reduce ? 0 : (now - this.t0) / 1000;
+        ORBIT.forEach((a, i) => {
+          const n = this.agentEls[i]; if (!n) return;
+          const ang = ((a.start + (a.reverse ? -1 : 1) * (t / a.duration) * 360) * Math.PI) / 180;
+          n.style.transform = 'translate(-50%, -50%) translate3d(' + (Math.cos(ang) * w * a.rx).toFixed(2) + 'px, ' + (Math.sin(ang) * h * a.ry).toFixed(2) + 'px, 0)';
+        });
+      }
+      if (this.spotEl) {
+        const s = this.spot; s.cx += (s.tx - s.cx) * 0.14; s.cy += (s.ty - s.cy) * 0.14;
+        this.spotEl.style.setProperty('--spotlight-x', s.cx + '%');
+        this.spotEl.style.setProperty('--spotlight-y', s.cy + '%');
+      }
+      if (this.state.screen === 'landing') this.scrollFx(); else this.consoleFx(now);
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+    this.clockTimer = setInterval(() => this.setState({ now: new Date() }), 30000);
+    this.typeLoop();
+    window.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf); clearInterval(this.clockTimer); clearInterval(this.iconPoll);
+    clearTimeout(this.typeTimer); clearInterval(this.runTimer); clearInterval(this.roomTimer);
+    window.removeEventListener('pointermove', this.onMove);
+  }
+
+  typeLoop() {
+    const { wordIndex, letterCount, deleting, screen } = this.state;
+    if (this.reduce) return;
+    const word = WORDS[wordIndex];
+    const complete = !deleting && letterCount === word.length;
+    const deleted = deleting && letterCount === 0;
+    const delay = complete ? 1350 : deleted ? 260 : deleting ? 70 : 115;
+    this.typeTimer = setTimeout(() => {
+      if (this.state.screen !== 'landing') { this.typeLoop(); return; }
+      if (complete) this.setState({ deleting: true }, () => this.typeLoop());
+      else if (deleted) this.setState({ wordIndex: (wordIndex + 1) % WORDS.length, deleting: false }, () => this.typeLoop());
+      else this.setState({ letterCount: letterCount + (deleting ? -1 : 1) }, () => this.typeLoop());
+    }, screen === 'landing' ? delay : 500);
+  }
+
+  ic(name, size = 20, extra) {
+    const node = (window.GROOT_ICONS || {})[name];
+    if (!node) return React.createElement('span', { style: { display: 'inline-block', width: size, height: size, flex: '0 0 auto' } });
+    return React.createElement('svg', Object.assign({ xmlns: 'http://www.w3.org/2000/svg', width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, extra || {}),
+      node.map(([tag, attrs], i) => React.createElement(tag, Object.assign({ key: i }, attrs))));
+  }
+
+
+  setLogEl = (el) => { this.logEl = el; };
+  onResize = () => this.setState({ vw: window.innerWidth });
+  componentDidUpdate() {
+    if (this.logEl && this.state.log.length !== this._ll) { this._ll = this.state.log.length; this.logEl.scrollTop = this.logEl.scrollHeight; }
+  }
+  consoleFx(now) {
+    if (this.state.screen !== 'console') return;
+    if (this.consoleEl && this._pal !== this.state.channel) { this._pal = this.state.channel; const k = this._pal === 'room' ? 1 : 0; Object.keys(PALETTE).forEach((v) => this.consoleEl.style.setProperty('--g-' + v, PALETTE[v][k])); }
+    const t = now / 1000;
+    document.querySelectorAll('[data-pulse]').forEach((el) => { el.style.opacity = (0.25 + 0.75 * (0.5 + 0.5 * Math.sin(t * 4))).toFixed(3); el.style.transform = 'scale(' + (1 + 0.06 * (0.5 + 0.5 * Math.sin(t * 4))).toFixed(3) + ')'; });
+    const live = this.state.roomIdx >= 0 && this.state.roomIdx < ROOM.length;
+    document.querySelectorAll('[data-bar]').forEach((el, i) => { el.style.height = (live ? 4 + 22 * Math.abs(Math.sin(t * 5 + i * 0.8) * Math.sin(t * 1.7 + i)) : 4).toFixed(1) + 'px'; el.style.opacity = live ? '1' : '0.4'; });
+  }
+
+  go() {
+    clearTimeout(this.bootTimer);
+    const boot = !this.reduce;
+    this.setState({ screen: 'console', booting: boot }); window.scrollTo({ top: 0, left: 0 });
+    if (boot) this.bootTimer = setTimeout(() => this.setState({ booting: false }), 3000);
+  }
+  bootEl() {
+    const h = React.createElement, M = MONO;
+    const brass = 'linear-gradient(145deg, #8a6a34 0%, #c8a15a 18%, #6b5128 45%, #a9843f 70%, #5a4220 100%)';
+    const rivet = (pos) => h('i', { key: JSON.stringify(pos), style: Object.assign({ position: 'absolute', width: 9, height: 9, borderRadius: 99, background: 'radial-gradient(circle at 35% 35%, #f0d99a, #7a5c2a 60%, #3a2a12)', boxShadow: '0 1px 1px rgba(0,0,0,0.6)' }, pos) });
+    const lines = [['GROOT CONSOLE', 'v1.0', '#f2b544'], ['language parser', 'OK'], ['mission compiler', 'OK'], ['context engine', 'OK'], ['decision graph', 'OK'], ['decision memory', 'LOADED']];
+    return h('div', { key: 'boot', onClick: () => { clearTimeout(this.bootTimer); this.setState({ booting: false }); }, style: { position: 'fixed', inset: 0, zIndex: 200, display: 'grid', placeItems: 'center', overflow: 'hidden', cursor: 'pointer', background: 'radial-gradient(ellipse at 50% 45%, #2a2414 0%, #0d0b06 70%)', animation: 'gBootFade 3000ms ease forwards' } },
+      h('div', { style: { position: 'relative', width: '100vw', height: '100vh', padding: 14, borderRadius: 26, background: brass, boxShadow: '0 40px 120px rgba(0,0,0,0.8), inset 0 2px 0 rgba(255,235,180,0.45), inset 0 -3px 0 rgba(0,0,0,0.45)', transformOrigin: '50% 50%', animation: 'gBootBox 3000ms cubic-bezier(.65,0,.25,1) forwards' } },
+        rivet({ top: 6, left: 6 }), rivet({ top: 6, right: 6 }), rivet({ bottom: 6, left: 6 }), rivet({ bottom: 6, right: 6 }),
+        h('div', { style: { position: 'absolute', top: -1, left: '50%', transform: 'translateX(-50%)', padding: '3px 18px 5px', borderRadius: '0 0 10px 10px', background: '#2a2010', color: '#e9c77a', fontFamily: M, fontSize: 11, fontWeight: 700, letterSpacing: '0.3em', boxShadow: 'inset 0 -1px 0 rgba(255,220,150,0.25)' } }, 'GROOT'),
+        h('div', { style: { position: 'absolute', bottom: 3, right: 34, display: 'flex', gap: 8 } },
+          h('i', { style: { width: 7, height: 7, borderRadius: 99, background: '#4ADE80', boxShadow: '0 0 8px #4ADE80', animation: 'gBootBlink 900ms steps(2) infinite' } }),
+          h('i', { style: { width: 7, height: 7, borderRadius: 99, background: '#f2b544', boxShadow: '0 0 8px #f2b544' } })),
+        h('div', { style: { position: 'relative', width: '100%', height: '100%', overflow: 'hidden', borderRadius: 14, background: '#0c0b06', boxShadow: 'inset 0 0 0 2px #1a140a, inset 0 0 60px rgba(0,0,0,0.9)' } },
+          h('div', { style: { position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 50%, #2b2814 0%, #15140c 75%)', transformOrigin: '50% 50%', animation: 'gBootCrt 3000ms ease forwards' } },
+            h('div', { style: { position: 'absolute', inset: 0, background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 2px, transparent 2px 4px)', pointerEvents: 'none' } }),
+            h('div', { style: { position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: 'grid', gap: 10, width: 'min(420px, 80%)', fontFamily: M, fontSize: 'clamp(11px, 1.6vmin, 15px)', color: '#dccfa7', textShadow: '0 0 8px rgba(242,181,68,0.35)', animation: 'gBootText 3000ms ease forwards' } },
+              lines.map(([a, b, col], i) => h('div', { key: a, style: { display: 'flex', gap: 10, opacity: 0, animation: 'gBootLine 3000ms ease forwards', animationDelay: (i * 130) + 'ms', color: col || undefined, fontWeight: col ? 700 : 400, letterSpacing: col ? '0.2em' : '0.04em' } },
+                h('span', null, i ? '› ' + a : a), h('span', { style: { flex: 1, borderBottom: i ? '1px dotted rgba(220,207,167,0.3)' : 0, marginBottom: 4 } }), h('span', { style: { color: i ? '#4ADE80' : col } }, b))),
+              h('div', { style: { height: 4, marginTop: 8, borderRadius: 99, background: 'rgba(242,181,68,0.14)', overflow: 'hidden' } },
+                h('div', { style: { height: '100%', background: '#f2b544', boxShadow: '0 0 12px #f2b544', transformOrigin: 'left', animation: 'gBootBar 3000ms ease forwards' } })))))));
+  }
+  stamp() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }); }
+  entry(kind, tag, text, extra) { this.lid += 1; return Object.assign({ id: this.lid, t: this.stamp(), kind, tag, text }, extra || {}); }
+  push(entries) { this.setState((s) => ({ log: s.log.concat(entries) })); }
+  active() { return this.state.missions.find((m) => m.id === this.state.activeId) || null; }
+
+  updateMission(id, fn, logs) {
+    this.setState((s) => {
+      let before = null, after = null, title = '';
+      const missions = s.missions.map((m) => {
+        if (m.id !== id) return m;
+        before = statusOf(m);
+        const n = fn(Object.assign({}, m, { nodes: m.nodes.map((x) => Object.assign({}, x)) }));
+        after = statusOf(n); title = n.title;
+        return n;
+      });
+      const log = s.log.concat(logs || []);
+      if (before && after && before !== after && after !== 'SKIPPED') { this.lid += 1; log.push({ id: this.lid, t: this.stamp(), kind: 'state', tag: 'DECISION STATE', text: title + ' → ' + after, status: after }); }
+      return { missions, log };
+    });
+  }
+
+  compile(promptArg) {
+    if (this.state.compiling) return;
+    const prompt = ((promptArg != null ? promptArg : this.state.input) || '').trim();
+    if (!prompt) return;
+    const type = classify(prompt);
+    const cur = this.state.missions.find((m) => m.topic === 'supplier' && !m.saved);
+    if (type === 'ambient' && cur) {
+      this.setState({ input: '', activeId: cur.id, selected: 'cap' });
+      this.updateMission(cur.id, (m) => { m.critical = 'cap'; return m; }, [
+        this.entry('input', 'TYPED', prompt),
+        this.entry('signal', 'SIGNAL · Objection', 'capacity risk', { sig: 'Objection / disagreement' }),
+        this.entry('signal', 'SIGNAL · Unknown', 'peak capacity is decision-critical', { sig: 'Unknown' }),
+        this.entry('groot', 'GROOT', GROOT_AMBIENT)
+      ]);
+      return;
+    }
+    const learned = this.state.memory.some((x) => x.topic === 'supplier' && x.learned);
+    this.mid += 1;
+    const id = this.mid;
+    const m = buildMission(id, type, prompt, learned);
+    const lines = compileLines(m);
+    const first = this.entry('input', 'TYPED', prompt);
+    this.setState((s) => ({ input: '', compiling: true, missions: s.missions.concat([m]), activeId: id, selected: null, log: s.log.concat([first]) }));
+    let i = 0;
+    clearInterval(this.runTimer);
+    this.runTimer = setInterval(() => {
+      const ln = lines[i];
+      const extra = [ln.skipped ? this.entry('skip', ln.n + ' ' + ln.k.toUpperCase(), 'skipped · ' + ln.text) : this.entry('compile', ln.n + ' ' + ln.k.toUpperCase(), ln.text)];
+      if (ln.n === '03' && m.kind !== 'decision') extra.push(this.entry('skip', 'DECISION GRAPH', 'not required for this request · context map only'));
+      if (ln.n === '04' && m.fromMemory) extra.push(this.entry('memory', 'MEMORY', 'learned input applied · peak capacity included by default'));
+      i += 1;
+      const done = i >= lines.length;
+      if (done) {
+        clearInterval(this.runTimer);
+        extra.push(this.entry('groot', 'GROOT', grootLine(m)));
+        if (m.kind === 'decision') extra.push(this.entry('state', 'DECISION STATE', m.title + ' → ' + statusOf(m), { status: statusOf(m) }));
+      }
+      const step = i;
+      this.setState((s) => ({ log: s.log.concat(extra), compiling: !done, missions: s.missions.map((x) => (x.id === id ? Object.assign({}, x, { step, revealed: step >= 3 }) : x)) }));
+    }, 380);
+  }
+
+  acquire(nid, mid) {
+    const m = this.state.missions.find((x) => x.id === mid);
+    const n = m && m.nodes.find((x) => x.id === nid);
+    if (!n || n.state === 'known' || n.state === 'acquiring' || n.kind === 'option' || n.kind === 'spec') return;
+    const crit = m.critical === nid;
+    this.updateMission(mid, (mm) => { mm.nodes.find((x) => x.id === nid).state = 'acquiring'; return mm; },
+      crit ? [this.entry('room', 'PERMISSION', 'granted · investigate ' + n.label.toLowerCase()), this.entry('data', 'DATA MISSION', 'acquiring ' + n.label.toLowerCase() + ' from permitted sources')] : [this.entry('data', 'DATA MISSION', 'acquiring ' + n.label.toLowerCase() + ' from permitted sources')]);
+    setTimeout(() => this.updateMission(mid, (mm) => { const x = mm.nodes.find((y) => y.id === nid); x.state = 'known'; x.note = 'Evidence received from a permitted source (simulated in this demo). Source lineage is kept with the decision.'; return mm; },
+      [this.entry('data', 'EVIDENCE', n.label.toLowerCase() + ' resolved · source lineage kept')]), 1400 + Math.random() * 700);
+  }
+  acquireAll() {
+    const m = this.active();
+    if (!m) return;
+    m.nodes.filter((n) => n.kind !== 'option' && n.kind !== 'spec' && n.state !== 'known' && n.state !== 'acquiring').forEach((n, i) => setTimeout(() => this.acquire(n.id, m.id), i * 320));
+  }
+  markAssumed(nid, mid) {
+    const m = this.state.missions.find((x) => x.id === mid);
+    const n = m && m.nodes.find((x) => x.id === nid);
+    if (!n) return;
+    this.updateMission(mid, (mm) => { const x = mm.nodes.find((y) => y.id === nid); x.state = 'assumed'; x.note = 'Marked as an assumption. It stays visible in the decision state and gets checked against the outcome.'; if (mm.critical === nid) mm.critical = null; return mm; },
+      [this.entry('signal', 'SIGNAL · Assumption', n.label.toLowerCase() + ' used as a premise', { sig: 'Assumption' })]);
+  }
+  save() {
+    const m = this.active();
+    if (!m || statusOf(m) !== 'READY') return;
+    this.setState((s) => ({ memory: s.memory.concat([{ id: m.id, title: m.title, topic: m.topic, learned: false, deltas: [] }]) }));
+    this.updateMission(m.id, (mm) => { mm.saved = true; return mm; }, [this.entry('memory', 'MEMORY', 'decision saved · what was known, assumed and missing is kept with it')]);
+  }
+  outcome() {
+    const m = this.active();
+    if (!m || !m.saved || m.outcome) return;
+    const sup = m.topic === 'supplier';
+    const deltas = sup ? ['Peak capacity becomes a standard input for supplier decisions', 'Lead-time distribution was predictive · weight it higher', 'Capacity evidence path marked useful'] : ['Variables used here become defaults for similar missions'];
+    const out = sup ? 'Supplier B met Q4 volume; lead time ran longer than planned.' : 'Outcome recorded against the saved decision.';
+    this.setState((s) => ({ memory: s.memory.map((x) => (x.id === m.id ? Object.assign({}, x, { learned: true, deltas }) : x)) }));
+    this.updateMission(m.id, (mm) => { mm.outcome = true; return mm; }, [this.entry('memory', 'SIMULATED OUTCOME', out)].concat(deltas.map((d) => this.entry('memory', 'LEARNING DELTA', d)), [this.entry('groot', 'GROOT', sup ? 'Next time a supplier decision comes in, I will ask for peak capacity first.' : 'This outcome now shapes the next similar mission.')]));
+  }
+
+  startRoom() {
+    clearInterval(this.roomTimer);
+    let cur = this.state.missions.find((m) => m.topic === 'supplier' && !m.saved);
+    const pre = [this.entry('room', 'DECISION ROOM', 'consent granted · listening')];
+    if (!cur) {
+      this.mid += 1;
+      cur = Object.assign(buildMission(this.mid, 'decision', 'Supplier allocation (from conversation)', false), { revealed: true, step: 8 });
+      pre.push(this.entry('compile', 'MISSION', 'created from conversation · supplier allocation'));
+      const c0 = cur;
+      this.setState((s) => ({ missions: s.missions.concat([c0]) }));
+    }
+    const mid = cur.id;
+    this.setState((s) => ({ roomIdx: 0, activeId: mid, log: s.log.concat(pre) }));
+    this.roomTimer = setInterval(() => {
+      const i = this.state.roomIdx;
+      const L = ROOM[i];
+      if (!L) { clearInterval(this.roomTimer); return; }
+      const logs = [this.entry('heard', 'HEARD · Participant', '“' + L.text + '”'), this.entry('signal', 'SIGNAL · ' + (L.sig === 'Objection / disagreement' ? 'Objection' : L.sig), L.detail, { sig: L.sig })];
+      if (i === ROOM.length - 1) { logs.push(this.entry('groot', 'GROOT', GROOT_AMBIENT)); clearInterval(this.roomTimer); }
+      this.setState((s) => ({ roomIdx: i + 1, selected: L.critical ? 'cap' : s.selected }));
+      this.updateMission(mid, (m) => { if (L.critical) m.critical = L.critical; return m; }, logs);
+    }, 1700);
+  }
+  stopRoom() { clearInterval(this.roomTimer); this.setState((s) => ({ roomIdx: -1, log: s.log.concat([this.entry('room', 'DECISION ROOM', 'stopped listening')]) })); }
+
+  renderVals() {
+    const s = this.state;
+    const isConsole = s.screen === 'console';
+    const m = s.missions.find((x) => x.id === s.activeId) || null;
+    const status = statusOf(m);
+    const c = counts(m);
+
+    const logRows = s.log.map((e) => {
+      let col = C.amber;
+      if (e.kind === 'skip') col = C.dim;
+      else if (e.kind === 'signal') col = SIG_COLOR[e.sig] || C.coral;
+      else if (e.kind === 'heard' || e.kind === 'memory' || e.kind === 'room') col = C.violet;
+      else if (e.kind === 'data') col = C.green;
+      else if (e.kind === 'state') col = STATUS_COLOR[e.status] || C.text;
+      const big = e.kind === 'input' || e.kind === 'groot' || e.kind === 'heard';
+      const rowStyle = { display: 'grid', gridTemplateColumns: '62px 16px minmax(110px, 180px) minmax(0, 1fr)', gap: 12, alignItems: 'baseline', padding: big ? '12px 0' : '6px 0' };
+      if (e.kind === 'input') Object.assign(rowStyle, { marginTop: 14, borderTop: '1px solid ' + C.line, paddingTop: 18 });
+      if (e.kind === 'groot') Object.assign(rowStyle, { margin: '8px -14px', padding: '14px', borderRadius: 10, background: 'rgba(242,181,68,0.07)', border: '1px solid rgba(242,181,68,0.22)' });
+      let textStyle = { color: '#d8d1c3', fontFamily: MONO, fontSize: 12.5, lineHeight: 1.55, overflowWrap: 'anywhere' };
+      if (e.kind === 'input') textStyle = { color: C.text, fontSize: 19, fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.35 };
+      if (e.kind === 'groot') textStyle = { color: C.text, fontSize: 16, lineHeight: 1.5 };
+      if (e.kind === 'heard') textStyle = { color: C.text, fontSize: 16, fontStyle: 'italic', lineHeight: 1.45 };
+      if (e.kind === 'skip') textStyle = Object.assign(textStyle, { color: C.dim, textDecoration: 'line-through' });
+      if (e.kind === 'state') textStyle = Object.assign(textStyle, { color: col, fontWeight: 700 });
+      return { id: e.id, t: e.t, glyph: GLYPH[e.kind], tag: e.tag, text: e.text, rowStyle, textStyle,
+        glyphStyle: { color: col, fontFamily: MONO, fontSize: 13, fontWeight: 700, textAlign: 'center' },
+        tagStyle: { color: e.kind === 'skip' ? C.dim : col, fontFamily: MONO, fontSize: 10.5, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' } };
+    });
+
+    let graphNodes = [], edgesSvg = null;
+    if (m && m.revealed) {
+      const n = m.nodes.length;
+      const pos = m.nodes.map((x, i) => { const a = ((-90 + (i * 360) / n) * Math.PI) / 180; return { x: 50 + 37 * Math.cos(a), y: 50 + 38 * Math.sin(a) }; });
+      const colOf = (x) => {
+        if (x.id === m.critical && x.state !== 'known') return C.amber;
+        return { known: C.green, unknown: C.muted, assumed: C.violet, conflicting: C.coral, acquiring: C.green, option: C.line2, spec: C.line2 }[x.state];
+      };
+      edgesSvg = React.createElement('svg', { viewBox: '0 0 100 100', preserveAspectRatio: 'none', style: { position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' } },
+        m.nodes.map((x, i) => React.createElement('line', { key: x.id, x1: 50, y1: 50, x2: pos[i].x, y2: pos[i].y, style: { stroke: colOf(x) }, strokeWidth: x.id === m.critical ? 1.6 : 1, strokeDasharray: x.state === 'unknown' || x.state === 'acquiring' ? '4 4' : 'none', vectorEffect: 'non-scaling-stroke', opacity: 0.8 })));
+      graphNodes = m.nodes.map((x, i) => {
+        const crit = x.id === m.critical && x.state !== 'known';
+        const sel = s.selected === x.id;
+        const look = {
+          known: { background: 'rgba(74,222,128,0.14)', border: '1px solid ' + C.green, color: '#dcffe7' },
+          unknown: { background: C.bg, border: '1px dashed ' + C.muted, color: C.text },
+          assumed: { background: 'rgba(182,156,255,0.13)', border: '1px solid ' + C.violet, color: '#e8e0ff' },
+          conflicting: { background: 'rgba(255,138,107,0.13)', border: '1px solid ' + C.coral, color: '#ffe0d6' },
+          acquiring: { background: 'rgba(74,222,128,0.06)', border: '1px dashed ' + C.green, color: '#c4f7d4' },
+          option: { background: 'var(--g-chip, #28251a)', border: '1px solid ' + C.line2, color: C.text, borderRadius: 4 },
+          spec: { background: 'var(--g-chip, #28251a)', border: '1px solid ' + C.line2, color: C.soft }
+        }[x.state];
+        const st = Object.assign({ position: 'absolute', left: pos[i].x + '%', top: pos[i].y + '%', zIndex: sel ? 3 : 2, display: 'grid', gap: 3, justifyItems: 'center', padding: '8px 12px', borderRadius: 999, cursor: 'pointer', transform: 'translate(-50%, -50%)', fontFamily: 'Inter, sans-serif', boxShadow: sel ? '0 0 0 2px ' + C.bg + ', 0 0 0 3.5px ' + C.text : 'none' }, look);
+        if (crit) Object.assign(st, { border: '1.5px solid ' + C.amber, background: 'rgba(242,181,68,0.12)', color: '#ffe6b0' });
+        const sub = crit ? 'CRITICAL UNKNOWN' : x.kind === 'spec' ? 'SPEC' : x.kind === 'source' && x.state === 'unknown' ? 'SOURCE' : x.state.toUpperCase();
+        return { id: x.id, label: x.label, sub, style: st,
+          subStyle: { fontFamily: MONO, fontSize: 8.5, fontWeight: 700, letterSpacing: '0.14em', color: crit ? C.amber : x.state === 'known' ? C.green : C.muted },
+          ringStyle: { position: 'absolute', inset: -7, display: crit ? 'block' : 'none', border: '1px solid ' + C.amber, borderRadius: 999, pointerEvents: 'none' },
+          onClick: () => this.setState({ selected: x.id }) };
+      });
+    }
+
+    const selNode = m && s.selected ? m.nodes.find((x) => x.id === s.selected) : null;
+    let insp = {};
+    if (selNode) {
+      const crit = selNode.id === m.critical && selNode.state !== 'known';
+      const defNote = { unknown: 'Missing fact. GROOT can fetch it from permitted sources.', assumed: 'A belief used as a premise. Replace it with evidence or keep it flagged.', conflicting: 'Sources disagree on this input.', option: 'An alternative under evaluation.', acquiring: 'Data mission running on permitted sources.' }[selNode.state] || '';
+      const stColor = crit ? C.amber : { known: C.green, unknown: C.muted, assumed: C.violet, conflicting: C.coral, acquiring: C.green, option: C.soft, spec: C.soft }[selNode.state];
+      const actionable = selNode.kind !== 'option' && selNode.kind !== 'spec' && selNode.state !== 'known' && selNode.state !== 'acquiring';
+      insp = {
+        kind: 'Node · ' + selNode.kind, label: selNode.label, state: crit ? 'Critical unknown' : selNode.state,
+        note: crit ? "This unknown blocks the decision. GROOT can investigate it before the decision is finalized." : (selNode.note || defNote),
+        chipStyle: { padding: '4px 9px', border: '1px solid ' + stColor, borderRadius: 999, color: stColor, fontFamily: MONO, fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' },
+        canAcquire: actionable, acquireLabel: crit ? 'Investigate' : 'Run data mission', onAcquire: () => this.acquire(selNode.id, m.id),
+        canAssume: selNode.state === 'unknown', onAssume: () => this.markAssumed(selNode.id, m.id)
+      };
+    }
+
+    const statusNote = {
+      IDLE: 'No active mission.',
+      SKIPPED: 'Not required for this request. The full decision pipeline stays off.',
+      OPEN: c.unknown + ' unknown' + (c.unknown === 1 ? '' : 's') + ' left before the decision is ready.',
+      BLOCKED: 'Critical unknown: ' + ((m && m.nodes.find((x) => x.id === m.critical)) || {}).label + '.',
+      READY: 'Critical inputs are known. Save the decision.',
+      SAVED: 'In decision memory. Introduce the outcome to learn from it.',
+      LEARNED: 'Outcome compared. Learning delta stored.'
+    }[status];
+
+    const canFetch = !!m && m.nodes.some((n) => n.kind !== 'option' && n.kind !== 'spec' && n.state !== 'known' && n.state !== 'acquiring') && !s.compiling;
+    const canSave = status === 'READY';
+    const canOutcome = status === 'SAVED';
+
+    const pipe = STEPS.map(([n, k], i) => {
+      let st = { display: 'block', width: 22, height: 6, borderRadius: 2, background: C.line };
+      if (m) {
+        const skipped = SKIP[m.type].includes(n);
+        if (i < m.step) st = Object.assign(st, skipped ? { background: 'none', border: '1px dashed ' + C.dim } : { background: C.amber });
+        else if (i === m.step && s.compiling) st = Object.assign(st, { background: 'rgba(242,181,68,0.4)' });
+      }
+      return { n, k, style: st };
+    });
+
+    const roomLive = s.roomIdx >= 0 && s.roomIdx < ROOM.length;
+    const roomDone = s.roomIdx >= ROOM.length;
+    const tok = parseTokens(s.input);
+    const doc = s.docView ? VIEWS[s.docView] : null;
+
+    const wide = s.vw >= 1240;
+    const narrow = s.vw < 820;
+    const railBase = { display: 'flex', flexDirection: 'column', gap: 26, minHeight: 0, padding: '20px 16px', overflowY: 'auto', borderRight: '1px solid ' + C.line, background: C.bg };
+    const railStyle = wide ? railBase : Object.assign(railBase, { position: 'fixed', top: 0, bottom: 0, left: 0, zIndex: 61, width: 280, display: s.railOpen ? 'flex' : 'none', boxShadow: '20px 0 60px rgba(0,0,0,0.5)' });
+    const vals = {
+      mainGridStyle: { display: 'grid', gridTemplateColumns: wide ? 'minmax(210px, 250px) minmax(0, 1fr) minmax(340px, 440px)' : narrow ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(290px, 360px)', gridAutoRows: narrow ? 'minmax(420px, auto)' : 'auto', minHeight: 0, overflowY: narrow ? 'auto' : 'visible' },
+      notWide: !wide, legendStyle: { display: wide ? 'flex' : 'none', flexWrap: 'wrap', gap: 14, marginLeft: 'auto', color: C.dim, fontFamily: MONO, fontSize: 10.5 },
+      parserIdle: wide ? 'Parser idle. Start typing and GROOT tags the intent, object, constraints and time horizon live.' : 'Start typing to see the live parse.',
+      wide, compilerLabel: wide ? 'Mission compiler · state what you need to know, understand, investigate or decide' : 'Mission compiler',
+      pipeWrapStyle: { display: wide ? 'grid' : 'none', flex: 1, gap: 8, justifyItems: 'start', minWidth: 0 },
+      railStyle, railOverlay: !wide && s.railOpen, showRailBtn: !wide, showChips: !wide,
+      footOpen: s.footOpen, footClosed: !s.footOpen, footToggleLabel: s.footOpen ? 'Minimize decision state' : 'Expand decision state',
+      toggleFoot: () => this.setState((st) => ({ footOpen: !st.footOpen })),
+      footChevStyle: { transform: s.footOpen ? 'none' : 'rotate(180deg)', transition: 'transform 200ms ease' },
+      toggleRail: () => this.setState((st) => ({ railOpen: !st.railOpen })), closeRail: () => this.setState({ railOpen: false }),
+      rightStyle: Object.assign({ display: 'grid', gridTemplateRows: s.graphMin ? 'auto auto' : 'auto minmax(270px, 1fr) auto', alignContent: 'start', minHeight: 0, overflowY: 'auto', borderLeft: narrow ? 0 : '1px solid ' + C.line, borderTop: narrow ? '1px solid ' + C.line : 0, background: 'var(--g-side, #1a190f)' },
+        s.graphMax ? { position: 'fixed', inset: 0, zIndex: 85, gridTemplateRows: s.graphMin ? 'auto auto' : 'auto minmax(0, 1fr) auto', alignContent: 'stretch', border: 0, boxShadow: '0 0 0 100vmax rgba(8,7,5,0.6)' } : {}),
+      graphMin: s.graphMin, graphShown: !s.graphMin, graphMax: s.graphMax, graphNotMax: !s.graphMax,
+      graphMinLabel: s.graphMin ? 'Show graph' : 'Minimize graph', graphMaxLabel: s.graphMax ? 'Exit full screen' : 'Maximize graph',
+      graphMinChev: { transform: s.graphMin ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease' },
+      toggleGraphMin: () => this.setState((st) => ({ graphMin: !st.graphMin })),
+      toggleGraphMax: () => this.setState((st) => ({ graphMax: !st.graphMax, graphMin: false })),
+      isLanding: !isConsole, isConsole,
+      bootFx: s.booting ? this.bootEl() : null,
+      setConsoleEl: (el) => { this.consoleEl = el; this._pal = null; },
+      goLanding: () => { this.setState({ screen: 'landing' }); window.scrollTo({ top: 0, left: 0 }); },
+      openDashboard: () => this.go(),
+      landingNav: ['Product', 'Architecture', 'Decision Room', 'Roadmap'].map((label) => {
+        const id = label.toLowerCase().replace(/ /g, '-');
+        return { label, href: '#' + id, onClick: (e) => { e.preventDefault(); this.scrollTo(id); } };
+      }),
+      setScrollRoot: this.setScrollRoot, setOrbitEl: this.setOrbitEl, setSpotEl: this.setSpotEl,
+      ringsSvg: React.createElement('svg', { className: 'orbit-rings', viewBox: '0 0 1600 820', preserveAspectRatio: 'none' },
+        [['orbit-ring orbit-ring-dotted orbit-ring-outer', 790, 335], ['orbit-ring orbit-ring-solid', 700, 285], ['orbit-ring orbit-ring-dotted', 610, 240], ['orbit-ring orbit-ring-solid orbit-ring-soft', 505, 190], ['orbit-ring orbit-ring-dotted orbit-ring-inner-soft', 410, 150], ['orbit-ring orbit-ring-solid orbit-ring-inner', 300, 112]]
+          .map(([cl, rx, ry], i) => React.createElement('ellipse', { key: i, className: cl, cx: 800, cy: 410, rx, ry }))),
+      typedWord: WORDS[s.wordIndex].slice(0, s.letterCount),
+
+      sessionId: this.sessionId,
+      clockText: s.now.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' }) + ' · ' + s.now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }),
+      channels: [['typed', 'Typed'], ['room', 'Decision Room']].map(([k, label]) => ({ label, onClick: () => this.setState({ channel: k }),
+        style: { padding: '7px 12px', border: 0, borderRadius: 6, background: s.channel === k ? (k === 'room' ? C.violet : C.text) : 'none', color: s.channel === k ? C.bg : C.muted, fontFamily: MONO, fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer' } })),
+      openPaper: () => this.setState({ docView: 'Overview' }),
+
+      noMissions: s.missions.length === 0,
+      missionRows: s.missions.slice().reverse().map((x) => {
+        const st = statusOf(x);
+        const on = x.id === s.activeId;
+        return { title: x.title, meta: TYPE_LABEL[x.type] + ' · ' + (st === 'SKIPPED' ? 'no state' : st.toLowerCase()), onClick: () => this.setState({ activeId: x.id, selected: null, railOpen: false }),
+          style: { display: 'grid', gridTemplateColumns: '10px minmax(0, 1fr)', gap: 10, alignItems: 'center', padding: '10px 12px', border: '1px solid ' + (on ? C.line2 : 'transparent'), borderRadius: 8, background: on ? 'var(--g-chip, #28251a)' : 'none', cursor: 'pointer' },
+          glyph: { display: 'block', width: 10, height: 10, borderRadius: 2, background: STATUS_COLOR[st] || C.muted } };
+      }),
+      examples: EXAMPLES.map((ex) => ({ label: ex.label, prompt: ex.prompt, onClick: () => { this.setState({ channel: 'typed', railOpen: false }); this.compile(ex.prompt); } })),
+      noMemory: s.memory.length === 0,
+      memoryRows: s.memory.map((x) => ({ title: x.title, meta: x.learned ? 'learned · ' + x.deltas.length + ' deltas' : 'saved · awaiting outcome', deltas: x.deltas })),
+      docLinks: DOCS.map((d, i) => ({ num: '0' + (i + 1), label: d, onClick: () => this.setState({ docView: d, railOpen: false }) })),
+
+      isTyped: s.channel === 'typed', isRoom: s.channel === 'room',
+      input: s.input,
+      onInput: (e) => this.setState({ input: e.target.value }),
+      onKey: (e) => { if (e.key === 'Enter') this.compile(); },
+      onCompile: () => this.compile(),
+      compiling: s.compiling,
+      compileLabel: s.compiling ? 'Compiling…' : 'Compile ⏎',
+      compileBtnStyle: btnStyle('primary', !s.compiling),
+      noTokens: tok.length === 0,
+      tokens: tok.map((t) => ({ w: t.w, role: t.role || '·',
+        wordStyle: { padding: '4px 8px', borderRadius: 5, border: '1px solid ' + (t.role ? ROLE_COLOR[t.role] : C.line), background: t.role ? 'rgba(241,236,226,0.04)' : 'none', color: t.role ? ROLE_COLOR[t.role] : C.muted, fontFamily: MONO, fontSize: 12.5 },
+        roleStyle: { paddingLeft: 2, color: t.role ? ROLE_COLOR[t.role] : C.line2, fontFamily: MONO, fontSize: 8.5, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' } })),
+      intentText: s.input.trim() ? TYPE_LABEL[classify(s.input)] : 'waiting',
+      roomText: roomLive ? 'Listening. ' + s.roomIdx + ' of ' + ROOM.length + ' statements processed. GROOT is watching for decisions, assumptions, objections and unknowns.' : roomDone ? 'Conversation processed. The graph shows what the room revealed. Select the critical unknown to investigate it.' : 'With explicit participant consent and a visible Decision Room state, GROOT can process live conversation and detect when it creates an implicit information requirement.',
+      bars: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+      roomAction: () => (roomLive ? this.stopRoom() : this.startRoom()),
+      roomBtnLabel: roomLive ? 'Stop listening' : roomDone ? 'Listen again' : 'Grant consent and listen',
+      roomBtnStyle: btnStyle('violet', true),
+
+      logCount: s.log.length + ' entries',
+      emptyLog: s.log.length === 0,
+      logRows, setLogEl: this.setLogEl,
+
+      graphLabel: m ? (m.kind === 'decision' ? 'Decision graph' : 'Context map · decision graph not required') : 'Decision graph',
+      graphTitle: m ? m.title : 'No mission yet',
+      graphEmpty: !m || !m.revealed, graphReady: !!(m && m.revealed),
+      graphEmptyText: m ? 'Compiling the mission…' : 'Compile a request and GROOT maps what is known, unknown, assumed and conflicting here.',
+      edgesSvg, graphNodes, centerTag: m ? m.centerTag : '', centerLabel: m ? m.center : '',
+      hasInspect: !!selNode, noInspect: !selNode, insp,
+
+      status, statusNote,
+      statusMiniStyle: { color: STATUS_COLOR[status] || C.text, fontFamily: MONO, fontSize: 12, fontWeight: 700, letterSpacing: '0.12em' },
+      statusStyle: { color: STATUS_COLOR[status], fontFamily: 'Anton, sans-serif', fontSize: 34, fontWeight: 400, lineHeight: 1.05, letterSpacing: '0.02em' },
+      countRows: [['known', 'Known', C.green], ['unknown', 'Unknown', C.muted], ['assumed', 'Assumed', C.violet], ['conflicting', 'Conflicting', C.coral]].map(([k, label, col]) => ({ label, n: c[k],
+        numStyle: { color: c[k] ? (k === 'unknown' ? C.text : col) : C.line2, fontFamily: 'Anton, sans-serif', fontSize: 28, lineHeight: 1 },
+        swStyle: { display: 'block', width: 8, height: 8, borderRadius: 2, background: k === 'unknown' ? 'none' : col, border: k === 'unknown' ? '1px dashed ' + C.muted : 0 } })),
+      pipe,
+      onAcquireAll: () => this.acquireAll(), acquireAllOff: !canFetch, acquireAllStyle: btnStyle('ghost', canFetch),
+      onSave: () => this.save(), saveOff: !canSave, saveStyle: btnStyle('primary', canSave),
+      onOutcome: () => this.outcome(), outcomeOff: !canOutcome, outcomeStyle: btnStyle('violet', canOutcome),
+
+      docOpen: !!doc, closeDoc: () => this.setState({ docView: null }), stop: (e) => e.stopPropagation(),
+      docTabs: DOCS.map((d) => ({ label: d, onClick: () => this.setState({ docView: d }),
+        style: { padding: '6px 10px', border: '1px solid ' + (d === s.docView ? C.amber : C.line), borderRadius: 999, background: d === s.docView ? 'rgba(242,181,68,0.1)' : 'none', color: d === s.docView ? C.amber : C.muted, fontFamily: MONO, fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer' } })),
+      doc: doc ? {
+        num: '0' + (DOCS.indexOf(s.docView) + 1), title: s.docView, subtitle: doc.subtitle,
+        blocks: doc.blocks.map((b) => ({
+          heading: b.h, isSummary: !!b.summary, text: b.summary || '', isRows: !!b.rows, isAction: !!b.action, label: b.action || '',
+          onClick: () => { this.setState({ docView: null, channel: 'typed' }); this.compile(b.prompt); },
+          rows: (b.rows || []).map(([title, text, tag]) => ({ title, text, tag, hasTitle: !!title, hasText: !!text, hasTag: !!tag,
+            gridStyle: { display: 'grid', gridTemplateColumns: title ? 'minmax(0, 0.85fr) minmax(0, 1.4fr)' : 'minmax(0, 1fr)', gap: 20, padding: '14px 0', borderTop: '1px solid ' + C.line } }))
+        }))
+      } : { blocks: [] }
+    };
+    ORBIT.forEach((a, i) => { vals['agentRef' + i] = this.agentRefs[i]; vals['agentIcon' + i] = this.ic(a.icon, 24, { strokeWidth: 2.2 }); });
+    return vals;
+  }
+}
+
+</script>
+</body>
+</html>

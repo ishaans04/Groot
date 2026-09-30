@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>GROOT: Organizational Intelligence Through Natural Language</title>
+<meta name="description" content="GROOT turns natural human language into executable intelligence missions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Condiment&amp;family=Inter:wght@400;500;600;700;800&amp;family=Pixelify+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/groot-styles.css">
+<script src="assets/icons.js"></script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#010A04"></rect><text x="50" y="64" text-anchor="middle" font-family="Inter, sans-serif" font-size="40" font-weight="800" fill="#4ADE80">G</text></svg></template>
+<style>
+html, body { margin: 0; background: #010A04; }
+a { color: inherit; }
+a:hover { color: #4ADE80; }
+span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0; padding: 0; border: 0; background: none; box-shadow: none; font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; }
+.groot-tag { display: block; margin-top: 0.38rem; color: rgba(138, 146, 140, 0.92); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; font-style: normal; text-transform: none; }
+</style>
+</helmet>
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div class="landing-shell" data-screen-label="Landing">
+  <div class="landing-vignette" aria-hidden="true"></div>
+  <div class="landing-grid" aria-hidden="true"></div>
+  <div class="mouse-spotlight" ref="{{ setSpotEl }}" aria-hidden="true"></div>
+  <div class="landing-glow landing-glow-left" aria-hidden="true"></div>
+  <div class="landing-glow landing-glow-right" aria-hidden="true"></div>
+
+  <header class="landing-header">
+    <button type="button" class="landing-logo" onClick="{{ goLanding }}" aria-label="GROOT home">
+      <span>GROOT</span>
+      <i aria-hidden="true"></i>
+    </button>
+    <nav class="landing-nav" aria-label="Landing navigation">
+      <sc-for list="{{ landingNav }}" as="item" hint-placeholder-count="4">
+        <a href="{{ item.href }}" onClick="{{ item.onClick }}">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+    <button type="button" onClick="{{ openDashboard }}" class="landing-header-cta liquid-glass" style="white-space: nowrap">Launch GROOT</button>
+  </header>
+
+  <main class="landing-main">
+    <div class="orbit-background" aria-hidden="true" ref="{{ setOrbitEl }}">
+      <div class="orbit-core-glow"></div>
+      <div class="orbit-horizon-glow"></div>
+      {{ ringsSvg }}
+      <div class="orbit-sparks">
+        <span style="--spark-left: 7%; --spark-top: 19%; --spark-delay: 1.1s"></span>
+        <span style="--spark-left: 14%; --spark-top: 77%; --spark-delay: 3.8s"></span>
+        <span style="--spark-left: 21%; --spark-top: 33%; --spark-delay: 2.2s"></span>
+        <span style="--spark-left: 31%; --spark-top: 84%; --spark-delay: 0.4s"></span>
+        <span style="--spark-left: 39%; --spark-top: 27%; --spark-delay: 4.4s"></span>
+        <span style="--spark-left: 47%; --spark-top: 89%; --spark-delay: 2.7s"></span>
+        <span style="--spark-left: 54%; --spark-top: 20%; --spark-delay: 1.7s"></span>
+        <span style="--spark-left: 61%; --spark-top: 75%; --spark-delay: 4.9s"></span>
+        <span style="--spark-left: 70%; --spark-top: 31%; --spark-delay: 0.8s"></span>
+        <span style="--spark-left: 78%; --spark-top: 68%; --spark-delay: 3.2s"></span>
+        <span style="--spark-left: 86%; --spark-top: 24%; --spark-delay: 5.1s"></span>
+        <span style="--spark-left: 94%; --spark-top: 82%; --spark-delay: 2.9s"></span>
+        <span style="--spark-left: 18%; --spark-top: 58%; --spark-delay: 5.5s"></span>
+        <span style="--spark-left: 36%; --spark-top: 48%; --spark-delay: 1.2s"></span>
+        <span style="--spark-left: 67%; --spark-top: 51%; --spark-delay: 3.6s"></span>
+        <span style="--spark-left: 90%; --spark-top: 44%; --spark-delay: 0.1s"></span>
+      </div>
+      <div class="orbit-agent-live orbit-agent-email" ref="{{ agentRef0 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon0 }}</span><span class="orbit-agent-label">Understands</span></div></div>
+      <div class="orbit-agent-live orbit-agent-calendar" ref="{{ agentRef1 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon1 }}</span><span class="orbit-agent-label">Finds context</span></div></div>
+      <div class="orbit-agent-live orbit-agent-task" ref="{{ agentRef2 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon2 }}</span><span class="orbit-agent-label">Maps decisions</span></div></div>
+      <div class="orbit-agent-live orbit-agent-notes" ref="{{ agentRef3 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon3 }}</span><span class="orbit-agent-label">Fetches data</span></div></div>
+      <div class="orbit-agent-live orbit-agent-analytics" ref="{{ agentRef4 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon4 }}</span><span class="orbit-agent-label">Tracks progress</span></div></div>
+      <div class="orbit-agent-live orbit-agent-research" ref="{{ agentRef5 }}"><div class="orbit-agent-content"><span class="orbit-agent-badge">{{ agentIcon5 }}</span><span class="orbit-agent-label">Learns</span></div></div>
+    </div>
+
+    <section class="landing-hero" aria-labelledby="landing-title">
+      <div class="hero-kicker">
+        <span></span>
+        <p>Growth | Reasoning | Observation | Orchestration | Thinking</p>
+      </div>
+      <h1 id="landing-title" class="hero-title">
+        <span>Natural Language, One</span>
+        <strong>
+          <span class="typing-hero-word">
+            <span class="typing-hero-word-text" aria-hidden="true">{{ typedWord }}<span class="typing-hero-dot">.</span></span>
+            <span class="typing-hero-cursor" aria-hidden="true"></span>
+          </span>
+        </strong>
+      </h1>
+      <p class="hero-subtitle">Ask a question, or just talk it through in a meeting. GROOT finds what you need and helps your team decide.</p>
+      <button type="button" onClick="{{ openDashboard }}" class="hero-cta liquid-glass">Open Mission Control</button>
+    </section>
+  </main>
+  <div data-scroll-cue="" style="position: absolute; left: 50%; bottom: 22px; z-index: 12; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(239, 244, 255, 0.55); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; pointer-events: none">
+    <span>Scroll</span>
+    <div style="width: 1px; height: 44px; background: linear-gradient(180deg, rgba(74, 222, 128, 0.9), rgba(74, 222, 128, 0))"></div>
+  </div>
+</div>
+
+<div ref="{{ setScrollRoot }}" data-screen-label="Landing sections" style="position: relative; background: linear-gradient(180deg, #010503 0%, #020906 45%, #010503 100%); color: #ffffff; font-family: Inter, ui-sans-serif, system-ui, sans-serif">
+
+  <nav data-rail="" aria-label="Section navigation" style="position: fixed; right: 28px; top: 50%; z-index: 40; display: flex; flex-direction: column; gap: 18px; transform: translateY(-50%); opacity: 0; pointer-events: none; transition: opacity 300ms ease">
+    <sc-for list="{{ landingNav }}" as="item" hint-placeholder-count="4">
+      <a href="{{ item.href }}" onClick="{{ item.onClick }}" data-rail-item="" style="display: flex; align-items: center; justify-content: flex-end; gap: 12px; color: rgba(239, 244, 255, 0.4); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none">
+        <span>{{ item.label }}</span>
+        <i data-rail-dot="" style="display: block; width: 8px; height: 8px; border-radius: 999px; background: rgba(239, 244, 255, 0.25); transition: all 250ms ease"></i>
+      </a>
+    </sc-for>
+  </nav>
+
+  <section id="product" data-section="0" style="max-width: 1200px; margin: 0 auto; padding: 160px clamp(20px, 6vw, 96px) 140px">
+    <p data-reveal="0" style="margin: 0 0 22px; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">01 · Product</p>
+    <h2 data-words="" style="margin: 0; max-width: 980px; font-size: clamp(2.4rem, 5.4vw, 4.6rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02; text-wrap: balance">
+      <span data-w="" style="display: inline-block">Ask</span> <span data-w="" style="display: inline-block">in</span> <span data-w="" style="display: inline-block">plain</span> <span data-w="" style="display: inline-block">words.</span> <span data-w="" style="display: inline-block; color: #4ADE80">GROOT</span> <span data-w="" style="display: inline-block; color: #4ADE80">works</span> <span data-w="" style="display: inline-block; color: #4ADE80">out</span> <span data-w="" style="display: inline-block; color: #4ADE80">the</span> <span data-w="" style="display: inline-block; color: #4ADE80">rest.</span>
+    </h2>
+    <p data-reveal="1" style="margin: 28px 0 64px; max-width: 640px; color: rgba(239, 244, 255, 0.66); font-size: 1.2rem; line-height: 1.6; text-wrap: pretty">You don't need to know which files, spreadsheets or systems hold the answer. Say what you want to know or decide, and GROOT plans the work.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px">
+      <div data-reveal="0" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Quick answer</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“What were Q2 sales in Maharashtra?”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">A straight answer from your own data.</p>
+      </div>
+      <div data-reveal="1" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Find the cause</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“Why did sales decline?”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">Likely reasons, with the evidence behind each one.</p>
+      </div>
+      <div data-reveal="2" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Make a decision</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“Should we switch suppliers?”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">What you know, what's missing, and what to check next.</p>
+      </div>
+      <div data-reveal="3" style="display: grid; gap: 14px; align-content: start; min-height: 240px; padding: 26px; border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 18px; background: rgba(3, 18, 8, 0.62)">
+        <span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Build a list</span>
+        <strong style="font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3">“Find 30 manufacturers matching these constraints.”</strong>
+        <p style="margin: 0; color: rgba(239, 244, 255, 0.6); line-height: 1.5">A clean list, ready to use.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture" data-section="1" data-arch="" style="position: relative; height: 380vh">
+    <div style="position: sticky; top: 0; display: flex; height: 100vh; flex-direction: column; justify-content: center; gap: clamp(18px, 5vh, 48px); overflow: hidden">
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 96px)">
+        <div>
+          <p style="margin: 0 0 22px; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">02 · Architecture</p>
+          <h2 style="margin: 0; font-size: clamp(1.8rem, min(4.6vw, 6.5vh), 3.9rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02">How a question becomes a decision</h2>
+        </div>
+        <div style="width: min(280px, 100%); height: 2px; border-radius: 999px; background: rgba(239, 244, 255, 0.1); overflow: hidden">
+          <div data-arch-fill="" style="width: 100%; height: 100%; background: #4ADE80; box-shadow: 0 0 14px rgba(74, 222, 128, 0.7); transform-origin: left center; transform: scaleX(0)"></div>
+        </div>
+      </div>
+      <div style="width: 100%; perspective: 1400px">
+        <div data-track="" style="display: flex; gap: 24px; width: max-content; padding: 0 clamp(20px, 6vw, 96px) 0 max(clamp(20px, 6vw, 96px), calc((100vw - 1200px) / 2 + 96px)); will-change: transform">
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">01</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Listen</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Understands a typed question, or what people say in a meeting.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">02</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Plan</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Turns the request into a clear task: what to find, by when, and how sure it needs to be.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">03</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Look around</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Checks the files, systems and outside sources your team has allowed.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">04</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Map the decision</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Lays out the options, what's known, what's missing and what's being assumed.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">05</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Fetch what's missing</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Collects only the information the task needs. Nothing extra.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">06</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Keep track</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Holds the decision open until the missing pieces are filled in.</p></div>
+          </div>
+          <div data-step="" style="display: grid; align-content: space-between; width: min(340px, 78vw); min-height: min(320px, 46vh); padding: clamp(18px, 3.5vh, 30px); border: 1px solid rgba(74, 222, 128, 0.12); border-radius: 22px; background: rgba(3, 18, 8, 0.72)">
+            <span style="color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 6vh, 3rem); font-weight: 700; line-height: 1">07</span>
+            <div style="display: grid; gap: 10px"><strong style="font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em">Learn</strong><p style="margin: 0; color: rgba(239, 244, 255, 0.64); line-height: 1.55">Compares each decision with what happened next, so the next one goes better.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decision-room" data-section="2" data-room="" style="position: relative; height: 320vh">
+    <div data-room-sticky="" style="position: sticky; top: 0; display: flex; height: 100vh; align-items: center; overflow: hidden">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 96px)">
+        <div style="display: grid; gap: clamp(10px, 2.4vh, 22px)">
+          <p style="margin: 0; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">03 · Decision Room</p>
+          <h2 style="margin: 0; font-size: clamp(1.8rem, min(4.2vw, 6vh), 3.6rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02; text-wrap: balance">Your meeting already asked the question.</h2>
+          <p style="margin: 0; max-width: 520px; color: rgba(239, 244, 255, 0.66); font-size: clamp(0.95rem, 2.1vh, 1.1rem); line-height: 1.5">With everyone's consent, GROOT listens to the discussion and spots the facts the decision depends on.</p>
+          <div style="display: grid; gap: clamp(6px, 1.2vh, 10px)">
+            <div data-q="0" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“Supplier B is cheaper.”</div>
+            <div data-q="1" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“I'm worried about Q4 capacity.”</div>
+            <div data-q="2" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“We don't have recent capacity evidence.”</div>
+            <div data-q="3" style="justify-self: start; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(239, 244, 255, 0.12); border-radius: 18px 18px 18px 4px; background: rgba(239, 244, 255, 0.05); font-size: clamp(0.88rem, 2vh, 1.05rem)">“Let's not decide until we know.”</div>
+          </div>
+        </div>
+        <div style="display: grid; gap: clamp(6px, 1.4vh, 14px); padding: clamp(16px, 3vh, 28px); border: 1px solid rgba(74, 222, 128, 0.16); border-radius: 22px; background: radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.08), transparent 18rem), rgba(3, 18, 8, 0.86); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45)">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+            <span style="color: rgba(239, 244, 255, 0.8); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase">What GROOT understood</span>
+            <div style="display: grid">
+              <span data-status-a="" style="grid-area: 1 / 1; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 999px; color: #86f7a3; font-size: 12px; font-weight: 700">Listening</span>
+              <span data-status-b="" style="grid-area: 1 / 1; padding: 6px 12px; border: 1px solid rgba(251, 191, 36, 0.45); border-radius: 999px; color: #fcd34d; font-size: 12px; font-weight: 700; opacity: 0">On hold</span>
+            </div>
+          </div>
+          <div data-need="1" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Decision</span><strong style="font-weight: 600; text-align: right">Supplier allocation</strong></div>
+          <div data-need="1" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Known</span><strong style="font-weight: 600; text-align: right">Supplier B is cheaper</strong></div>
+          <div data-need="2" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Concern</span><strong style="font-weight: 600; text-align: right">Can B handle Q4 volume?</strong></div>
+          <div data-need="3" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Missing</span><strong style="font-weight: 600; text-align: right; color: #fcd34d">Supplier B's Q4 capacity</strong></div>
+          <div data-need="4" style="display: flex; justify-content: space-between; gap: 16px; padding: clamp(7px, 1.5vh, 14px) 16px; border: 1px solid rgba(74, 222, 128, 0.08); border-radius: 14px; background: rgba(1, 10, 4, 0.5)"><span style="color: rgba(239, 244, 255, 0.55)">Next step</span><strong style="font-weight: 600; text-align: right">Check Supplier B's capacity</strong></div>
+          <div data-need="5" style="margin-top: 2px; padding: clamp(9px, 1.8vh, 16px) 18px; border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 18px 18px 4px 18px; background: rgba(74, 222, 128, 0.08); color: #eaffef; font-size: clamp(0.9rem, 2vh, 1.02rem); line-height: 1.45">I found one missing fact: Supplier B's Q4 capacity. I can look into it before you decide.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap" data-section="3" style="max-width: 1200px; margin: 0 auto; padding: 160px clamp(20px, 6vw, 96px) 120px">
+    <p data-reveal="0" style="margin: 0 0 22px; color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase">04 · Roadmap</p>
+    <h2 data-words="" style="margin: 0 0 24px; font-size: clamp(2.4rem, 5.4vw, 4.6rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.02">
+      <span data-w="" style="display: inline-block">Built</span> <span data-w="" style="display: inline-block">in</span> <span data-w="" style="display: inline-block; color: #4ADE80">six</span> <span data-w="" style="display: inline-block; color: #4ADE80">steps.</span>
+    </h2>
+    <p data-reveal="1" style="margin: 0 0 72px; max-width: 560px; color: rgba(239, 244, 255, 0.66); font-size: 1.2rem; line-height: 1.6">Each step proves one piece works before the next one starts.</p>
+    <div data-road="" style="position: relative; display: grid; gap: 44px; padding-left: 56px">
+      <div style="position: absolute; left: 11px; top: 6px; bottom: 6px; width: 2px; border-radius: 999px; background: rgba(239, 244, 255, 0.1)">
+        <div data-road-fill="" style="width: 100%; height: 100%; background: linear-gradient(180deg, #86f7a3, #2db954); box-shadow: 0 0 14px rgba(74, 222, 128, 0.7); transform-origin: top center; transform: scaleY(0)"></div>
+      </div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 1</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Question to task</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Turn a typed question into a clear task GROOT can run every time.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 2</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Connect data</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Hook up files, one internal system and one approved outside source.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 3</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Map decisions</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Show what's known, missing and assumed, not just a single answer.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 4</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Meeting mode</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Let a spoken discussion start or update the same decision.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 5</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Decision memory</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Save each decision and what happened afterwards.</p></div>
+      <div data-ph="" style="position: relative; display: grid; gap: 8px"><i data-ph-dot="" style="position: absolute; left: -52px; top: 4px; width: 16px; height: 16px; border: 2px solid rgba(239, 244, 255, 0.3); border-radius: 999px; background: #010503"></i><span style="color: #86f7a3; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">Step 6</span><strong style="font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.03em">Learning loop</strong><p style="margin: 0; max-width: 620px; color: rgba(239, 244, 255, 0.62); line-height: 1.55">Use past results to handle similar decisions better next time.</p></div>
+    </div>
+  </section>
+
+  <section style="display: flex; min-height: 90vh; flex-direction: column; align-items: center; justify-content: center; gap: 44px; padding: 120px clamp(20px, 6vw, 96px) 80px; text-align: center; background: radial-gradient(ellipse at 50% 60%, rgba(24, 117, 57, 0.28) 0%, transparent 60%)">
+    <h2 data-words="" style="margin: 0; max-width: 1000px; font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 500; letter-spacing: -0.055em; line-height: 1.05; text-wrap: balance">
+      <span data-w="" style="display: inline-block">Most</span> <span data-w="" style="display: inline-block">assistants</span> <span data-w="" style="display: inline-block">wait</span> <span data-w="" style="display: inline-block">for</span> <span data-w="" style="display: inline-block">a</span> <span data-w="" style="display: inline-block">question.</span> <span data-w="" style="display: inline-block; color: #4ADE80">GROOT</span> <span data-w="" style="display: inline-block; color: #4ADE80">also</span> <span data-w="" style="display: inline-block; color: #4ADE80">hears</span> <span data-w="" style="display: inline-block; color: #4ADE80">the</span> <span data-w="" style="display: inline-block; color: #4ADE80">one</span> <span data-w="" style="display: inline-block; color: #4ADE80">your</span> <span data-w="" style="display: inline-block; color: #4ADE80">team</span> <span data-w="" style="display: inline-block; color: #4ADE80">hasn't</span> <span data-w="" style="display: inline-block; color: #4ADE80">asked</span> <span data-w="" style="display: inline-block; color: #4ADE80">yet.</span>
+    </h2>
+    <div data-reveal="0"><button type="button" onClick="{{ openDashboard }}" class="hero-cta liquid-glass">Open Mission Control</button></div>
+    <p style="margin: 40px 0 0; color: rgba(239, 244, 255, 0.35); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase">GROOT · Growth | Reasoning | Observation | Orchestration | Thinking</p>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+<div class="orbit-os-shell" data-screen-label="Mission Control">
+  <div class="orbit-os-grid" aria-hidden="true"></div>
+  <div class="orbit-os-glow orbit-os-glow-left" aria-hidden="true"></div>
+  <div class="orbit-os-glow orbit-os-glow-right" aria-hidden="true"></div>
+
+  <header class="orbit-os-topbar">
+    <div class="orbit-os-logo" onClick="{{ goLanding }}" style="cursor: pointer">
+      <span>GROOT</span>
+      <i aria-hidden="true"></i>
+    </div>
+    <div class="orbit-os-time">{{ topBarDate }}</div>
+    <div class="orbit-os-top-actions">
+      <div class="orbit-os-live-pill">
+        <span></span>
+        <strong>Live</strong>
+        <em>Engine Online</em>
+      </div>
+      <button class="orbit-os-icon-button" type="button" aria-label="System telemetry" onClick="{{ openTelemetry }}">{{ ic.activity }}</button>
+    </div>
+  </header>
+
+  <div class="orbit-os-layout">
+    <aside class="orbit-os-sidebar">
+      <sc-for list="{{ navGroups }}" as="group" hint-placeholder-count="3">
+        <div class="orbit-os-nav-group">
+          <div class="orbit-os-section-label">{{ group.title }}</div>
+          <div class="orbit-os-nav-list">
+            <sc-for list="{{ group.items }}" as="item" hint-placeholder-count="3">
+              <button type="button" class="orbit-os-nav-item {{ item.activeCls }}" onClick="{{ item.onClick }}">
+                {{ item.iconEl }}
+                <span>{{ item.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <button class="orbit-os-login" type="button" onClick="{{ openLogin }}">
+        {{ ic.user }}
+        <span>Login / Sign up</span>
+      </button>
+    </aside>
+
+    <main class="orbit-os-main">
+      <sc-if value="{{ isMissionView }}" hint-placeholder-val="{{ true }}">
+        <section class="orbit-os-command">
+          <div class="orbit-os-title-row">
+            <span></span>
+            <h1>GROOT Mission Control</h1>
+            <span></span>
+          </div>
+          <div class="orbit-command-input-wrap">
+            {{ ic.sparkles28 }}
+            <input value="{{ request }}" onChange="{{ onRequestChange }}" onKeyDown="{{ onRequestKey }}" placeholder="Ask GROOT anything...">
+            <button type="button" onClick="{{ onSend }}" disabled="{{ isGenerating }}" aria-label="Send command">{{ sendIcon }}</button>
+          </div>
+          <div class="orbit-command-chips">
+            <sc-for list="{{ quickCommands }}" as="cmd" hint-placeholder-count="5">
+              <button type="button" onClick="{{ cmd.onClick }}" disabled="{{ isGenerating }}" title="{{ cmd.prompt }}">
+                {{ cmd.iconEl }}
+                <span>{{ cmd.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </section>
+
+        <section class="orbit-ai-brief">
+          <div class="orbit-os-section-heading">Mission Output</div>
+          <sc-if value="{{ noResult }}" hint-placeholder-val="{{ true }}">
+            <div class="orbit-brief-empty">
+              <div class="orbit-brief-empty-orbits" aria-hidden="true"></div>
+              <h2>{{ emptyTitle }}</h2>
+              <p>{{ emptyText }}</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasResult }}" hint-placeholder-val="{{ false }}">
+            <div class="orbit-brief-results">
+              <div class="orbit-brief-summary">
+                {{ ic.sparkles18 }}
+                <p>{{ result.summary }}</p>
+              </div>
+              <sc-for list="{{ result.sections }}" as="section" hint-placeholder-count="3">
+                <section class="orbit-brief-section">
+                  <h3>{{ section.title }}</h3>
+                  <div class="orbit-brief-section-body">
+                    <sc-for list="{{ section.items }}" as="item" hint-placeholder-count="2">
+                      <div class="orbit-brief-item">
+                        <div class="orbit-brief-item-icon">{{ item.iconEl }}</div>
+                        <div>
+                          <p>{{ item.text }}</p>
+                          <span>{{ item.meta }}</span>
+                        </div>
+                        <div class="orbit-feedback-actions" aria-label="Feedback controls">
+                          <button type="button" class="{{ item.upCls }}" onClick="{{ item.onUp }}" aria-label="Mark useful">{{ ic.thumbsUp }}</button>
+                          <button type="button" class="{{ item.downCls }}" onClick="{{ item.onDown }}" aria-label="Mark not useful">{{ ic.thumbsDown }}</button>
+                          <sc-if value="{{ item.saved }}" hint-placeholder-val="{{ false }}"><span>Saved</span></sc-if>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </section>
+              </sc-for>
+              <sc-if value="{{ result.hasAction }}" hint-placeholder-val="{{ false }}">
+                <div class="orbit-command-chips" style="justify-content: flex-start">
+                  <button type="button" onClick="{{ result.onAction }}">
+                    {{ ic.shield18 }}
+                    <span>{{ result.actionLabel }}</span>
+                  </button>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ isContentView }}" hint-placeholder-val="{{ false }}">
+        <section class="orbit-mvp-view">
+          <div class="orbit-mvp-view-header">
+            <span class="orbit-os-section-heading">{{ view.title }}</span>
+            <p>{{ view.subtitle }}</p>
+          </div>
+
+          <sc-if value="{{ view.hasRoom }}" hint-placeholder-val="{{ false }}">
+            <section class="orbit-brief-section">
+              <h3>Decision Room</h3>
+              <div class="orbit-brief-section-body" style="display: grid; gap: 12px">
+                <sc-if value="{{ roomIdle }}" hint-placeholder-val="{{ true }}">
+                  <div class="orbit-data-row">
+                    {{ ic.shield18 }}
+                    <div>
+                      <strong>Consent required</strong>
+                      <p>With explicit participant consent and a visible Decision Room state, GROOT can process live conversation. The goal is not to replace meeting assistants. The goal is to detect when ordinary conversation creates an implicit information requirement.</p>
+                    </div>
+                  </div>
+                  <div class="orbit-command-chips" style="justify-content: flex-start">
+                    <button type="button" onClick="{{ startRoom }}">{{ ic.mic18 }}<span>Grant consent and start Decision Room</span></button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ roomStarted }}" hint-placeholder-val="{{ false }}">
+                  <div class="orbit-data-list">
+                    <sc-for list="{{ roomLines }}" as="line" hint-placeholder-count="2">
+                      <div class="orbit-data-row">
+                        {{ ic.quote18 }}
+                        <div>
+                          <strong>{{ line.text }}</strong>
+                          <em class="groot-tag">{{ line.tag }}</em>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <sc-if value="{{ roomListening }}" hint-placeholder-val="{{ false }}">
+                    <div class="orbit-empty-inline">{{ ic.loader16 }}<span>Listening for decision-relevant signals...</span></div>
+                  </sc-if>
+                  <sc-if value="{{ hasRoomState }}" hint-placeholder-val="{{ false }}">
+                    <div class="orbit-os-section-heading">GROOT internal state</div>
+                    <div class="orbit-mvp-stats-grid">
+                      <sc-for list="{{ roomState }}" as="stat" hint-placeholder-count="3">
+                        <div class="orbit-mvp-stat">
+                          <span>{{ stat.label }}</span>
+                          <strong>{{ stat.value }}</strong>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ roomDone }}" hint-placeholder-val="{{ false }}">
+                    <div class="orbit-brief-summary">
+                      {{ ic.sparkles18 }}
+                      <p>“I detected one decision-critical unknown: Supplier B's Q4 capacity. I can investigate it before the decision is finalized.”</p>
+                    </div>
+                    <div class="orbit-command-chips" style="justify-content: flex-start">
+                      <button type="button" onClick="{{ sendRoom }}">{{ ic.send18 }}<span>Send to Mission Control</span></button>
+                      <button type="button" onClick="{{ resetRoom }}">{{ ic.reset18 }}<span>Reset room</span></button>
+                    </div>
+                  </sc-if>
+                </sc-if>
+              </div>
+            </section>
+          </sc-if>
+
+          <sc-for list="{{ view.blocks }}" as="block" hint-placeholder-count="3">
+            <section class="orbit-brief-section">
+              <h3>{{ block.heading }}</h3>
+              <div class="orbit-brief-section-body" style="display: grid; gap: 12px">
+                <sc-if value="{{ block.isSummary }}" hint-placeholder-val="{{ false }}">
+                  <div class="orbit-brief-summary">
+                    {{ ic.sparkles18 }}
+                    <p>{{ block.text }}</p>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ block.isRows }}" hint-placeholder-val="{{ true }}">
+                  <div class="orbit-data-list">
+                    <sc-for list="{{ block.rows }}" as="row" hint-placeholder-count="3">
+                      <div class="orbit-data-row">
+                        {{ row.iconEl }}
+                        <div>
+                          <sc-if value="{{ row.hasTitle }}" hint-placeholder-val="{{ true }}"><strong>{{ row.title }}</strong></sc-if>
+                          <sc-if value="{{ row.hasText }}" hint-placeholder-val="{{ true }}"><p>{{ row.text }}</p></sc-if>
+                          <sc-if value="{{ row.hasTag }}" hint-placeholder-val="{{ false }}"><em class="groot-tag">{{ row.tag }}</em></sc-if>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ block.isAction }}" hint-placeholder-val="{{ false }}">
+                  <div class="orbit-command-chips" style="justify-content: flex-start">
+                    <button type="button" onClick="{{ block.onClick }}">{{ ic.play18 }}<span>{{ block.label }}</span></button>
+                  </div>
+                </sc-if>
+              </div>
+            </section>
+          </sc-for>
+        </section>
+      </sc-if>
+    </main>
+
+    <aside class="orbit-os-right">
+      <section class="orbit-side-card">
+        <div class="orbit-os-section-heading">Pipeline Status</div>
+        <div class="orbit-status-list">
+          <sc-for list="{{ statusRows }}" as="row" hint-placeholder-count="6">
+            <div class="orbit-status-row {{ row.status }}">
+              {{ row.iconEl }}
+              <span>{{ row.label }}</span>
+              {{ row.checkEl }}
+              <i></i>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+      <section class="orbit-side-card orbit-timeline-card">
+        <div class="orbit-os-section-heading">Execution Timeline</div>
+        <div class="orbit-timeline">
+          <sc-for list="{{ timeline }}" as="ev" hint-placeholder-count="5">
+            <div class="orbit-timeline-item {{ ev.status }}">
+              <div class="orbit-timeline-pin"></div>
+              <div>
+                <time>{{ ev.time }}</time>
+                <strong>{{ ev.label }}</strong>
+                <span>{{ ev.message }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <sc-if value="{{ telemetryOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="orbit-modal-backdrop" role="presentation" onClick="{{ closeModals }}">
+      <div class="orbit-modal" role="dialog" aria-modal="true" aria-label="System Telemetry" onClick="{{ stop }}">
+        <div class="orbit-modal-header">
+          <div><span class="orbit-os-section-heading">System Telemetry</span></div>
+          <button type="button" onClick="{{ closeModals }}" aria-label="Close modal">{{ ic.x }}</button>
+        </div>
+        <div class="orbit-modal-body">
+          <div class="orbit-modal-grid">
+            <div class="orbit-mvp-stat"><span>Mission engine</span><strong>Online</strong><p>Frontend demo mode</p></div>
+            <div class="orbit-mvp-stat"><span>Missions run</span><strong>{{ missionCount }}</strong><p>{{ learningSignals }}</p></div>
+            <div class="orbit-mvp-stat"><span>Last mission</span><strong>{{ lastRunTime }}</strong><p>{{ lastRunState }}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ loginOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="orbit-modal-backdrop" role="presentation" onClick="{{ closeModals }}">
+      <div class="orbit-modal" role="dialog" aria-modal="true" aria-label="Demo Mode" onClick="{{ stop }}">
+        <div class="orbit-modal-header">
+          <div><span class="orbit-os-section-heading">Demo Mode</span></div>
+          <button type="button" onClick="{{ closeModals }}" aria-label="Close modal">{{ ic.x }}</button>
+        </div>
+        <div class="orbit-modal-body">
+          <div class="orbit-demo-modal-copy">
+            {{ ic.database22 }}
+            <div>
+              <h2>GROOT is running in frontend demo mode.</h2>
+              <p>Missions, the Decision Room and decision memory are simulated in the browser from the GROOT Final Concept Paper. GROOT treats consent, retention and permission boundaries as core implementation requirements, not optional polish.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ORBIT = [
+  { duration: 34, start: 222, reverse: false, rx: 0.28, ry: 0.25, icon: 'Cpu' },
+  { duration: 39, start: 305, reverse: true, rx: 0.28, ry: 0.24, icon: 'Database' },
+  { duration: 31, start: 180, reverse: false, rx: 0.42, ry: 0.28, icon: 'Network' },
+  { duration: 36, start: 8, reverse: true, rx: 0.42, ry: 0.27, icon: 'Radar' },
+  { duration: 42, start: 128, reverse: false, rx: 0.36, ry: 0.32, icon: 'Flag' },
+  { duration: 28, start: 52, reverse: true, rx: 0.36, ry: 0.31, icon: 'Brain' }
+];
+const WORDS = ['GROOT', 'Mission'];
+
+const STAGES = [
+  { key: 'language', label: 'Language Understanding', icon: 'MessageSquare', msg: 'Parsed object, outcome, constraints and time horizon' },
+  { key: 'compiler', label: 'Mission Compiler', icon: 'Cpu', msg: 'Classified request and built task representation' },
+  { key: 'context', label: 'Context Engine', icon: 'Database', msg: 'Mapped variables to permitted context' },
+  { key: 'graph', label: 'Decision Graph', icon: 'Network', msg: 'Separated known, unknown, assumed and conflicting' },
+  { key: 'acquisition', label: 'Data Acquisition', icon: 'Radar', msg: 'Planned acquisition of required information only' },
+  { key: 'state', label: 'Decision State', icon: 'Flag', msg: 'Decision state persisted' }
+];
+
+const TYPES = {
+  direct: { label: 'Direct answer', stages: ['language', 'compiler', 'context', 'acquisition'] },
+  investigation: { label: 'Analysis', stages: ['language', 'compiler', 'context', 'graph', 'acquisition'] },
+  decision: { label: 'Decision support', stages: ['language', 'compiler', 'context', 'graph', 'acquisition', 'state'] },
+  data: { label: 'Structured data acquisition', stages: ['language', 'compiler', 'context', 'acquisition'] },
+  ambient: { label: 'Decision Room event', stages: ['language', 'compiler', 'context', 'graph', 'acquisition', 'state'] }
+};
+
+const QUICK = [
+  { label: 'Question', prompt: 'What were Q2 sales in Maharashtra?', icon: 'MessageSquare' },
+  { label: 'Investigate', prompt: 'Why did sales decline?', icon: 'Search' },
+  { label: 'Decide', prompt: 'Should we move 30% of production from Supplier A to B?', icon: 'GitBranch' },
+  { label: 'Dataset', prompt: 'Find 30 manufacturers matching these constraints.', icon: 'Database' },
+  { label: 'Meeting', prompt: 'The concern is whether B can handle Q4 volume.', icon: 'Mic' }
+];
+
+const NAV = [
+  { title: 'Dashboard', items: [['Mission Control', 'LayoutDashboard'], ['Overview', 'BookOpen']] },
+  { title: 'Mission Engine', items: [['Decision Graph', 'Network'], ['Decision Room', 'Mic'], ['Decision Memory', 'History'], ['Architecture', 'Layers']] },
+  { title: 'Insights', items: [['Track 01 Fit', 'Target'], ['Build Plan', 'Route'], ['Differentiation', 'Scale']] }
+];
+
+const ROOM_LINES = [
+  { text: '“Supplier B is cheaper.”', tag: 'Known · unit-cost advantage' },
+  { text: '“I\'m worried about Q4 capacity.”', tag: 'Objection / disagreement · capacity risk' },
+  { text: '“We don\'t have recent capacity evidence.”', tag: 'Unknown · peak capacity' },
+  { text: '“Let\'s not decide until we know.”', tag: 'Decision statement · status blocked' }
+];
+const ROOM_STATE = [
+  [1, 'Decision', 'Supplier allocation'],
+  [4, 'Status', 'BLOCKED'],
+  [3, 'Critical unknown', 'Peak capacity'],
+  [1, 'Known', 'Unit-cost advantage'],
+  [2, 'Concern', 'Capacity risk'],
+  [4, 'Required mission', 'Investigate supplier capacity']
+];
+
+const VIEWS = {
+  'Overview': {
+    subtitle: 'GROOT in one page. Growth | Reasoning | Observation | Orchestration | Thinking. Organizational intelligence through natural language. Final Concept Paper, Track 01.',
+    blocks: [
+      { h: 'One-sentence thesis', summary: 'GROOT turns natural human language - typed explicitly or spoken naturally in a decision-making environment - into executable intelligence missions that can answer questions, assemble decision-ready information, and learn from organizational outcomes over time.' },
+      { h: 'Executive Summary', icon: 'FileText', rows: [
+        ['Natural language is the primary interface', 'GROOT is not a scraping platform, a dashboard, or a chatbot wrapper. Its primary interface is natural language. A user can type or speak a requirement such as “Should we switch suppliers?”, “Why did sales fall in the North?”, or “Find 30 manufacturers matching these constraints.” GROOT interprets the intent, determines what information and workflow are required, and executes the appropriate intelligence mission.'],
+        ['The ambient input path', 'The second input path is ambient: with explicit consent, GROOT can sit inside a decision room and listen to natural conversation. It does not treat the meeting as a transcription problem. It detects decision-relevant statements, assumptions, objections, unresolved information gaps and emerging questions, and turns them into the same internal mission structure generated from an explicit prompt.'],
+        ['A persistent decision-learning layer', 'The long-term system is a persistent decision-learning layer. It records what was known, what was assumed, what was missing, what decision was made, and what happened afterward. Over repeated decisions, GROOT can update the organization-specific decision model - not by continuously retraining a base LLM, but by maintaining a growing decision memory and updating the variables, evidence paths and reasoning patterns that it uses.']
+      ] },
+      { h: 'Core layers', icon: 'Layers', rows: [
+        ['Natural-language interface', 'Accepts a plain-English prompt or naturally occurring spoken language.'],
+        ['Mission compiler', 'Converts language into the required task, data requirements, constraints and workflow.'],
+        ['Context engine', 'Combines permitted internal data, files, meeting context and external sources.'],
+        ['Decision graph', 'Represents evidence, unknowns, assumptions, alternatives and dependencies.'],
+        ['Data acquisition', 'Obtains only the information needed to complete the mission.'],
+        ['Decision state', 'Maintains the current state of an open or completed organizational decision.'],
+        ['Learning engine', 'Compares decisions with outcomes and updates organization-specific decision memory.']
+      ] },
+      { h: 'The central idea', summary: 'The user does not need to know what data, columns, APIs or workflow steps are required. The user states what they need to know, understand, investigate or decide. GROOT determines the information architecture behind the request.' },
+      { h: 'The Problem', icon: 'CircleHelp', rows: [
+        ['The gap is not access to AI. It is the gap between language and executable intelligence.', 'Modern AI assistants can already research multi-step questions and work across connected information. OpenAI documents Deep Research as a system that can plan, research and synthesize complex questions using web, files and connected apps. Anthropic similarly offers enterprise context, connectors and tool access. Microsoft has gone further with Work IQ, a workplace intelligence layer that continuously builds semantic understanding across email, meetings, files, people and business systems. [1][2][3]'],
+        ['', 'That means GROOT cannot claim novelty simply because it can understand natural language, listen to meetings, or connect to company information. Those capabilities are increasingly becoming platform primitives. GROOT must differentiate at the level of the system it builds around those capabilities.']
+      ] },
+      { h: 'The actual unmet need', icon: 'AlertTriangle', rows: [
+        ['', 'Organizations express requirements in human language, while the data needed to fulfill those requirements is fragmented across systems, documents, conversations and external information.'],
+        ['', 'The user often knows the outcome they want, but does not know the complete data specification needed to produce it.'],
+        ['', 'In a live meeting, the information requirement may be implicit: people discuss an issue, reveal an uncertainty, or raise an objection without formally creating a data request.'],
+        ['', 'A useful answer is not always the same thing as a useful decision state. Decisions need assumptions, alternatives, unresolved variables, evidence and later outcome tracking.']
+      ] },
+      { h: 'The design question', summary: 'Can one system convert ordinary human language - including language spoken inside a meeting - into a machine-executable intelligence mission, then preserve the resulting decision state and learn from what actually happened?' },
+      { h: 'Why “just build a better chatbot” is insufficient', icon: 'Scale', rows: [
+        ['Language -> mission -> answer / dataset / decision state', '', 'Generic assistant: Prompt -> answer'],
+        ['Builds persistent organizational decision context', '', 'Generic assistant: Uses context for the current task'],
+        ['Meeting -> detected decision state and information gaps', '', 'Generic assistant: Meeting -> transcript / summary'],
+        ['Acquire information according to mission need and decision sensitivity', '', 'Generic assistant: More data is generally helpful'],
+        ['Decision can remain open, monitored and learnable', '', 'Generic assistant: Conversation ends when response is delivered'],
+        ['Memory is structured decision history tied to outcomes', '', 'Generic assistant: Memory is conversational context']
+      ] }
+    ]
+  },
+  'Architecture': {
+    subtitle: 'One intelligence engine, two natural-language entry paths. Both inputs enter the same mission compiler and intelligence engine.',
+    blocks: [
+      { h: 'Two entry paths', icon: 'GitBranch', rows: [
+        ['Explicit mode', 'User types or speaks: “Should we switch supplier B?”', 'Natural language understanding -> intent detection'],
+        ['Ambient mode', 'Meeting participants speak naturally: “Supplier B is cheaper, but can they handle Q4 volume?”', 'Natural language understanding -> event detection'],
+        ['The key innovation is not voice', 'Voice is only the transport mechanism. The differentiated capability is that GROOT can recognize an implicit information requirement from ordinary human language. If a meeting reveals that a decision depends on a missing variable, GROOT can convert that observation into a mission even when nobody formally created a prompt.']
+      ] },
+      { h: 'GROOT architecture', icon: 'Layers', rows: [
+        ['Human organization', 'Meetings / Voice · Data Systems · External Sources', 'Input'],
+        ['Context engine', 'Combines permitted internal data, files, meeting context and external sources.', 'Layer 01'],
+        ['Natural language / intent + event engine', 'Accepts a plain-English prompt or naturally occurring spoken language.', 'Layer 02'],
+        ['Mission compiler', 'Converts language into the required task, data requirements, constraints and workflow.', 'Layer 03'],
+        ['Decision graph', 'Evidence · Unknowns · Assumptions', 'Layer 04'],
+        ['Data acquisition orchestrator', 'Obtains only the information needed to complete the mission.', 'Layer 05'],
+        ['Decision dataset', 'Mission-specific decision datasets normalize the information required for the current task.', 'Layer 06'],
+        ['Decision state', 'Maintains the current state of an open or completed organizational decision.', 'Layer 07'],
+        ['Outcome', 'What actually happened.', 'Feedback'],
+        ['Learning engine', 'Compares decisions with outcomes and updates organization-specific decision memory.', 'Layer 08'],
+        ['Company decision memory', 'Structured decision history tied to outcomes.', 'Output']
+      ] },
+      { h: 'Architecture principle', summary: 'The components are modular: language understanding decides what mission is required; the mission compiler creates the structured task; the acquisition layer obtains the required information; decision state persists what matters; and the learning layer closes the outcome loop.' },
+      { h: 'What the user can ask', icon: 'MessageSquare', rows: [
+        ['“What were Q2 sales in Maharashtra?”', 'Answer grounded in permitted data.', 'Direct question'],
+        ['“Why did sales decline?”', 'Hypothesis / evidence analysis.', 'Investigation'],
+        ['“Should we switch suppliers?”', 'Decision graph + required information + state.', 'Decision'],
+        ['“Find manufacturers matching these constraints.”', 'Structured data mission + result dataset.', 'Data requirement']
+      ] },
+      { h: 'Important product rule', summary: 'GROOT should not activate the full decision pipeline for every request. The mission compiler first determines what the user is actually asking, then invokes only the necessary downstream reasoning and acquisition components.' },
+      { h: 'Reference implementation stack', icon: 'Boxes', rows: [
+        ['Interface', 'Web app + microphone / meeting capture'],
+        ['Speech', 'Streaming speech-to-text'],
+        ['Reasoning', 'LLM with tool calling / structured output'],
+        ['Mission model', 'JSON schema + decision graph representation'],
+        ['Orchestration', 'Python service + task queue / workflow runner'],
+        ['Data', 'PostgreSQL + object storage'],
+        ['Retrieval', 'Metadata index + embeddings where useful'],
+        ['Connectors', 'API / MCP / file adapters'],
+        ['Learning memory', 'Decision + outcome tables / graph layer'],
+        ['Security', 'Tenant isolation + permission-aware connectors'],
+        ['Evaluation', 'Golden missions + decision replay tests']
+      ] }
+    ]
+  },
+  'Decision Graph': {
+    subtitle: 'The mission compiler is the heart of the product. It translates a human request into a formal internal representation, so GROOT can support multiple kinds of requests without asking the user to know the underlying data model.',
+    blocks: [
+      { h: 'From natural language to an executable intelligence mission', icon: 'Workflow', rows: [
+        ['1. Parse the user language.', 'Identify the object, desired outcome, constraints, time horizon and level of certainty required.'],
+        ['2. Classify the request:', 'direct answer, analysis, decision support, or structured data acquisition.'],
+        ['3. Build a task representation.', 'Translate the request into variables, entities, relationships, evidence requirements and output schema.'],
+        ['4. Map variables to available context.', 'Identify which requirements can be satisfied from internal systems, documents, permitted external sources or conversation context.'],
+        ['5. Find information gaps.', 'Distinguish between unavailable data, unknown variables, unresolved assumptions and conflicting evidence.'],
+        ['6. Plan acquisition.', 'Retrieve only the information needed to complete the mission, using the organization\'s permitted tools and sources.'],
+        ['7. Construct the decision-ready result.', 'This may be a direct answer, analysis, dataset, or living decision state.'],
+        ['8. Persist the useful structure.', 'Save the decision state and relevant reasoning context when the task is consequential or ongoing.']
+      ] },
+      { h: 'Decision Graph example', icon: 'Network', rows: [
+        ['USER: “Should we move 30% of production from Supplier A to B?”', '', 'Decision'],
+        ['Option A: Maintain allocation', '', 'Alternative'],
+        ['Option B: Shift 30%', '', 'Alternative'],
+        ['Critical variables', 'Unit cost · Lead-time distribution · Defect rate · MOQ · Transition cost · Peak capacity'],
+        ['Input states', 'Known · Unknown · Assumed · Conflicting'],
+        ['Required data mission(s)', 'Current decision state']
+      ] },
+      { h: 'Run this mission', action: 'Run the supplier decision in Mission Control', prompt: 'Should we move 30% of production from Supplier A to B?' },
+      { h: 'Design principle', summary: 'The system should optimize for completion of the user mission, not for the number of sources queried or the amount of data collected.' }
+    ]
+  },
+  'Decision Room': {
+    room: true,
+    subtitle: 'Ambient Decision Mode: when the prompt is spoken, not typed.',
+    blocks: [
+      { h: 'What GROOT extracts from conversation', icon: 'Ear', rows: [
+        ['Decision statement', 'A choice is being proposed, evaluated or finalized.'],
+        ['Assumption', 'A belief is being used as a premise.'],
+        ['Objection / disagreement', 'A variable or interpretation may be contested.'],
+        ['Unknown', 'A missing fact may block or change the decision.'],
+        ['Commitment', 'An agreed follow-up or information request emerges.'],
+        ['Decision change', 'New evidence changes the previously known state.']
+      ] },
+      { h: 'Why this is not just “meeting notes”', summary: 'A conventional meeting tool primarily compresses speech into a summary. GROOT converts speech into an evolving computational state: what the organization believes, what it needs to know, what decision is open, and what information would move the state forward. This distinction is central to the product.' },
+      { h: 'Feasibility note', summary: 'Modern speech-to-text and meeting-recording systems make the input channel technically practical. OpenAI documents meeting transcription and multi-speaker recording, but also emphasizes consent and accuracy limitations. GROOT therefore treats consent, retention and permission boundaries as core implementation requirements, not optional polish. [4]' }
+    ]
+  },
+  'Decision Memory': {
+    subtitle: 'GROOT learns the organization through decisions and outcomes.',
+    blocks: [
+      { h: 'Self-learning, defined', summary: '“Self-learning” should not mean that the base language model is silently retrained after every interaction. The practical design is a persistent organizational memory that stores decision structures and outcomes, then uses those observations to update future decision workflows, relevant variables and information priorities.' },
+      { h: 'The learning loop', icon: 'RotateCcw', rows: [
+        ['Past decision', 'Inputs known at the time · Assumptions · Information missing · Decision made · Predicted result'],
+        ['Real world outcome', 'What actually happened'],
+        ['Learning engine', 'Which variables were predictive? · Which assumptions failed? · Which evidence paths were useful? · Which unknowns should become standard inputs?'],
+        ['Future decision', 'Updated decision model for this organization']
+      ] },
+      { h: 'Decision Memory', icon: 'Database', rows: [
+        ['Decision context', 'What was being decided and under what constraints.'],
+        ['Variables', 'Which measurable factors were used or considered.'],
+        ['Evidence', 'Where each important input came from.'],
+        ['Assumptions', 'What the organization believed when the decision was made.'],
+        ['Decision outcome', 'What choice was made.'],
+        ['Observed outcome', 'What happened later.'],
+        ['Learning delta', 'What GROOT should change in a similar future mission.']
+      ] },
+      { h: 'What the system can learn', icon: 'Lightbulb', rows: [
+        ['', 'Repeated decision variables that consistently influence outcomes.'],
+        ['', 'Information that decision-makers repeatedly request before committing.'],
+        ['', 'Assumptions that repeatedly fail or require revision.'],
+        ['', 'Sources or internal systems that are repeatedly useful for particular decision variables.'],
+        ['', 'Patterns between the organization’s stated reasoning and its actual decisions and outcomes.']
+      ] },
+      { h: 'Technical position', summary: 'The moat is not a proprietary foundation model. The moat is the accumulated structured record of how a specific organization frames decisions, which information it needs, what it decides, and what actually happens afterward.' }
+    ]
+  },
+  'Track 01 Fit': {
+    subtitle: 'How GROOT directly satisfies the problem statement: natural-language understanding of data requirements and dynamic workflow execution.',
+    blocks: [
+      { h: 'Product center', summary: 'The central Track 01 requirement is natural-language understanding of data requirements and dynamic workflow execution. GROOT treats that requirement as the product center: the user does not need to provide a pre-defined schema or collection recipe. The system derives the structure from ordinary language.' },
+      { h: 'Track 01 requirement -> GROOT implementation', icon: 'Target', rows: [
+        ['Understand requirements from natural-language prompts', 'Mission compiler converts plain language into objectives, entities, variables, constraints and outputs.'],
+        ['Dynamically design data-collection workflows', 'Workflow is derived after the system determines what information is actually needed.'],
+        ['Execute across multiple permitted sources', 'Context engine + acquisition orchestrator work across connected internal and external sources subject to permission.'],
+        ['Clean / structure / validate information', 'Mission-specific decision datasets normalize the information required for the current task.'],
+        ['Traceable / explainable outputs', 'Decision state retains source lineage and the reasoning structure behind important inputs.'],
+        ['Monitor / manage collection tasks', 'Open missions and unresolved variables remain part of the decision state until resolved or closed.'],
+        ['Maintain workflow / dataset history', 'GROOT maintains persistent decision and outcome memory rather than discarding context after the response.']
+      ] },
+      { h: 'Why the interpretation is differentiated', summary: 'A common interpretation of Track 01 is “natural language -> schema -> scrape / query -> table.” GROOT interprets it as “natural language -> determine the information mission -> determine what must be known -> acquire only what is needed -> produce the answer or decision state -> learn from the outcome.” This moves the center of gravity from collection to intelligence orchestration.' },
+      { h: 'Scraping is not the product', summary: 'External web collection can be one acquisition mechanism when permitted and useful. It is deliberately not the defining product abstraction. GROOT is valuable even when the required information already exists inside an ERP, CRM, document store, meeting transcript or connected business system.' },
+      { h: 'Research basis', summary: 'The design uses established ideas rather than claiming to invent decision theory itself. Value-of-information research provides a formal basis for prioritizing which additional information is worth collecting because it can reduce decision uncertainty or expected loss. GROOT operationalizes that principle as part of an AI mission compiler. [5]' }
+    ]
+  },
+  'Build Plan': {
+    subtitle: 'From hackathon prototype to startup-grade system. Each phase proves a distinct architectural claim.',
+    blocks: [
+      { h: 'Is GROOT actually buildable? Yes - as a staged system.', summary: 'The complete vision is ambitious, but the underlying building blocks are individually available: speech-to-text, LLM reasoning, retrieval, structured extraction, tool calling, event-driven workflows, databases, permissions, and APIs. The build challenge is systems integration and the definition of the decision/mission representation, not the invention of a new foundation model.' },
+      { h: 'Roadmap', icon: 'Route', rows: [
+        ['Prompt to mission', 'Build natural-language compiler and structured mission object.', 'Phase 1 · Proof: User prompt reliably becomes an executable task specification.'],
+        ['Context and acquisition', 'Connect files, one internal source and one approved external source.', 'Phase 2 · Proof: Mission can gather and normalize required information.'],
+        ['Decision graph', 'Represent assumptions, unknowns and evidence.', 'Phase 3 · Proof: Decision request produces a transparent state rather than a single answer.'],
+        ['Decision Room', 'Add live speech ingestion and event detection.', 'Phase 4 · Proof: Spoken discussion can create or update the same mission/decision state.'],
+        ['Memory', 'Persist decisions and outcomes.', 'Phase 5 · Proof: Past decisions can be replayed and compared with actual outcomes.'],
+        ['Learning loop', 'Update organization-specific variable and workflow priorities from outcomes.', 'Phase 6 · Proof: Similar future missions use learned organizational context.']
+      ] },
+      { h: 'Recommended MVP boundary', icon: 'CheckSquare', rows: [
+        ['Natural-language prompt', 'Primary interaction and Track 01 compliance.'],
+        ['Mission compiler', 'Turns prompts into structured missions.'],
+        ['Connected data sources', 'Start with a small set: uploaded files + one business data source + approved external source.'],
+        ['Decision graph', 'Represent variables, evidence, unknowns and assumptions for decision requests.'],
+        ['Decision Room voice input', 'Live transcription and event extraction for one meeting flow.'],
+        ['Decision state', 'Persist open / resolved / blocked states.'],
+        ['Basic outcome memory', 'Store decision + outcome pairs for later replay.']
+      ] },
+      { h: 'Not required for a convincing prototype', icon: 'X', rows: [
+        ['', 'A proprietary foundation model.'],
+        ['', 'Dozens of enterprise connectors.'],
+        ['', 'Continuous model retraining.'],
+        ['', 'Large-scale web scraping infrastructure.'],
+        ['', 'A complex analytics dashboard.']
+      ] },
+      { h: 'Competition demo flow', icon: 'Play', rows: [
+        ['1.', 'User types: “Should we move 30% of production from Supplier A to B?”'],
+        ['2.', 'GROOT identifies a decision and builds the critical-variable graph.'],
+        ['3.', 'GROOT shows known vs unknown information.'],
+        ['4.', 'User enters a Decision Room and says: “The concern is whether B can handle Q4 volume.”'],
+        ['5.', 'GROOT detects the new decision-critical unknown.'],
+        ['6.', 'GROOT asks permission to investigate / calls permitted sources.'],
+        ['7.', 'GROOT returns the decision-ready result and updates the decision state.'],
+        ['8.', 'The decision is saved.'],
+        ['9.', 'A simulated later outcome is introduced.'],
+        ['10.', 'GROOT replays the decision and shows the learning delta.']
+      ] },
+      { h: 'Try the demo flow', action: 'Start step 1 in Mission Control', prompt: 'Should we move 30% of production from Supplier A to B?' },
+      { h: 'Evaluation metrics', icon: 'TrendingUp', rows: [
+        ['Mission compilation accuracy', 'Does GROOT infer the intended task and constraints?'],
+        ['Required-variable recall', 'Does it identify the decision-critical variables?'],
+        ['Acquisition efficiency', 'Does it obtain the needed information without unnecessary work?'],
+        ['Decision-state fidelity', 'Can the system reconstruct what was known, unknown and assumed?'],
+        ['Outcome learning', 'Does a prior outcome change the next similar mission in a measurable way?']
+      ] },
+      { h: 'Buildability verdict', summary: 'A strong competition MVP is technically realistic. The difficult part is not making an LLM answer a question; it is making the mission representation, decision state and outcome loop reliable enough that the system behaves consistently across different prompts and meetings.' },
+      { h: 'Startup path', summary: 'Begin with organizations where decisions are repeated, cross-functional and data-fragmented. The product can expand horizontally once the mission compiler, decision state and learning loop are reliable enough to become reusable infrastructure.' }
+    ]
+  },
+  'Differentiation': {
+    subtitle: 'Why GROOT is more than a normal chatbot agent.',
+    blocks: [
+      { h: 'Capability comparison', icon: 'Scale', rows: [
+        ['Natural-language questions', 'ChatGPT / Claude style assistant: Yes', 'GROOT: Yes - core interface'],
+        ['Research / connected data', 'ChatGPT / Claude style assistant: Yes', 'GROOT: Yes - as mission execution'],
+        ['Meeting transcription', 'ChatGPT / Claude style assistant: Increasingly available', 'GROOT: Yes - as ambient mission input'],
+        ['Persistent decision object', 'ChatGPT / Claude style assistant: Not the core abstraction', 'GROOT: Core abstraction'],
+        ['Implicit information requirement from meeting language', 'ChatGPT / Claude style assistant: Possible with tooling', 'GROOT: Core workflow'],
+        ['Decision graph: assumptions / unknowns / evidence', 'ChatGPT / Claude style assistant: Can be constructed ad hoc', 'GROOT: Persisted system state'],
+        ['Outcome-linked decision memory', 'ChatGPT / Claude style assistant: Not the core abstraction', 'GROOT: Core learning loop'],
+        ['Organization-specific decision model', 'ChatGPT / Claude style assistant: Requires custom setup and usage', 'GROOT: Designed as product state']
+      ] },
+      { h: 'Framing the claim', summary: 'The comparison must be framed carefully. OpenAI and Anthropic are rapidly adding research, connectors, enterprise context and meeting capabilities, while Microsoft is building an enterprise intelligence layer that reasons over organizational work context. [1][2][3][4] Therefore the defensible claim is not “existing assistants cannot do these things.” The claim is that GROOT makes a different system-level abstraction the product: the persistent intelligence mission and decision state that sit between natural language and organizational action.' },
+      { h: 'The final product thesis', icon: 'Star', rows: [
+        ['Core', 'Natural language is the primary interface. The user states what they want to know, investigate, compare, collect or decide.'],
+        ['Inputs', 'GROOT can receive either an explicit prompt or, with consent, natural spoken language from a Decision Room.'],
+        ['Engine', 'GROOT compiles that language into a mission, identifies what information is required, orchestrates acquisition and builds a structured result or decision state.'],
+        ['Memory', 'The system stores decisions and outcomes, creating an organization-specific decision memory that improves future missions.']
+      ] },
+      { h: 'Final pitch', summary: '“Every AI assistant waits for you to ask a question. GROOT can understand the question you explicitly ask - or recognize the question your organization is implicitly trying to answer. It converts natural language into intelligence missions, carries those missions through the organization’s information, and learns from the decisions that follow.”' },
+      { h: 'Research references', icon: 'BookOpen', rows: [
+        ['[1] OpenAI Deep Research', '', 'help.openai.com/en/articles/10500283-deep-research-in-chatgpt'],
+        ['[2] Anthropic Enterprise / Connectors', '', 'support.anthropic.com/en/articles/9797531-what-is-the-enterprise-plan'],
+        ['[3] Microsoft Work IQ APIs', '', 'learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/work-iq-api-overview'],
+        ['[4] OpenAI ChatGPT Record', '', 'help.openai.com/en/articles/11487532-chatgpt-record'],
+        ['[5] Value of Information review', '', 'annualreviews.org/content/journals/10.1146/annurev-statistics-040120-010730']
+      ] }
+    ]
+  }
+};
+
+function classify(p) {
+  const s = p.toLowerCase();
+  if (/concern|worried|can they handle|handle q4|capacity evidence/.test(s)) return 'ambient';
+  if (/\bshould\b|switch|\bmove\b|decide|choose/.test(s)) return 'decision';
+  if (/\bwhy\b/.test(s)) return 'investigation';
+  if (/\bfind\b|\blist\b|collect|manufacturer/.test(s)) return 'data';
+  return 'direct';
+}
+
+function buildMission(type, prompt, investigating) {
+  const s = prompt.toLowerCase();
+  const label = TYPES[type].label;
+  const I = (t, m, icon) => ({ t, m, icon });
+  if (type === 'decision' && /supplier/.test(s)) return {
+    summary: 'Decision detected. GROOT built the critical-variable graph for moving 30% of production from Supplier A to B and shows known vs unknown information before anything is decided.',
+    sections: [
+      { title: 'Mission Specification', items: [I('Decision support', 'Request classification', 'Cpu'), I('Option A: Maintain allocation', 'Alternative', 'GitBranch'), I('Option B: Shift 30%', 'Alternative', 'GitBranch'), I('Decision graph + required information + state', 'Output schema', 'FileText')] },
+      { title: 'Critical Variables', items: [I('Unit cost', 'Known · unit-cost advantage', 'CheckSquare'), I('Peak capacity', 'Unknown · decision-critical', 'AlertTriangle'), I('Lead-time distribution', 'Unknown', 'CircleHelp'), I('Defect rate', 'Unknown', 'CircleHelp'), I('MOQ', 'Unknown', 'CircleHelp'), I('Transition cost', 'Unknown', 'CircleHelp')] },
+      { title: 'Required Data Missions', items: [I('Investigate supplier capacity', 'Required data mission', 'Radar'), I('Acquire lead-time, defect-rate, MOQ and transition-cost evidence from permitted sources', 'Acquisition plan', 'Radar')] },
+      { title: 'Decision State', items: [I('Decision: Supplier allocation', 'Status: OPEN', 'Flag'), I('Next: continue the discussion in the Decision Room', 'Ambient mode', 'Mic')] }
+    ]
+  };
+  if (type === 'ambient') return {
+    summary: investigating ? 'Investigation approved. GROOT is calling permitted sources for Supplier B\'s Q4 capacity and will update the decision state when the evidence returns.' : '“I detected one decision-critical unknown: Supplier B\'s Q4 capacity. I can investigate it before the decision is finalized.”',
+    sections: [
+      { title: 'Detected Signals', items: [I(prompt, 'Objection / disagreement', 'Ear'), I('Peak capacity', 'Unknown · decision-critical', 'AlertTriangle')] },
+      { title: 'Decision State', items: [I('Decision: Supplier allocation', investigating ? 'Status: OPEN · investigating' : 'Status: BLOCKED', 'Flag'), I('Known: Unit-cost advantage', 'Evidence', 'CheckSquare'), I('Concern: Capacity risk', 'Assumption under review', 'AlertTriangle'), I('Required mission: Investigate supplier capacity', investigating ? 'Running on permitted sources' : 'Awaiting permission', 'Radar')] }
+    ],
+    action: investigating ? null : 'Allow GROOT to investigate'
+  };
+  if (type === 'direct' && /q2|maharashtra/.test(s)) return {
+    summary: 'Direct question detected. GROOT answers from permitted data and does not activate the full decision pipeline for this request.',
+    sections: [
+      { title: 'Mission Specification', items: [I('Q2 sales', 'Object', 'Target'), I('Maharashtra', 'Constraint', 'Target'), I('Q2', 'Time horizon', 'Clock3'), I('Answer grounded in permitted data.', 'Output', 'FileText')] },
+      { title: 'Context Map', items: [I('Connected business data source', 'Required · demo mode: not connected', 'Database')] },
+      { title: 'Pipeline Rule', items: [I('Decision graph and decision state skipped', 'Not required for this mission', 'ShieldCheck')] }
+    ]
+  };
+  if (type === 'investigation' && /sales/.test(s)) return {
+    summary: 'Investigation detected. GROOT is building a hypothesis / evidence analysis and separating what is unavailable, unknown, assumed or conflicting.',
+    sections: [
+      { title: 'Mission Specification', items: [I('Sales decline', 'Object', 'Target'), I('Hypothesis / evidence analysis.', 'Output', 'FileText')] },
+      { title: 'Evidence Plan', items: [I('Map variables to internal systems, documents, permitted external sources or conversation context', 'Step 4', 'Database'), I('Distinguish unavailable data, unknown variables, unresolved assumptions and conflicting evidence', 'Step 5', 'Search'), I('Retrieve only the information needed to complete the mission', 'Step 6', 'Radar')] }
+    ]
+  };
+  if (type === 'data' && /manufacturer/.test(s)) return {
+    summary: 'Data requirement detected. GROOT compiled a structured data mission and will return a result dataset.',
+    sections: [
+      { title: 'Mission Specification', items: [I('Manufacturers matching the stated constraints', 'Entities', 'Target'), I('Structured data mission + result dataset.', 'Output', 'FileText')] },
+      { title: 'Acquisition Plan', items: [I('Uploaded files + one business data source + approved external source', 'Permitted sources', 'Database'), I('Normalize the information required for the current task', 'Decision dataset', 'Boxes'), I('External web collection is one acquisition mechanism when permitted and useful', 'Scraping is not the product', 'Radar')] }
+    ]
+  };
+  return {
+    summary: 'Mission classified as ' + label.toLowerCase() + '. GROOT compiled “' + prompt + '” into a structured task and invoked only the components this mission needs.',
+    sections: [
+      { title: 'Mission Compiler', items: [I('Parse the user language', 'Step 1', 'MessageSquare'), I('Classify the request: ' + label.toLowerCase(), 'Step 2', 'Cpu'), I('Build a task representation', 'Step 3', 'Workflow'), I('Map variables to available context', 'Step 4', 'Database'), I('Find information gaps', 'Step 5', 'Search'), I('Plan acquisition', 'Step 6', 'Radar'), I('Construct the decision-ready result', 'Step 7', 'FileText')] }
+    ]
+  };
+}
+
+function clock(d) { return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+
+class Component extends DCLogic {
+  state = {
+    screen: 'landing', activeView: 'Mission Control', request: '', now: new Date(),
+    wordIndex: 0, letterCount: WORDS[0].length, deleting: false,
+    mission: null, step: 0, isGenerating: false, hasStarted: false, events: [], runStartedAt: null,
+    investigating: false, feedback: {}, missionCount: 0,
+    roomCount: -1, telemetryOpen: false, loginOpen: false, iconsReady: !!window.GROOT_ICONS
+  };
+  agentEls = [];
+  agentRefs = [0, 1, 2, 3, 4, 5].map((i) => (el) => { this.agentEls[i] = el; });
+  spot = { cx: 50, cy: 44, tx: 50, ty: 44 };
+  setOrbitEl = (el) => { this.orbitEl = el; };
+  setSpotEl = (el) => { this.spotEl = el; };
+  setScrollRoot = (el) => { this.scrollRoot = el; };
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+
+  scrollFx() {
+    const root = this.scrollRoot;
+    if (!root) return;
+    const vh = window.innerHeight, vw = window.innerWidth;
+    const cl = (v) => Math.max(0, Math.min(1, v));
+    const rm = this.reduce;
+    const sy = window.scrollY;
+    const hero = document.querySelector('.landing-hero');
+    if (hero) { const k = rm ? 0 : cl(sy / (vh * 0.9)); hero.style.transform = 'translateY(' + (k * vh * 0.28).toFixed(1) + 'px) scale(' + (1 - k * 0.08).toFixed(3) + ')'; hero.style.opacity = (1 - k * 1.1).toFixed(3); }
+    const cue = document.querySelector('[data-scroll-cue]');
+    if (cue) { const cta = document.querySelector('.landing-hero .hero-cta'); const cr = cta ? cta.getBoundingClientRect() : null; cue.style.display = cr && cr.bottom + sy + 90 > vh ? 'none' : 'flex'; cue.style.opacity = (1 - cl(sy / 160)).toFixed(3); }
+    root.querySelectorAll('[data-reveal]').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      const p = rm ? 1 : cl((vh * 0.95 - r.top) / (vh * 0.3) - (+el.dataset.reveal || 0) * 0.22);
+      el.style.opacity = p.toFixed(3);
+      el.style.transform = 'translateY(' + ((1 - p) * 56).toFixed(1) + 'px) scale(' + (0.95 + 0.05 * p).toFixed(3) + ')';
+      el.style.filter = p < 1 ? 'blur(' + ((1 - p) * 10).toFixed(1) + 'px)' : 'none';
+    });
+    root.querySelectorAll('[data-words]').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      const p = rm ? 1 : cl((vh * 0.9 - r.top) / (vh * 0.5));
+      const ws = el.querySelectorAll('[data-w]');
+      const n = ws.length;
+      ws.forEach((w, i) => {
+        const q = cl(p * (n + 2) - i);
+        w.style.opacity = (0.1 + 0.9 * q).toFixed(3);
+        w.style.filter = q < 1 ? 'blur(' + ((1 - q) * 8).toFixed(1) + 'px)' : 'none';
+        w.style.transform = 'translateY(' + ((1 - q) * 0.35).toFixed(3) + 'em) rotateX(' + ((1 - q) * 60).toFixed(1) + 'deg)';
+      });
+    });
+    const pin = (el) => { const r = el.getBoundingClientRect(); return cl(-r.top / Math.max(1, r.height - vh)); };
+    const arch = root.querySelector('[data-arch]');
+    if (arch) {
+      const p = rm ? 0 : pin(arch);
+      const track = arch.querySelector('[data-track]');
+      const max = Math.max(0, track.scrollWidth - vw);
+      track.style.transform = 'translate3d(' + (-p * max).toFixed(1) + 'px, 0, 0)';
+      const fill = arch.querySelector('[data-arch-fill]');
+      if (fill) fill.style.transform = 'scaleX(' + (rm ? 1 : p).toFixed(3) + ')';
+      arch.querySelectorAll('[data-step]').forEach((c) => {
+        const r = c.getBoundingClientRect();
+        const d = (r.left + r.width / 2 - vw / 2) / vw;
+        const lit = cl(1 - Math.abs(d) * 1.6);
+        c.style.transform = rm ? 'none' : 'rotateY(' + (d * -28).toFixed(1) + 'deg) translateZ(' + (lit * 40).toFixed(1) + 'px)';
+        c.style.opacity = (0.35 + 0.65 * lit).toFixed(3);
+        c.style.borderColor = 'rgba(74, 222, 128, ' + (0.1 + lit * 0.45).toFixed(3) + ')';
+        c.style.boxShadow = '0 0 ' + (lit * 60).toFixed(0) + 'px rgba(74, 222, 128, ' + (lit * 0.18).toFixed(3) + ')';
+      });
+    }
+    const room = root.querySelector('[data-room]');
+    if (room) {
+      const narrow = vw < 720;
+      const st = room.querySelector('[data-room-sticky]');
+      room.style.height = narrow ? 'auto' : '320vh';
+      if (st) { st.style.position = narrow ? 'relative' : 'sticky'; st.style.height = narrow ? 'auto' : '100vh'; st.style.padding = narrow ? '120px 0' : '0'; const g = st.firstElementChild; if (g) g.style.gridTemplateColumns = narrow ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(0, 1.05fr)'; }
+      const rr = room.getBoundingClientRect();
+      const c = rm ? 9 : narrow ? cl((vh * 0.9 - rr.top) / (rr.height * 0.8)) * 6.4 : pin(room) * 6.4;
+      room.querySelectorAll('[data-q]').forEach((el) => {
+        const v = cl(c - +el.dataset.q);
+        el.style.opacity = v.toFixed(3);
+        el.style.transform = 'translateX(' + ((1 - v) * -40).toFixed(1) + 'px) scale(' + (0.9 + 0.1 * v).toFixed(3) + ')';
+      });
+      room.querySelectorAll('[data-need]').forEach((el) => {
+        const v = cl(c - +el.dataset.need);
+        el.style.opacity = (0.12 + 0.88 * v).toFixed(3);
+        el.style.transform = 'translateY(' + ((1 - v) * 14).toFixed(1) + 'px)';
+        el.style.filter = v < 1 ? 'blur(' + ((1 - v) * 4).toFixed(1) + 'px)' : 'none';
+      });
+      const a = room.querySelector('[data-status-a]'), b = room.querySelector('[data-status-b]');
+      if (a && b) { a.style.opacity = c >= 4 ? '0' : '1'; b.style.opacity = c >= 4 ? '1' : '0'; }
+    }
+    const road = root.querySelector('[data-road]');
+    if (road) {
+      const r = road.getBoundingClientRect();
+      const line = vh * 0.6;
+      const p = rm ? 1 : cl((line - r.top) / r.height);
+      const fill = road.querySelector('[data-road-fill]');
+      if (fill) fill.style.transform = 'scaleY(' + p.toFixed(3) + ')';
+      road.querySelectorAll('[data-ph]').forEach((el) => {
+        const er = el.getBoundingClientRect();
+        const v = rm ? 1 : cl((line - er.top) / 120);
+        el.style.opacity = (0.28 + 0.72 * v).toFixed(3);
+        el.style.transform = 'translateX(' + ((1 - v) * 24).toFixed(1) + 'px)';
+        const dot = el.querySelector('[data-ph-dot]');
+        if (dot) { dot.style.background = v >= 1 ? '#4ADE80' : '#010503'; dot.style.borderColor = v >= 1 ? '#86f7a3' : 'rgba(239, 244, 255, 0.3)'; dot.style.boxShadow = v >= 1 ? '0 0 18px rgba(74, 222, 128, 0.8)' : 'none'; }
+      });
+    }
+    const rail = root.querySelector('[data-rail]');
+    if (rail) {
+      const show = sy > vh * 0.6 && vw > 900;
+      rail.style.opacity = show ? '1' : '0';
+      rail.style.pointerEvents = show ? 'auto' : 'none';
+      let active = -1;
+      root.querySelectorAll('[data-section]').forEach((s) => { if (s.getBoundingClientRect().top < vh * 0.5) active = +s.dataset.section; });
+      rail.querySelectorAll('[data-rail-item]').forEach((it, i) => {
+        const on = i === active;
+        it.style.color = on ? '#86f7a3' : 'rgba(239, 244, 255, 0.4)';
+        const dot = it.querySelector('[data-rail-dot]');
+        if (dot) { dot.style.background = on ? '#4ADE80' : 'rgba(239, 244, 255, 0.25)'; dot.style.transform = on ? 'scale(1.6)' : 'scale(1)'; dot.style.boxShadow = on ? '0 0 12px rgba(74, 222, 128, 0.9)' : 'none'; }
+      });
+    }
+  }
+
+  componentDidMount() {
+    if (!window.GROOT_ICONS) {
+      this.iconPoll = setInterval(() => { if (window.GROOT_ICONS) { clearInterval(this.iconPoll); this.setState({ iconsReady: true }); } }, 60);
+    }
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.coarse = window.matchMedia('(pointer: coarse)').matches;
+    this.t0 = performance.now();
+    this.onMove = (e) => { this.spot.tx = (e.clientX / window.innerWidth) * 100; this.spot.ty = (e.clientY / window.innerHeight) * 100; };
+    if (!this.reduce && !this.coarse) window.addEventListener('pointermove', this.onMove, { passive: true });
+    const tick = (now) => {
+      const el = this.orbitEl;
+      if (el) {
+        const r = el.getBoundingClientRect();
+        const w = r.width || 1536, h = r.height || 790;
+        const t = this.reduce ? 0 : (now - this.t0) / 1000;
+        ORBIT.forEach((a, i) => {
+          const n = this.agentEls[i]; if (!n) return;
+          const ang = ((a.start + (a.reverse ? -1 : 1) * (t / a.duration) * 360) * Math.PI) / 180;
+          n.style.transform = 'translate(-50%, -50%) translate3d(' + (Math.cos(ang) * w * a.rx).toFixed(2) + 'px, ' + (Math.sin(ang) * h * a.ry).toFixed(2) + 'px, 0)';
+        });
+      }
+      if (this.spotEl) {
+        const s = this.spot; s.cx += (s.tx - s.cx) * 0.14; s.cy += (s.ty - s.cy) * 0.14;
+        this.spotEl.style.setProperty('--spotlight-x', s.cx + '%');
+        this.spotEl.style.setProperty('--spotlight-y', s.cy + '%');
+      }
+      if (this.state.screen === 'landing') this.scrollFx();
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+    this.clockTimer = setInterval(() => this.setState({ now: new Date() }), 30000);
+    this.typeLoop();
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf); clearInterval(this.clockTimer); clearInterval(this.iconPoll);
+    clearTimeout(this.typeTimer); clearInterval(this.runTimer); clearInterval(this.roomTimer);
+    window.removeEventListener('pointermove', this.onMove);
+  }
+
+  typeLoop() {
+    const { wordIndex, letterCount, deleting, screen } = this.state;
+    if (this.reduce) return;
+    const word = WORDS[wordIndex];
+    const complete = !deleting && letterCount === word.length;
+    const deleted = deleting && letterCount === 0;
+    const delay = complete ? 1350 : deleted ? 260 : deleting ? 70 : 115;
+    this.typeTimer = setTimeout(() => {
+      if (this.state.screen !== 'landing') { this.typeLoop(); return; }
+      if (complete) this.setState({ deleting: true }, () => this.typeLoop());
+      else if (deleted) this.setState({ wordIndex: (wordIndex + 1) % WORDS.length, deleting: false }, () => this.typeLoop());
+      else this.setState({ letterCount: letterCount + (deleting ? -1 : 1) }, () => this.typeLoop());
+    }, screen === 'landing' ? delay : 500);
+  }
+
+  ic(name, size = 20, extra) {
+    const node = (window.GROOT_ICONS || {})[name];
+    if (!node) return React.createElement('span', { style: { display: 'inline-block', width: size, height: size, flex: '0 0 auto' } });
+    return React.createElement('svg', Object.assign({ xmlns: 'http://www.w3.org/2000/svg', width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, extra || {}),
+      node.map(([tag, attrs], i) => React.createElement(tag, Object.assign({ key: i }, attrs))));
+  }
+
+  go(view) {
+    this.setState({ screen: 'dashboard', activeView: view });
+    window.scrollTo({ top: 0, left: 0 });
+  }
+
+  generate(promptArg) {
+    const prompt = ((promptArg ?? this.state.request) || '').trim() || 'Should we move 30% of production from Supplier A to B?';
+    const type = classify(prompt);
+    clearInterval(this.runTimer);
+    this.setState((s) => ({ activeView: 'Mission Control', screen: 'dashboard', request: prompt, mission: { type, prompt }, step: 0, isGenerating: true, hasStarted: true, events: [], runStartedAt: Date.now(), investigating: false, missionCount: s.missionCount + 1 }));
+    const stages = TYPES[type].stages;
+    this.runTimer = setInterval(() => {
+      this.setState((s) => {
+        const st = STAGES.find((x) => x.key === stages[s.step]);
+        let msg = st.msg;
+        if (st.key === 'compiler') msg = 'Classified as ' + TYPES[type].label.toLowerCase();
+        if (st.key === 'state') msg = type === 'ambient' ? 'Decision state updated: BLOCKED' : 'Decision state persisted: OPEN';
+        const events = s.events.concat([{ id: s.events.length, time: clock(new Date()), label: st.label, message: msg, status: 'completed' }]);
+        const step = s.step + 1;
+        const done = step >= stages.length;
+        if (done) {
+          clearInterval(this.runTimer);
+          const skipped = STAGES.filter((x) => !stages.includes(x.key));
+          if (skipped.length) events.push({ id: events.length, time: clock(new Date()), label: 'Mission Compiler', message: 'Skipped ' + skipped.map((x) => x.label).join(', ') + ' (not required)', status: 'completed' });
+        }
+        return { step, events, isGenerating: !done };
+      });
+    }, 650);
+  }
+
+  investigate() {
+    this.setState((s) => ({ investigating: true, events: s.events.concat([
+      { id: s.events.length, time: clock(new Date()), label: 'Data Acquisition', message: 'Permission granted · investigating supplier capacity', status: 'running' },
+      { id: s.events.length + 1, time: clock(new Date()), label: 'Decision State', message: 'Status: OPEN · investigating', status: 'completed' }
+    ]) }));
+  }
+
+  startRoom() {
+    clearInterval(this.roomTimer);
+    this.setState({ roomCount: 0 });
+    this.roomTimer = setInterval(() => {
+      this.setState((s) => {
+        const n = s.roomCount + 1;
+        if (n >= ROOM_LINES.length) clearInterval(this.roomTimer);
+        return { roomCount: Math.min(n, ROOM_LINES.length) };
+      });
+    }, 1300);
+  }
+
+  feedbackFor(key, action) {
+    this.setState((s) => ({ feedback: Object.assign({}, s.feedback, { [key]: action }) }));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const ic = (n, sz, x) => this.ic(n, sz, x);
+    const isDashboard = s.screen === 'dashboard';
+    const view = VIEWS[s.activeView];
+
+    const navGroups = NAV.map((g) => ({
+      title: g.title,
+      items: g.items.map(([label, icon]) => ({ label, iconEl: ic(icon, 20), activeCls: label === s.activeView ? 'is-active' : '', onClick: () => this.go(label) }))
+    }));
+
+    let viewVals = null;
+    if (view) {
+      viewVals = {
+        title: s.activeView, subtitle: view.subtitle, hasRoom: !!view.room,
+        blocks: view.blocks.map((b) => ({
+          heading: b.h,
+          isSummary: !!b.summary, text: b.summary || '',
+          isAction: !!b.action, label: b.action || '', onClick: () => this.generate(b.prompt),
+          isRows: !!b.rows,
+          rows: (b.rows || []).map(([title, text, tag]) => ({ title, text, tag, hasTitle: !!title, hasText: !!text, hasTag: !!tag, iconEl: ic(b.icon || 'Sparkles', 18) }))
+        }))
+      };
+    }
+
+    const type = s.mission && s.mission.type;
+    const activeStages = type ? TYPES[type].stages : [];
+    const done = s.mission && !s.isGenerating;
+    const statusRows = STAGES.map((st) => {
+      let status = 'waiting';
+      if (s.mission) {
+        const idx = activeStages.indexOf(st.key);
+        if (idx !== -1) status = done || idx < s.step ? 'completed' : idx === s.step ? 'running' : 'waiting';
+      }
+      return { label: st.label, status, iconEl: ic(st.icon, 20), checkEl: ic('CheckCircle2', 17, { className: 'orbit-status-check' }) };
+    });
+
+    let timeline;
+    if (s.events.length) timeline = s.events.slice(-6);
+    else {
+      const base = s.runStartedAt || Date.now();
+      timeline = STAGES.slice(0, 5).map((st, i) => ({
+        id: 'p' + i, label: st.label,
+        status: s.isGenerating && i === s.step ? 'running' : 'waiting',
+        time: i < 3 ? clock(new Date(base + i * 60000)) : '--:--',
+        message: i < 3 ? 'Waiting for live status' : 'Waiting to start'
+      }));
+    }
+
+    let result = null;
+    if (done) {
+      const m = buildMission(type, s.mission.prompt, s.investigating);
+      result = {
+        summary: m.summary,
+        hasAction: !!m.action, actionLabel: m.action || '', onAction: () => this.investigate(),
+        sections: m.sections.map((sec, si) => ({
+          title: sec.title,
+          items: sec.items.map((it, ii) => {
+            const key = s.missionCount + ':' + si + ':' + ii;
+            const fb = s.feedback[key];
+            return {
+              text: it.t, meta: it.m, iconEl: ic(it.icon, 16),
+              upCls: fb === 'up' ? 'is-saved' : '', downCls: fb === 'down' ? 'is-saved' : '', saved: !!fb,
+              onUp: () => this.feedbackFor(key, 'up'), onDown: () => this.feedbackFor(key, 'down')
+            };
+          })
+        }))
+      };
+    }
+
+    const rc = s.roomCount;
+    const roomState = ROOM_STATE.filter(([need]) => rc >= need).map(([, label, value]) => ({ label, value }));
+
+    const rings = React.createElement('svg', { className: 'orbit-rings', viewBox: '0 0 1600 820', preserveAspectRatio: 'none' },
+      [['orbit-ring orbit-ring-dotted orbit-ring-outer', 790, 335], ['orbit-ring orbit-ring-solid', 700, 285], ['orbit-ring orbit-ring-dotted', 610, 240], ['orbit-ring orbit-ring-solid orbit-ring-soft', 505, 190], ['orbit-ring orbit-ring-dotted orbit-ring-inner-soft', 410, 150], ['orbit-ring orbit-ring-solid orbit-ring-inner', 300, 112]]
+        .map(([c, rx, ry], i) => React.createElement('ellipse', { key: i, className: c, cx: 800, cy: 410, rx, ry })));
+
+    const fbCount = Object.keys(s.feedback).length;
+    const vals = {
+      isLanding: !isDashboard, isDashboard,
+      goLanding: () => { this.setState({ screen: 'landing' }); window.scrollTo({ top: 0, left: 0 }); },
+      openDashboard: () => this.go('Mission Control'),
+      landingNav: ['Product', 'Architecture', 'Decision Room', 'Roadmap'].map((label) => {
+        const id = label.toLowerCase().replace(/ /g, '-');
+        return { label, href: '#' + id, onClick: (e) => { e.preventDefault(); this.scrollTo(id); } };
+      }),
+      setScrollRoot: this.setScrollRoot,
+      setOrbitEl: this.setOrbitEl, setSpotEl: this.setSpotEl, ringsSvg: rings,
+      typedWord: WORDS[s.wordIndex].slice(0, s.letterCount),
+      topBarDate: 'Today is ' + s.now.toLocaleDateString([], { weekday: 'long' }) + ' \u2022 ' + clock(s.now),
+      navGroups,
+      isMissionView: s.activeView === 'Mission Control', isContentView: !!view, view: viewVals || { blocks: [] },
+      request: s.request,
+      onRequestChange: (e) => this.setState({ request: e.target.value }),
+      onRequestKey: (e) => { if (e.key === 'Enter' && !this.state.isGenerating) this.generate(); },
+      onSend: () => this.generate(),
+      sendIcon: s.isGenerating ? ic('Loader2', 24, { className: 'spin' }) : ic('Send', 24),
+      isGenerating: s.isGenerating,
+      quickCommands: QUICK.map((q) => ({ label: q.label, prompt: q.prompt, iconEl: ic(q.icon, 18), onClick: () => this.generate(q.prompt) })),
+      noResult: !result, hasResult: !!result, result: result || { sections: [] },
+      emptyTitle: s.hasStarted ? 'GROOT is compiling your mission' : 'Your intelligence mission will appear here',
+      emptyText: 'State what you need to know, understand, investigate or decide. GROOT determines the information architecture behind the request.',
+      statusRows, timeline,
+      roomIdle: rc < 0, roomStarted: rc >= 0, roomListening: rc >= 0 && rc < ROOM_LINES.length, roomDone: rc >= ROOM_LINES.length,
+      roomLines: rc > 0 ? ROOM_LINES.slice(0, rc) : [], roomState, hasRoomState: roomState.length > 0,
+      startRoom: () => this.startRoom(),
+      resetRoom: () => { clearInterval(this.roomTimer); this.setState({ roomCount: -1 }); },
+      sendRoom: () => this.generate('The concern is whether B can handle Q4 volume.'),
+      telemetryOpen: s.telemetryOpen, loginOpen: s.loginOpen,
+      openTelemetry: () => this.setState({ telemetryOpen: true }),
+      openLogin: () => this.setState({ loginOpen: true }),
+      closeModals: () => this.setState({ telemetryOpen: false, loginOpen: false }),
+      stop: (e) => e.stopPropagation(),
+      missionCount: s.missionCount,
+      learningSignals: fbCount + ' learning signal' + (fbCount === 1 ? '' : 's') + ' captured',
+      lastRunTime: s.runStartedAt ? clock(new Date(s.runStartedAt)) : 'Not run',
+      lastRunState: s.isGenerating ? 'Mission in progress' : s.mission ? 'Mission completed' : 'Idle',
+      ic: {
+        activity: ic('Activity', 18), user: ic('User', 21), sparkles28: ic('Sparkles', 28), sparkles18: ic('Sparkles', 18),
+        thumbsUp: ic('ThumbsUp', 14), thumbsDown: ic('ThumbsDown', 14), x: ic('X', 18), database22: ic('Database', 22),
+        shield18: ic('ShieldCheck', 18), mic18: ic('Mic', 18), quote18: ic('Quote', 18), send18: ic('Send', 18),
+        reset18: ic('RotateCcw', 18), play18: ic('Play', 18), loader16: ic('Loader2', 16, { className: 'spin' })
+      }
+    };
+    ORBIT.forEach((a, i) => { vals['agentRef' + i] = this.agentRefs[i]; vals['agentIcon' + i] = ic(a.icon, 24, { strokeWidth: 2.2 }); });
+    return vals;
+  }
+}
+</script>
+</body>
+</html>
