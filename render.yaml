@@ -12,7 +12,6 @@ services:
     startCommand: python backend/app.py
     healthCheckPath: /api/health
     autoDeployTrigger: commit
-    maxShutdownDelaySeconds: 30
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.11
