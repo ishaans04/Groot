@@ -506,6 +506,14 @@ span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0
     <div style="display: flex; align-items: center; gap: 12px; padding: 9px 22px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Decision state</span>
       <span style="{{ statusMiniStyle }}">{{ status }}</span>
+      <div style="display: flex; align-items: center; gap: 12px; margin-left: auto">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55); white-space: nowrap">Mission compiler</span>
+        <div style="display: flex; align-items: center; gap: 3px">
+          <sc-for list="{{ pipeMini }}" as="pm" hint-placeholder-count="8">
+            <i style="{{ pm.linkStyle }}"></i><i title="{{ pm.k }}" style="{{ pm.dotStyle }}"></i>
+          </sc-for>
+        </div>
+      </div>
     </div>
   </sc-if>
   <sc-if value="{{ footOpen }}" hint-placeholder-val="{{ true }}">
@@ -534,10 +542,10 @@ span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0
         </sc-for>
       </div>
     </div>
-    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-left: auto">
-      <button type="button" onClick="{{ onAcquireAll }}" disabled="{{ acquireAllOff }}" style="{{ acquireAllStyle }}">Fetch unknowns</button>
-      <button type="button" onClick="{{ onSave }}" disabled="{{ saveOff }}" style="{{ saveStyle }}">Save decision</button>
-      <button type="button" onClick="{{ onOutcome }}" disabled="{{ outcomeOff }}" style="{{ outcomeStyle }}">Simulate outcome</button>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><div style="display: grid; grid-template-columns: auto auto; gap: 6px; margin-left: auto">
+      <button type="button" onClick="{{ onAcquireAll }}" disabled="{{ acquireAllOff }}" style="{{ acquireAllFootStyle }}">Fetch unknowns</button>
+      <button type="button" onClick="{{ onSave }}" disabled="{{ saveOff }}" style="{{ saveFootStyle }}">Save decision</button>
+      <button type="button" onClick="{{ onOutcome }}" disabled="{{ outcomeOff }}" style="{{ outcomeFootStyle }}">Simulate outcome</button>
     </div></sc-if>
   </div>
   </sc-if>
@@ -978,11 +986,12 @@ function btnStyle(kind, on) {
   if (kind === 'violet') return Object.assign(base, { border: '1px solid ' + C.violet, background: on ? 'rgba(182,156,255,0.12)' : 'none', color: '#e2d8ff' });
   return Object.assign(base, { border: '1px solid ' + C.line2, background: 'none', color: C.text });
 }
+const FOOT_BTN = { padding: '6px 10px', fontSize: 10, letterSpacing: '0.08em' };
 
 class Component extends DCLogic {
   state = {
     screen: 'landing', now: new Date(), wordIndex: 0, letterCount: WORDS[0].length, deleting: false, iconsReady: !!window.GROOT_ICONS,
-    channel: 'typed', input: '', log: [], vw: window.innerWidth, railOpen: false, railCollapsed: true, graphCollapsed: false, footOpen: true, booting: false, graphMin: false, graphMax: false, missions: [], activeId: null, selected: null, compiling: false, roomIdx: -1, memory: [], docView: null
+    channel: 'typed', input: '', log: [], vw: window.innerWidth, railOpen: false, railCollapsed: true, graphCollapsed: false, footOpen: false, booting: false, graphMin: false, graphMax: false, missions: [], activeId: null, selected: null, compiling: false, roomIdx: -1, memory: [], docView: null
   };
   sessionId = 'S-' + Math.random().toString(16).slice(2, 6).toUpperCase();
   mid = 0;
@@ -1183,8 +1192,8 @@ class Component extends DCLogic {
   go() {
     clearTimeout(this.bootTimer);
     const boot = !this.reduce;
-    // Each launch starts with the missions sidebar folded and the decision graph panel open.
-    this.setState({ screen: 'console', booting: boot, railOpen: false, railCollapsed: true, graphCollapsed: false, graphMax: false }); window.scrollTo({ top: 0, left: 0 });
+    // Each launch starts with the missions sidebar and decision state folded, and the decision graph panel open.
+    this.setState({ screen: 'console', booting: boot, railOpen: false, railCollapsed: true, graphCollapsed: false, graphMax: false, footOpen: false }); window.scrollTo({ top: 0, left: 0 });
     if (boot) this.bootTimer = setTimeout(() => this.setState({ booting: false }), 3000);
   }
   bootEl() {
@@ -1425,14 +1434,18 @@ class Component extends DCLogic {
     const canSave = status === 'READY';
     const canOutcome = status === 'SAVED';
 
-    const pipe = STEPS.map(([n, k], i) => {
-      let st = { display: 'block', width: 22, height: 6, borderRadius: 2, background: C.line };
-      if (m) {
-        const skipped = SKIP[m.type].includes(n);
-        if (i < m.step) st = Object.assign(st, skipped ? { background: 'none', border: '1px dashed ' + C.dim } : { background: C.amber });
-        else if (i === m.step && s.compiling) st = Object.assign(st, { background: 'rgba(242,181,68,0.4)' });
-      }
-      return { n, k, style: st };
+    const stepState = (n, i) => {
+      if (!m) return 'idle';
+      if (i < m.step) return SKIP[m.type].includes(n) ? 'skipped' : 'done';
+      return i === m.step && s.compiling ? 'active' : 'idle';
+    };
+    const stepLook = { idle: { background: C.line }, done: { background: C.amber }, skipped: { background: 'none', border: '1px dashed ' + C.dim }, active: { background: 'rgba(242,181,68,0.4)' } };
+    const pipe = STEPS.map(([n, k], i) => ({ n, k, style: Object.assign({ display: 'block', width: 22, height: 6, borderRadius: 2 }, stepLook[stepState(n, i)]) }));
+    // Compact dot-and-line version shown in the collapsed decision state bar.
+    const pipeMini = STEPS.map(([n, k], i) => {
+      const st = stepState(n, i);
+      return { k: n + ' · ' + k, linkStyle: { display: i === 0 ? 'none' : 'block', width: 14, height: 2, borderRadius: 1, background: i < (m ? m.step : 0) ? C.amber : C.line },
+        dotStyle: Object.assign({ display: 'block', width: 9, height: 9, borderRadius: 999, boxSizing: 'border-box' }, stepLook[st], st === 'active' ? { boxShadow: '0 0 0 3px rgba(242,181,68,0.18)' } : {}) };
     });
 
     const roomLive = s.roomIdx >= 0 && s.roomIdx < ROOM.length;
@@ -1461,7 +1474,7 @@ class Component extends DCLogic {
       notWide: !wide, legendStyle: { display: wide ? 'flex' : 'none', flexWrap: 'wrap', gap: 14, marginLeft: 'auto', color: C.dim, fontFamily: MONO, fontSize: 10.5 },
       parserIdle: wide ? 'Parser idle. Start typing and GROOT tags the intent, object, constraints and time horizon live.' : 'Start typing to see the live parse.',
       wide, compilerLabel: wide ? 'Mission compiler · state what you need to know, understand, investigate or decide' : 'Mission compiler',
-      pipeWrapStyle: { display: wide ? 'grid' : 'none', flex: 1, gap: 8, justifyItems: 'start', minWidth: 0 },
+      pipeWrapStyle: { display: wide ? 'grid' : 'none', flex: '1 0 auto', gap: 8, justifyItems: 'start' },
       railStyle, railOverlay: !wide && s.railOpen, showRailBtn: !wide, showChips: !wide,
       footOpen: s.footOpen, footClosed: !s.footOpen, footToggleLabel: s.footOpen ? 'Minimize decision state' : 'Expand decision state',
       toggleFoot: () => this.setState((st) => ({ footOpen: !st.footOpen })),
@@ -1545,10 +1558,13 @@ class Component extends DCLogic {
       countRows: [['known', 'Known', C.green], ['unknown', 'Unknown', C.muted], ['assumed', 'Assumed', C.violet], ['conflicting', 'Conflicting', C.coral]].map(([k, label, col]) => ({ label, n: c[k],
         numStyle: { color: c[k] ? (k === 'unknown' ? C.text : col) : C.line2, fontFamily: 'Anton, sans-serif', fontSize: 28, lineHeight: 1 },
         swStyle: { display: 'block', width: 8, height: 8, borderRadius: 2, background: k === 'unknown' ? 'none' : col, border: k === 'unknown' ? '1px dashed ' + C.muted : 0 } })),
-      pipe,
+      pipe, pipeMini,
       onAcquireAll: () => this.acquireAll(), acquireAllOff: !canFetch, acquireAllStyle: btnStyle('ghost', canFetch),
       onSave: () => this.save(), saveOff: !canSave, saveStyle: btnStyle('primary', canSave),
       onOutcome: () => this.outcome(), outcomeOff: !canOutcome, outcomeStyle: btnStyle('violet', canOutcome),
+      acquireAllFootStyle: Object.assign(btnStyle('ghost', canFetch), FOOT_BTN, { gridColumn: '1 / -1', justifySelf: 'center' }),
+      saveFootStyle: Object.assign(btnStyle('primary', canSave), FOOT_BTN),
+      outcomeFootStyle: Object.assign(btnStyle('violet', canOutcome), FOOT_BTN),
 
       docOpen: !!doc, closeDoc: () => this.setState({ docView: null }), stop: (e) => e.stopPropagation(),
       docTabs: DOCS.map((d) => ({ label: d, onClick: () => this.setState({ docView: d }),
