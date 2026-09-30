@@ -416,6 +416,7 @@ span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0
         <button type="button" onClick="{{ onGraphToggle }}" title="{{ graphToggleLabel }}" aria-label="{{ graphToggleLabel }}" aria-expanded="false" style="display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.75" y="2.25" width="12.5" height="11.5" rx="2.75" stroke="currentColor" stroke-width="1.4"></rect><path d="M10 2.5v11" stroke="currentColor" stroke-width="1.4"></path></svg>
         </button>
+        <button type="button" onClick="{{ onGraphToggle }}" tabindex="-1" aria-hidden="true" style="margin-top: 22px; padding: 0; border: 0; background: none; color: var(--g-dim, #8a7c55); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; writing-mode: vertical-rl; cursor: pointer" style-hover="color: #f2b544">Decision graph panel</button>
       </sc-if>
       <sc-if value="{{ graphExpanded }}" hint-placeholder-val="{{ true }}">
       <div style="display: flex; align-items: flex-start; gap: 12px; padding: 18px 22px 12px">
@@ -981,7 +982,7 @@ function btnStyle(kind, on) {
 class Component extends DCLogic {
   state = {
     screen: 'landing', now: new Date(), wordIndex: 0, letterCount: WORDS[0].length, deleting: false, iconsReady: !!window.GROOT_ICONS,
-    channel: 'typed', input: '', log: [], vw: window.innerWidth, railOpen: false, railCollapsed: false, graphCollapsed: false, footOpen: true, booting: false, graphMin: false, graphMax: false, missions: [], activeId: null, selected: null, compiling: false, roomIdx: -1, memory: [], docView: null
+    channel: 'typed', input: '', log: [], vw: window.innerWidth, railOpen: false, railCollapsed: true, graphCollapsed: false, footOpen: true, booting: false, graphMin: false, graphMax: false, missions: [], activeId: null, selected: null, compiling: false, roomIdx: -1, memory: [], docView: null
   };
   sessionId = 'S-' + Math.random().toString(16).slice(2, 6).toUpperCase();
   mid = 0;
@@ -1182,7 +1183,8 @@ class Component extends DCLogic {
   go() {
     clearTimeout(this.bootTimer);
     const boot = !this.reduce;
-    this.setState({ screen: 'console', booting: boot }); window.scrollTo({ top: 0, left: 0 });
+    // Each launch starts with the missions sidebar folded and the decision graph panel open.
+    this.setState({ screen: 'console', booting: boot, railOpen: false, railCollapsed: true, graphCollapsed: false, graphMax: false }); window.scrollTo({ top: 0, left: 0 });
     if (boot) this.bootTimer = setTimeout(() => this.setState({ booting: false }), 3000);
   }
   bootEl() {
