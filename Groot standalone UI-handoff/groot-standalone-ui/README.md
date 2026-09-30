@@ -1,22 +1,18 @@
-# CODING AGENTS: READ THIS FIRST
+# GROOT website files
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+This folder contains the website design that was handed over for the GROOT presentation. The main page is `project/GROOT.dc.html`. The combined GROOT service and presentation runbook are in `project/backend/`.
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+## Open the presentation
 
-## What you should do — IMPORTANT
+Open the `project/backend` folder and run `start-prototype.cmd`. Then open <http://127.0.0.1:8000/GROOT.dc.html>. Keep the command window open until the presentation ends. The service guide is at <http://127.0.0.1:8000/backend/docs/api.md>.
 
-**Read `groot-standalone-ui/project/GROOT.dc.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+The original website files, styles and icons are kept in their original places. The website's buttons still show their original built-in examples; use `project/backend/demo.http` to show the separate working service.
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+## Main files
 
-## About the design files
-
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
-
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
-
-## Bundle contents
-
-- `groot-standalone-ui/README.md` — this file
-- `groot-standalone-ui/project/` — the `Groot standalone UI` project files (HTML prototypes, assets, components)
+- `project/GROOT.dc.html` — main website and console design
+- `project/GROOT Standalone.html` — one-file version of that design
+- `project/GROOT v1.dc.html` and `project/GROOT v2.dc.html` — earlier design versions
+- `project/support.js` and `project/assets/` — code and visual styles that make the website work
+- `project/uploads/` — the concept paper and reference screenshots
+- `project/backend/` — the offline service and sample records; `project/backend/docs/` has the service and presentation guides

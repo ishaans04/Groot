@@ -1,21 +1,17 @@
-repo: ishaans04/Orbit
-branch: main
-path: frontend
+# Project handoff notes
 
-## Last sync
-date: 2026-09-30T00:58:00Z
+These files carry the GROOT website design and its related demo service.
 
-### Updated in this project
-- Rebuilt Landing and Dashboard as one standalone GROOT UI (frontend only; repo untouched)
-- Replaced all Orbit briefing content with the GROOT Final Concept Paper
-- Replaced the dashboard with the GROOT Console (mission compiler log, decision graph, decision state, memory)
-- Landing gained scroll-animated Product, Architecture, Decision Room and Roadmap sections
+- Source project: `ishaans04/Orbit`, branch `main`, folder `frontend`
+- Design handoff received: 30 September 2026
+- Main website file here: `GROOT.dc.html`
+- Related concept paper: `uploads/GROOT_Final_Idea.pdf`
+- Offline service and sample data: `backend/`
 
-## Screen map
-| Project screen | Repo files |
-| --- | --- |
-| GROOT.dc.html — Landing | frontend/src/pages/Landing.jsx, frontend/src/components/OrbitBackground.jsx, frontend/src/components/MouseSpotlight.jsx, frontend/src/components/TypingHeroWord.jsx, frontend/index.html |
-| GROOT.dc.html — Console (new design, replaces Dashboard) | frontend/src/pages/Dashboard.jsx (replaced) |
-| GROOT v1.dc.html — previous Mission Control version | frontend/src/pages/Dashboard.jsx |
-| assets/groot-styles.css | frontend/src/styles.css, frontend/tailwind.config.js |
-| assets/icons.js | lucide-react icons (frontend/package.json) |
+## What is included
+
+- The home page introduces GROOT, explains how it works, shows the Decision Room idea, and presents the build plan.
+- The console design shows the request steps, the facts a decision needs, its current state, and lessons from past decisions.
+- The offline service has separate working examples for supplier decisions, sales questions, manufacturer searches, meeting statements, and saved outcomes.
+
+The website design came from a separate design handoff. Its files remain in place and the service does not change them.

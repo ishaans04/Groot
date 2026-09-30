@@ -1,0 +1,14 @@
+[
+  {"name":"Pune Precision Works","city":"Pune","state":"Maharashtra","category":"CNC machining","certifications":["ISO 9001","IATF 16949"],"capacity_units_month":18000,"lead_days":21,"source_id":"market-index-demo"},
+  {"name":"Apex Alloy Systems","city":"Nashik","state":"Maharashtra","category":"Metal stamping","certifications":["ISO 9001"],"capacity_units_month":22000,"lead_days":28,"source_id":"market-index-demo"},
+  {"name":"BluePeak Components","city":"Noida","state":"Uttar Pradesh","category":"CNC machining","certifications":["ISO 9001","IATF 16949"],"capacity_units_month":25000,"lead_days":24,"source_id":"market-index-demo"},
+  {"name":"Crestline Fabrication","city":"Faridabad","state":"Haryana","category":"Sheet metal","certifications":["ISO 9001"],"capacity_units_month":14500,"lead_days":19,"source_id":"market-index-demo"},
+  {"name":"Delta Motion India","city":"Chennai","state":"Tamil Nadu","category":"Precision assemblies","certifications":["ISO 9001","IATF 16949"],"capacity_units_month":31000,"lead_days":32,"source_id":"market-index-demo"},
+  {"name":"Evergreen Industrial","city":"Ahmedabad","state":"Gujarat","category":"Metal stamping","certifications":["ISO 9001"],"capacity_units_month":16000,"lead_days":25,"source_id":"market-index-demo"},
+  {"name":"ForgePoint Manufacturing","city":"Bengaluru","state":"Karnataka","category":"CNC machining","certifications":["ISO 9001","IATF 16949"],"capacity_units_month":27000,"lead_days":22,"source_id":"market-index-demo"},
+  {"name":"Granite River Parts","city":"Coimbatore","state":"Tamil Nadu","category":"Precision assemblies","certifications":["ISO 9001"],"capacity_units_month":12500,"lead_days":18,"source_id":"market-index-demo"},
+  {"name":"Horizon Tooling Co.","city":"Gurugram","state":"Haryana","category":"Tooling","certifications":["ISO 9001","IATF 16949"],"capacity_units_month":21000,"lead_days":30,"source_id":"market-index-demo"},
+  {"name":"Indus Microfab","city":"Hyderabad","state":"Telangana","category":"CNC machining","certifications":["ISO 9001"],"capacity_units_month":19500,"lead_days":20,"source_id":"market-index-demo"},
+  {"name":"Juniper Drive Systems","city":"Pune","state":"Maharashtra","category":"Precision assemblies","certifications":["ISO 9001","IATF 16949"],"capacity_units_month":34000,"lead_days":27,"source_id":"market-index-demo"},
+  {"name":"Kestrel Works","city":"Jaipur","state":"Rajasthan","category":"Sheet metal","certifications":["ISO 9001"],"capacity_units_month":11000,"lead_days":17,"source_id":"market-index-demo"}
+]

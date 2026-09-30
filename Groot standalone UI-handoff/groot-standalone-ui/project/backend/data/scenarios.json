@@ -1,0 +1,7 @@
+[
+  {"id":"supplier-decision","title":"Supplier allocation decision","prompt":"Should we move 30% of production from Supplier A to B for Q4?","expectation":"A persistent decision record with price known, peak capacity marked as important, other gaps still visible, followed by evidence, a saved choice, and an outcome lesson."},
+  {"id":"north-sales","title":"Look into North region sales","prompt":"Why did sales decline in the North in Q2 2026?","expectation":"Compare quarter-by-quarter sales, separate channel observations from possible causes, and keep unsupported explanations labeled as guesses."},
+  {"id":"maharashtra-sales","title":"Answer a direct question","prompt":"What were Q2 sales in Maharashtra?","expectation":"A short answer backed by the sample sales ledger, with its source shown."},
+  {"id":"manufacturer-search","title":"Build a supplier list","prompt":"Find 8 manufacturers in India with ISO 9001 and monthly capacity above 15000 units.","expectation":"A cleaned list that meets the stated requirements, shows where it came from, and returns no more than eight records."},
+  {"id":"decision-room","title":"Pick out a meeting concern","prompt":"The concern is whether Supplier B can handle Q4 volume.","expectation":"After consent is recorded, meeting statements update the supplier decision and highlight the capacity question."}
+]

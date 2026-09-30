@@ -1,0 +1,9 @@
+[
+  {"region":"Maharashtra","quarter":"Q1 2026","revenue_lakh_inr":184.2,"orders":426,"units":9810,"channel":"Direct","source_id":"crm-sales-quarterly"},
+  {"region":"Maharashtra","quarter":"Q2 2026","revenue_lakh_inr":201.6,"orders":461,"units":10540,"channel":"Direct","source_id":"crm-sales-quarterly"},
+  {"region":"Maharashtra","quarter":"Q2 2026","revenue_lakh_inr":76.4,"orders":188,"units":4020,"channel":"Partner","source_id":"crm-sales-quarterly"},
+  {"region":"North","quarter":"Q1 2026","revenue_lakh_inr":242.0,"orders":608,"units":13200,"channel":"Direct","source_id":"crm-sales-quarterly"},
+  {"region":"North","quarter":"Q2 2026","revenue_lakh_inr":214.5,"orders":550,"units":11910,"channel":"Direct","source_id":"crm-sales-quarterly"},
+  {"region":"North","quarter":"Q1 2026","revenue_lakh_inr":103.0,"orders":283,"units":5920,"channel":"Partner","source_id":"crm-sales-quarterly"},
+  {"region":"North","quarter":"Q2 2026","revenue_lakh_inr":81.7,"orders":230,"units":4770,"channel":"Partner","source_id":"crm-sales-quarterly"}
+]

@@ -1,0 +1,10 @@
+{
+  "name": "GROOT Demo Organization",
+  "as_of": "2026-09-30",
+  "currency": "USD",
+  "locale": "en-IN",
+  "mode": "offline fictional data",
+  "purpose": "Show how a spoken or typed request becomes a tracked information task, how evidence fills missing facts, and how a later result can guide a similar future choice.",
+  "supported_request_types": ["direct answer", "investigation", "decision support", "supplier search", "consented meeting statements"],
+  "limitations": ["No real company system is connected.", "No microphone or live speech service is connected.", "No large language model or outside research service is used.", "All sample company and market records are fictional."]
+}

@@ -1,0 +1,8 @@
+[
+  {"id":"erp-supplier-master","name":"Supplier list · sample business records","kind":"internal","permitted":true,"updated_at":"2026-09-29T09:00:00Z","description":"Contract terms, unit cost, minimum order and current allocation."},
+  {"id":"ops-capacity-plan","name":"Operations · sample Q4 capacity plan","kind":"internal","permitted":true,"updated_at":"2026-09-28T15:30:00Z","description":"Supplier-confirmed monthly and peak-quarter capacity."},
+  {"id":"quality-scorecard","name":"Quality · sample supplier scorecard","kind":"internal","permitted":true,"updated_at":"2026-09-27T12:00:00Z","description":"Last 12 months of defect and on-time delivery rates."},
+  {"id":"crm-sales-quarterly","name":"Sales · sample quarterly ledger","kind":"internal","permitted":true,"updated_at":"2026-09-30T07:15:00Z","description":"Quarterly sales by region, channel and product family."},
+  {"id":"market-index-demo","name":"Approved market list · sample records","kind":"external_fixture","permitted":true,"updated_at":"2026-09-25T00:00:00Z","description":"Fictional manufacturer list used to show a permitted outside source."},
+  {"id":"meeting-room","name":"Decision Room statements","kind":"conversation","permitted":false,"updated_at":null,"description":"Meeting statements are accepted only after the session owner records participant consent."}
+]

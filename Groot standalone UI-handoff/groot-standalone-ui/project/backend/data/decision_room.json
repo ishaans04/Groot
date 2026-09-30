@@ -1,0 +1,6 @@
+[
+  {"speaker":"CFO","text":"Supplier B is cheaper by about six percent.","signal":"known","node_id":"unit_cost","claim":"Supplier B has a unit-cost advantage","detail":"Unit-cost advantage; verify against current contract terms."},
+  {"speaker":"COO","text":"I'm worried about whether they can handle Q4 volume.","signal":"objection","node_id":"peak_capacity","claim":"Q4 peak capacity may constrain the proposed shift","detail":"Capacity risk raised by operations."},
+  {"speaker":"Procurement","text":"We don't have a recent capacity confirmation from Meridian.","signal":"unknown","node_id":"peak_capacity","claim":"Supplier B Q4 capacity confirmation is missing","detail":"Peak capacity is decision-critical; evidence is stale or absent."},
+  {"speaker":"CFO","text":"Let's not decide until we know the confirmed capacity.","signal":"decision","node_id":"decision","claim":"Hold the allocation decision until capacity is verified","detail":"Decision held pending evidence."}
+]

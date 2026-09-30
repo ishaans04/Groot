@@ -1,0 +1,33 @@
+{
+  "mission": {
+    "id": "M-HISTORY01",
+    "prompt": "Should we move 20% of Q3 production from Supplier A to B?",
+    "channel": "typed",
+    "type": "decision",
+    "title": "Supplier allocation · Q3 2026",
+    "topic": "supplier",
+    "status": "learned",
+    "created_at": "2026-07-02T09:00:00Z",
+    "updated_at": "2026-08-14T16:20:00Z",
+    "spec": {"object":"supplier allocation","outcome":"decision replay","constraints":[{"type":"allocation_percent","value":20}],"geography":null,"time_horizon":"Q3 2026","certainty_required":"source-backed"},
+    "variables": [
+      {"id":"unit_cost","label":"Unit cost","type":"variable","state":"known","critical":false,"required":true,"source_id":"erp-supplier-master","evidence":[]},
+      {"id":"peak_capacity","label":"Peak capacity","type":"variable","state":"known","critical":true,"required":true,"source_id":"ops-capacity-plan","evidence":[]},
+      {"id":"lead_time","label":"Lead-time distribution","type":"variable","state":"known","critical":false,"required":true,"source_id":"ops-capacity-plan","evidence":[]},
+      {"id":"defect_rate","label":"Defect rate","type":"variable","state":"assumed","critical":false,"required":true,"source_id":"quality-scorecard","evidence":[]}
+    ],
+    "options": [{"id":"maintain","label":"Maintain allocation","type":"option"},{"id":"shift","label":"Shift 20% to B","type":"option"}],
+    "workflow": [],
+    "memory_context": [],
+    "result": {"decision":"Shift 20% to Supplier B","rationale":"Capacity was confirmed with a 15% buffer; quality was monitored."},
+    "decision": {"choice":"Shift 20% to Supplier B","predicted":"Lower unit cost with acceptable service levels","recorded_at":"2026-07-10T14:00:00Z"}
+  },
+  "outcome": {
+    "mission_id":"M-HISTORY01",
+    "topic":"supplier",
+    "decision":"Shift 20% to Supplier B",
+    "observed":"Supplier B met committed Q3 volume; lead time ran 4 days longer than planned.",
+    "created_at":"2026-08-14T16:20:00Z"
+  },
+  "memory_rule": {"topic":"supplier","rule":"Peak capacity must be confirmed before recommending an allocation shift.","support_count":1,"updated_at":"2026-08-14T16:20:00Z"}
+}

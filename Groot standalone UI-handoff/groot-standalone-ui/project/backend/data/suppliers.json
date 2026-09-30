@@ -1,0 +1,5 @@
+[
+  {"id":"SUP-A","name":"Northstar Components","unit_cost":12.40,"current_share_pct":70,"q4_capacity_units":52000,"q4_commitment_units":47000,"defect_rate_pct":1.2,"on_time_pct":94.8,"lead_days_p50":18,"lead_days_p90":27,"moq":5000,"transition_cost":0,"currency":"USD"},
+  {"id":"SUP-B","name":"Meridian Manufacturing","unit_cost":11.65,"current_share_pct":30,"q4_capacity_units":38000,"q4_commitment_units":26000,"defect_rate_pct":1.8,"on_time_pct":91.2,"lead_days_p50":21,"lead_days_p90":34,"moq":8000,"transition_cost":42000,"currency":"USD"},
+  {"id":"SUP-C","name":"Atlas Industrial Group","unit_cost":12.10,"current_share_pct":0,"q4_capacity_units":18000,"q4_commitment_units":12000,"defect_rate_pct":0.9,"on_time_pct":97.1,"lead_days_p50":16,"lead_days_p90":23,"moq":10000,"transition_cost":28000,"currency":"USD"}
+]

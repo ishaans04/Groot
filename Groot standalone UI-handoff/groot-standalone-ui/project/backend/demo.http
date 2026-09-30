@@ -1,0 +1,124 @@
+@base = http://127.0.0.1:8000/api
+
+### Check that the local service is running
+GET {{base}}/health
+
+### List presentation scenarios
+GET {{base}}/scenarios
+
+### See the lesson saved from an earlier supplier choice
+GET {{base}}/memory
+
+### Create the supplier choice task
+POST {{base}}/missions
+Content-Type: application/json
+
+{"prompt":"Should we move 30% of production from Supplier A to B for Q4?","channel":"typed"}
+
+### Run the task - replace TASK_ID with the id returned above
+POST {{base}}/missions/TASK_ID/execute
+Content-Type: application/json
+
+{}
+
+### Look up Supplier B's Q4 capacity
+POST {{base}}/missions/TASK_ID/acquire
+Content-Type: application/json
+
+{"variable_id":"peak_capacity"}
+
+### Look up Supplier B's delivery time
+POST {{base}}/missions/TASK_ID/acquire
+Content-Type: application/json
+
+{"variable_id":"lead_time"}
+
+### Look up Supplier B's defect rate
+POST {{base}}/missions/TASK_ID/acquire
+Content-Type: application/json
+
+{"variable_id":"defect_rate"}
+
+### Look up Supplier B's minimum order quantity
+POST {{base}}/missions/TASK_ID/acquire
+Content-Type: application/json
+
+{"variable_id":"minimum_order"}
+
+### Look up the one-time setup cost
+POST {{base}}/missions/TASK_ID/acquire
+Content-Type: application/json
+
+{"variable_id":"transition_cost"}
+
+### Save the person's choice after all six facts are checked
+POST {{base}}/missions/TASK_ID/decision
+Content-Type: application/json
+
+{"choice":"Shift allocation to Supplier B","rationale":"The decision owner reviewed the sample facts and setup cost."}
+
+### Record what happened later
+POST {{base}}/missions/TASK_ID/outcome
+Content-Type: application/json
+
+{"observed":"Supplier B met Q4 volume; lead time ran four days longer than planned."}
+
+### See the saved history and lesson
+GET {{base}}/memory
+
+### Create the same task again and see what the earlier result changed
+POST {{base}}/missions
+Content-Type: application/json
+
+{"prompt":"Should we move 30% of production from Supplier A to B for Q4?","channel":"typed"}
+
+### Direct answer scenario
+POST {{base}}/missions
+Content-Type: application/json
+
+{"prompt":"What were Q2 sales in Maharashtra?","channel":"typed"}
+
+### Execute after replacing MISSION_ID
+POST {{base}}/missions/MISSION_ID/execute
+Content-Type: application/json
+
+{}
+
+### Look into the North region sales change
+POST {{base}}/missions
+Content-Type: application/json
+
+{"prompt":"Why did sales decline in the North in Q2 2026?","channel":"typed"}
+
+### Find matching manufacturers
+POST {{base}}/missions
+Content-Type: application/json
+
+{"prompt":"Find 8 manufacturers in India with ISO 9001 and monthly capacity above 15000 units.","channel":"typed"}
+
+### Start the meeting example only after recording consent
+POST {{base}}/decision-room/sessions
+Content-Type: application/json
+
+{"consent":true,"purpose":"Supplier allocation review: Q4 capacity and the 30% shift"}
+
+### Read the four sample meeting statements
+GET {{base}}/decision-room/sample
+
+### Add a typed meeting statement after replacing ROOM_ID
+POST {{base}}/decision-room/sessions/ROOM_ID/events
+Content-Type: application/json
+
+{"speaker":"COO","text":"We don't have a recent capacity confirmation from Meridian."}
+
+### Or add all four prepared meeting statements at once
+POST {{base}}/decision-room/sessions/ROOM_ID/replay-sample
+Content-Type: application/json
+
+{}
+
+### Close the consented session
+POST {{base}}/decision-room/sessions/ROOM_ID/close
+Content-Type: application/json
+
+{}
