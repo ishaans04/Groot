@@ -1,11 +1,12 @@
 # One Render web service serves the existing website files and the Python API.
-# The persistent disk keeps saved demo decisions when the service restarts.
+# Free plan: no persistent disk, so saved demo decisions reset whenever the
+# service restarts, redeploys, or spins down after inactivity.
 services:
   - type: web
     name: groot-prototype
     runtime: python
-    plan: starter
-    region: singapore
+    plan: free
+    region: oregon
     rootDir: "Groot standalone UI-handoff/groot-standalone-ui/project"
     buildCommand: python -m compileall -q backend
     startCommand: python backend/app.py
@@ -17,9 +18,6 @@ services:
         value: 3.12.11
       - key: GROOT_HOST
         value: 0.0.0.0
+      # Outside the served project folder so the database is not downloadable.
       - key: GROOT_DB
-        value: /var/data/groot-demo.sqlite3
-    disk:
-      name: groot-prototype-data
-      mountPath: /var/data
-      sizeGB: 1
+        value: /tmp/groot-demo.sqlite3
