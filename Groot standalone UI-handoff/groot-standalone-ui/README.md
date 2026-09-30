@@ -14,5 +14,5 @@ The original website files, styles and icons are kept in their original places. 
 - `project/GROOT Standalone.html` — one-file version of that design
 - `project/GROOT v1.dc.html` and `project/GROOT v2.dc.html` — earlier design versions
 - `project/support.js` and `project/assets/` — code and visual styles that make the website work
-- `project/uploads/` — the concept paper and reference screenshots
+- `project/uploads/` — local reference screenshots
 - `project/backend/` — the offline service and sample records; `project/backend/docs/` has the service and presentation guides

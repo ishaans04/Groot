@@ -25,7 +25,7 @@ Groot standalone UI-handoff/groot-standalone-ui/project/
 │   ├── README.md
 │   ├── docs/               # Plain-language service and presentation guides
 │   └── demo.http
-└── uploads/                # Reference material (concept paper PDF, screenshots)
+└── uploads/                # Reference screenshots
 ```
 
 ## Previewing locally

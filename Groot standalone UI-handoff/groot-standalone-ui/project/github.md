@@ -5,7 +5,6 @@ These files carry the GROOT website design and its related demo service.
 - Source project: `ishaans04/Orbit`, branch `main`, folder `frontend`
 - Design handoff received: 30 September 2026
 - Main website file here: `GROOT.dc.html`
-- Related concept paper: `uploads/GROOT_Final_Idea.pdf`
 - Offline service and sample data: `backend/`
 
 ## What is included
