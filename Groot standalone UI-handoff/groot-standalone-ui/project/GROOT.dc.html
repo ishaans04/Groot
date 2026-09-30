@@ -281,8 +281,14 @@ span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0
 
     <sc-if value="{{ railOverlay }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeRail }}" style="position: fixed; inset: 0; z-index: 60; background: rgba(8, 7, 5, 0.55)"></div></sc-if>
     <aside style="{{ railStyle }}">
+      <div style="{{ railHeadStyle }}">
+        <sc-if value="{{ railExpanded }}" hint-placeholder-val="{{ true }}"><div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Missions</div></sc-if>
+        <button type="button" onClick="{{ onRailToggle }}" title="{{ railToggleLabel }}" aria-label="{{ railToggleLabel }}" aria-expanded="{{ railExpanded }}" style="display: grid; place-items: center; flex-shrink: 0; width: 30px; height: 30px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.75" y="2.25" width="12.5" height="11.5" rx="2.75" stroke="currentColor" stroke-width="1.4"></rect><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.4"></path></svg>
+        </button>
+      </div>
+      <sc-if value="{{ railExpanded }}" hint-placeholder-val="{{ true }}">
       <div style="display: grid; gap: 8px">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">Missions</div>
         <sc-if value="{{ noMissions }}" hint-placeholder-val="{{ true }}">
           <p style="margin: 0; color: var(--g-dim, #8a7c55); font-size: 13px; line-height: 1.5">No missions yet. Compile a request or open the Decision Room.</p>
         </sc-if>
@@ -322,6 +328,7 @@ span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0
           </div>
         </sc-for>
       </div>
+      </sc-if>
 
     </aside>
 
@@ -405,12 +412,21 @@ span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0
     </section>
 
     <section style="{{ rightStyle }}">
+      <sc-if value="{{ graphCollapsed }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ onGraphToggle }}" title="{{ graphToggleLabel }}" aria-label="{{ graphToggleLabel }}" aria-expanded="false" style="display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.75" y="2.25" width="12.5" height="11.5" rx="2.75" stroke="currentColor" stroke-width="1.4"></rect><path d="M10 2.5v11" stroke="currentColor" stroke-width="1.4"></path></svg>
+        </button>
+      </sc-if>
+      <sc-if value="{{ graphExpanded }}" hint-placeholder-val="{{ true }}">
       <div style="display: flex; align-items: flex-start; gap: 12px; padding: 18px 22px 12px">
         <div style="display: grid; gap: 5px; min-width: 0; flex: 1">
           <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g-dim, #8a7c55)">{{ graphLabel }}</span>
           <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em">{{ graphTitle }}</strong>
         </div>
         <div style="display: flex; gap: 6px; flex-shrink: 0">
+          <sc-if value="{{ showGraphToggle }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ onGraphToggle }}" title="{{ graphToggleLabel }}" aria-label="{{ graphToggleLabel }}" aria-expanded="true" style="display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.75" y="2.25" width="12.5" height="11.5" rx="2.75" stroke="currentColor" stroke-width="1.4"></rect><path d="M10 2.5v11" stroke="currentColor" stroke-width="1.4"></path></svg>
+          </button></sc-if>
           <button type="button" onClick="{{ toggleGraphMin }}" title="{{ graphMinLabel }}" aria-label="{{ graphMinLabel }}" style="display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid var(--g-line, #4b4026); border-radius: 8px; background: none; color: var(--g-muted, #b8a87c); cursor: pointer" style-hover="color: #f2b544; border-color: var(--g-line3, #6e5d33)">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="{{ graphMinChev }}"><path d="M2.5 7.5 6 4l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </button>
@@ -477,6 +493,7 @@ span.sc-interp.sc-interp { display: inline; width: auto; height: auto; margin: 0
           </div>
         </sc-if>
       </div>
+      </sc-if>
     </section>
   </div>
 
@@ -964,7 +981,7 @@ function btnStyle(kind, on) {
 class Component extends DCLogic {
   state = {
     screen: 'landing', now: new Date(), wordIndex: 0, letterCount: WORDS[0].length, deleting: false, iconsReady: !!window.GROOT_ICONS,
-    channel: 'typed', input: '', log: [], vw: window.innerWidth, railOpen: false, footOpen: true, booting: false, graphMin: false, graphMax: false, missions: [], activeId: null, selected: null, compiling: false, roomIdx: -1, memory: [], docView: null
+    channel: 'typed', input: '', log: [], vw: window.innerWidth, railOpen: false, railCollapsed: false, graphCollapsed: false, footOpen: true, booting: false, graphMin: false, graphMax: false, missions: [], activeId: null, selected: null, compiling: false, roomIdx: -1, memory: [], docView: null
   };
   sessionId = 'S-' + Math.random().toString(16).slice(2, 6).toUpperCase();
   mid = 0;
@@ -1423,10 +1440,22 @@ class Component extends DCLogic {
 
     const wide = s.vw >= 1240;
     const narrow = s.vw < 820;
-    const railBase = { display: 'flex', flexDirection: 'column', gap: 26, minHeight: 0, padding: '20px 16px', overflowY: 'auto', borderRight: '1px solid ' + C.line, background: C.bg };
+    // Docked panels fold to a slim strip that keeps only their toggle button.
+    const railFolded = wide && s.railCollapsed;
+    const graphFolded = !narrow && s.graphCollapsed && !s.graphMax;
+    const railCol = railFolded ? '54px' : 'minmax(210px, 250px)';
+    const graphCol = graphFolded ? '54px' : wide ? 'minmax(340px, 440px)' : 'minmax(290px, 360px)';
+    const railBase = { display: 'flex', flexDirection: 'column', gap: 26, minHeight: 0, padding: railFolded ? '18px 0' : '20px 16px', alignItems: railFolded ? 'center' : 'stretch', overflowY: railFolded ? 'hidden' : 'auto', borderRight: '1px solid ' + C.line, background: C.bg };
     const railStyle = wide ? railBase : Object.assign(railBase, { position: 'fixed', top: 0, bottom: 0, left: 0, zIndex: 61, width: 280, display: s.railOpen ? 'flex' : 'none', boxShadow: '20px 0 60px rgba(0,0,0,0.5)' });
     const vals = {
-      mainGridStyle: { display: 'grid', gridTemplateColumns: wide ? 'minmax(210px, 250px) minmax(0, 1fr) minmax(340px, 440px)' : narrow ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(290px, 360px)', gridAutoRows: narrow ? 'minmax(420px, auto)' : 'auto', minHeight: 0, overflowY: narrow ? 'auto' : 'visible' },
+      mainGridStyle: { display: 'grid', gridTemplateColumns: wide ? railCol + ' minmax(0, 1fr) ' + graphCol : narrow ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) ' + graphCol, gridAutoRows: narrow ? 'minmax(420px, auto)' : 'auto', minHeight: 0, overflowY: narrow ? 'auto' : 'visible', transition: 'grid-template-columns 220ms ease' },
+      railExpanded: !railFolded,
+      railHeadStyle: { display: 'flex', alignItems: 'center', justifyContent: railFolded ? 'center' : 'space-between', gap: 10, marginBottom: railFolded ? 0 : -18 },
+      railToggleLabel: wide ? (railFolded ? 'Expand sidebar' : 'Collapse sidebar') : 'Close sidebar',
+      onRailToggle: () => (wide ? this.setState((st) => ({ railCollapsed: !st.railCollapsed })) : this.setState({ railOpen: false })),
+      graphCollapsed: graphFolded, graphExpanded: !graphFolded, showGraphToggle: !narrow && !s.graphMax,
+      graphToggleLabel: graphFolded ? 'Expand decision graph panel' : 'Collapse decision graph panel',
+      onGraphToggle: () => this.setState((st) => ({ graphCollapsed: !st.graphCollapsed, graphMax: false })),
       notWide: !wide, legendStyle: { display: wide ? 'flex' : 'none', flexWrap: 'wrap', gap: 14, marginLeft: 'auto', color: C.dim, fontFamily: MONO, fontSize: 10.5 },
       parserIdle: wide ? 'Parser idle. Start typing and GROOT tags the intent, object, constraints and time horizon live.' : 'Start typing to see the live parse.',
       wide, compilerLabel: wide ? 'Mission compiler · state what you need to know, understand, investigate or decide' : 'Mission compiler',
@@ -1437,12 +1466,13 @@ class Component extends DCLogic {
       footChevStyle: { transform: s.footOpen ? 'none' : 'rotate(180deg)', transition: 'transform 200ms ease' },
       toggleRail: () => this.setState((st) => ({ railOpen: !st.railOpen })), closeRail: () => this.setState({ railOpen: false }),
       rightStyle: Object.assign({ display: 'grid', gridTemplateRows: s.graphMin ? 'auto auto' : 'auto minmax(270px, 1fr) auto', alignContent: 'start', minHeight: 0, overflowY: 'auto', borderLeft: narrow ? 0 : '1px solid ' + C.line, borderTop: narrow ? '1px solid ' + C.line : 0, background: 'var(--g-side, #1a190f)' },
-        s.graphMax ? { position: 'fixed', inset: 0, zIndex: 85, gridTemplateRows: s.graphMin ? 'auto auto' : 'auto minmax(0, 1fr) auto', alignContent: 'stretch', border: 0, boxShadow: '0 0 0 100vmax rgba(8,7,5,0.6)' } : {}),
+        s.graphMax ? { position: 'fixed', inset: 0, zIndex: 85, gridTemplateRows: s.graphMin ? 'auto auto' : 'auto minmax(0, 1fr) auto', alignContent: 'stretch', border: 0, boxShadow: '0 0 0 100vmax rgba(8,7,5,0.6)' } : {},
+        graphFolded ? { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '18px 0', overflowY: 'hidden' } : {}),
       graphMin: s.graphMin, graphShown: !s.graphMin, graphMax: s.graphMax, graphNotMax: !s.graphMax,
       graphMinLabel: s.graphMin ? 'Show graph' : 'Minimize graph', graphMaxLabel: s.graphMax ? 'Exit full screen' : 'Maximize graph',
       graphMinChev: { transform: s.graphMin ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease' },
       toggleGraphMin: () => this.setState((st) => ({ graphMin: !st.graphMin })),
-      toggleGraphMax: () => this.setState((st) => ({ graphMax: !st.graphMax, graphMin: false })),
+      toggleGraphMax: () => this.setState((st) => ({ graphMax: !st.graphMax, graphMin: false, graphCollapsed: false })),
       isLanding: !isConsole, isConsole,
       bootFx: s.booting ? this.bootEl() : null,
       setConsoleEl: (el) => { this.consoleEl = el; this._pal = null; },
