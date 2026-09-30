@@ -8,7 +8,7 @@ GROOT turns a plain-English business request, typed or said in a meeting, into a
 
 [![Live demo](https://img.shields.io/badge/Live%20demo-Render-46E3B7?logo=render&logoColor=white)](https://groot-prototype.onrender.com)
 [![Code Cubicle](https://img.shields.io/badge/Code%20Cubicle-Track%2001-f2b544)](#team)
-[![Stage](https://img.shields.io/badge/stage-prototype-orange)](#prototype-scope)
+[![Stage](https://img.shields.io/badge/stage-prototype-orange)](#honest-limitations)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -19,24 +19,6 @@ GROOT turns a plain-English business request, typed or said in a meeting, into a
 </div>
 
 ![GROOT landing page](docs/screenshots/landing.png)
-
----
-
-## Contents
-
-- [The problem](#the-problem)
-- [Our approach](#our-approach)
-- [Prototype walkthrough](#prototype-walkthrough)
-- [Architecture](#architecture)
-- [How a request flows](#how-a-request-flows)
-- [How GROOT meets the problem statement](#how-groot-meets-the-problem-statement)
-- [Prototype scope](#prototype-scope)
-- [Run it locally](#run-it-locally)
-- [Deploy on Render](#deploy-on-render)
-- [Repository layout](#repository-layout)
-- [Roadmap](#roadmap)
-- [Team](#team)
-- [License](#license)
 
 ---
 
@@ -209,15 +191,33 @@ sequenceDiagram
 
 ---
 
-## Prototype scope
+## Honest limitations
 
-This is a **prototype-round build**. It shows the product experience and the core mission logic end to end, and is deliberately limited:
+This is a **prototype-round build**. It shows the product experience and the core mission logic end to end, but it is not a production system. What it does **not** do yet:
 
-- **Sample data only.** All company, sales, supplier and manufacturer records are fictional. Nothing connects to live company systems or the open web.
-- **No AI model yet.** The mission compiler is rule-based and deterministic, so every step can be inspected. An LLM-backed compiler is the next step (see [Roadmap](#roadmap)).
-- **Two demos, one service.** The console's buttons run an in-browser simulation of the flow. The same logic also runs as a real API (see [`backend/docs/api.md`](Groot%20standalone%20UI-handoff/groot-standalone-ui/project/backend/docs/api.md) and [`backend/demo.http`](Groot%20standalone%20UI-handoff/groot-standalone-ui/project/backend/demo.http)), but the two are not wired together yet.
-- **No audio.** The Decision Room uses written sample statements, and only after consent is recorded.
-- **No accounts or access control.** Do not enter real business information.
+### Intelligence
+
+- **No AI model.** The mission compiler is rule-based and deterministic. It handles the kinds of requests shown in the demo; unusual phrasing may be misclassified or met with a clarifying question.
+- **Learning is rule-based.** "Learning deltas" are predefined rules applied after an outcome is recorded, not model training.
+
+### Data
+
+- **Sample data only.** All company, sales, supplier and manufacturer records are fictional. Nothing connects to live company systems.
+- **No web collection.** GROOT does not scrape or search the live web. The "external source" is a fictional list of manufacturers bundled with the demo.
+- **Limited cleaning, no export.** Evidence is normalised into typed facts, but there is no general deduplication step and no CSV/JSON export yet.
+
+### Product
+
+- **The console is a simulation.** Its buttons run a scripted, in-browser version of the flow. Fetched facts and outcomes are simulated, which the node inspector also says.
+- **The console and the API are not connected.** The same mission logic runs for real in the Python API (see the [API guide](Groot%20standalone%20UI-handoff/groot-standalone-ui/project/backend/docs/api.md) and [`demo.http`](Groot%20standalone%20UI-handoff/groot-standalone-ui/project/backend/demo.http)), but the console does not call it yet.
+- **No audio in the Decision Room.** It uses written sample statements, and only after consent is recorded.
+
+### Security and hosting
+
+- **No accounts or access control.** Anyone with the link can use the API and write to the demo database, so never enter real business information.
+- **Not built for scale.** One service instance with SQLite, meant for demos rather than many users at once.
+- **Free-tier hosting.** The live demo sleeps when idle (the first load can take 30–60 seconds), and saved demo data resets on every restart or deploy.
+- **Needs internet access.** The page loads fonts and its React/Babel runtime from public CDNs.
 
 ---
 
@@ -290,8 +290,6 @@ Every push to `main` redeploys automatically. On the free plan, demo data is sto
 | 4 | **Decision Room.** Live speech ingestion and event detection | 🟡 Written statements |
 | 5 | **Memory.** Persist decisions and compare them with real outcomes | ✅ Prototype |
 | 6 | **Learning loop.** Organisation-specific priorities learned from outcomes | 🟡 Rule-based deltas |
-
-Next up: an LLM-backed compiler, live connectors and web collection, dataset export (CSV/JSON), wiring the console to the API, and authentication.
 
 ---
 
