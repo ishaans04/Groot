@@ -65,7 +65,27 @@ class Handler(SimpleHTTPRequestHandler):
             raise ValueError("Request body must be a JSON object.")
         return obj
 
+    def list_directory(self, path):
+        # Never expose folder contents; the project has no index.html files.
+        self.send_error(404, "Not found")
+        return None
+
+    def redirect_root(self) -> bool:
+        if unquote(urlparse(self.path).path) != "/":
+            return False
+        self.send_response(302)
+        self.send_header("Location", "/GROOT.dc.html")
+        self.send_header("Content-Length", "0")
+        self.end_headers()
+        return True
+
+    def do_HEAD(self):
+        if not self.redirect_root():
+            super().do_HEAD()
+
     def do_GET(self):
+        if self.redirect_root():
+            return None
         path = unquote(urlparse(self.path).path)
         if not path.startswith("/api/"):
             return super().do_GET()
